@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -18,6 +18,44 @@ const defaultTheme = createTheme();
 
 
 const RegisterPage = () => {
+
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [emailDirty, setEmailDirty] = useState(false)
+    const [passwordDirty, setPasswordDirty] = useState(false)
+    const [formValid, setFormValid] = useState(false)
+
+    useEffect(() => {
+        if (emailDirty || passwordDirty) {
+            setFormValid(false)
+        } else {
+            setFormValid(true)
+        }
+    },[emailDirty, passwordDirty])
+
+    const emailHandler = (e) => {
+        setEmail(e.target.value)
+        const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        
+        if (!re.test(String(email).toLowerCase())) {
+            setEmailDirty(true)
+        } else {
+            setEmailDirty(false)
+        }
+    }
+
+    const passwordHandler = (e) => {
+        setPassword(e.target.value)
+        if(e.target.value.length < 6 || e.target.value.length > 24){
+            setPasswordDirty(true)
+        } else {
+            setPasswordDirty(false)
+        }
+    }
+
+  
+
+
 
     const push = useNavigate();
 
@@ -64,6 +102,9 @@ const RegisterPage = () => {
                                         label="Email Address"
                                         name="email"
                                         autoComplete="email"
+                                        color={emailDirty ? 'error' : 'primary'}
+                                        value={email}
+                                        onChange={e => emailHandler(e)}
 
 
                                     />
@@ -77,6 +118,9 @@ const RegisterPage = () => {
                                         type="password"
                                         id="password"
                                         autoComplete="new-password"
+                                        color={passwordDirty ? 'error' : 'primary'}
+                                        value={password}
+                                        onChange={e => passwordHandler(e)}
 
                                     />
                                 </Grid>
@@ -87,6 +131,7 @@ const RegisterPage = () => {
                                 fullWidth
                                 variant="contained"
                                 sx={{ mt: 3, mb: 2 }}
+                                disabled={!formValid}
                             >
                                 Sign Up
                             </Button>
