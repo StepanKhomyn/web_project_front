@@ -9,12 +9,12 @@ import AgricultureIcon from '@mui/icons-material/Agriculture';
 
 const Header = ({ isLoggedIn, onLogout }) => {
     return (
-        <AppBar position="static">
+        <AppBar  position="static" style={{ backgroundColor: '#222831' }}>
             <Toolbar>
                 <Typography variant="h6" style={{ flexGrow: 1 }}>
-                    <Link to="/" style={{ color: 'inherit', textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
+                    <Link to="/" style={{ color: '#EEEEEE', textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
                         <AgricultureIcon
-                            style={{ marginRight: 16, fontSize: 30 }}
+                            style={{ marginRight: 16, fontSize: 30, color: '#EEEEEE' }}
                         />
                         Brand cars
                     </Link>
@@ -29,12 +29,12 @@ const Header = ({ isLoggedIn, onLogout }) => {
                     </Button>
                 ) : (
                     <div>
-                        <Link to="/login" style={{ textDecoration: 'none' }}>
+                        <Link to="/login" style={{ textDecoration: 'none', color: '#EEEEEE'  }}>
                             <Button color="inherit" startIcon={<ExitToAppIcon />}>
                                 Login
                             </Button>
                         </Link>
-                        <Link to="/register" style={{ textDecoration: 'none' }}>
+                        <Link to="/register" style={{ textDecoration: 'none', color: '#EEEEEE' }}>
                             <Button color="inherit" startIcon={<ExitToAppIcon />}>
                                 Sign up
                             </Button>
