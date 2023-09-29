@@ -28,11 +28,20 @@ const Header = ({ isLoggedIn, onLogout }) => {
                         Logout
                     </Button>
                 ) : (
-                    <Link to="/login" style={{ textDecoration: 'none' }}>
-                        <Button color="inherit" startIcon={<ExitToAppIcon />}>
-                            Login
-                        </Button>
-                    </Link>
+                    <div>
+                        <Link to="/login" style={{ textDecoration: 'none' }}>
+                            <Button color="inherit" startIcon={<ExitToAppIcon />}>
+                                Login
+                            </Button>
+                        </Link>
+                        <Link to="/register" style={{ textDecoration: 'none' }}>
+                            <Button color="inherit" startIcon={<ExitToAppIcon />}>
+                                Sign up
+                            </Button>
+                        </Link>
+                    </div>
+                    
+                    
                 )}
             </Toolbar>
         </AppBar>
