@@ -19,12 +19,13 @@ import PlaceIcon from '@mui/icons-material/Place';
 import SpeedIcon from '@mui/icons-material/Speed';
 import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
 import HandymanIcon from '@mui/icons-material/Handyman';
+import { Link } from "react-router-dom";
 
 const carData = [
   {
     id: 1,
-    name: "Tesla",
-    description: "This is Car 1",
+    name: "Tesla Model X 2022",
+    price: "10 000",
     location: "Lviv",
     transmission: "mechanical",
     fuelType: "Gas 1.6",
@@ -34,8 +35,8 @@ const carData = [
   },
   {
     id: 2,
-    name: "BMW",
-    description: "This is Car 2",
+    name: "Volkswagen Passat 2020",
+    price: "10 000",
     location: "Lviv",
     transmission: "mechanical",
     fuelType: "Gas 1.6",
@@ -45,8 +46,8 @@ const carData = [
   },
   {
     id: 3,
-    name: "AUDI",
-    description: "This is Car 3",
+    name: "Volkswagen Tiguan 2022",
+    price: "10 000",
     location: "Lviv",
     transmission: "mechanical",
     fuelType: "Gas 1.6",
@@ -57,7 +58,7 @@ const carData = [
   {
     id: 4,
     name: "Car 4",
-    description: "This is Car 4",
+    price: "10 000",
     location: "Lviv",
     transmission: "mechanical",
     fuelType: "Gas 1.6",
@@ -68,7 +69,7 @@ const carData = [
   {
     id: 5,
     name: "Car 5",
-    description: "This is Car 5",
+    price: "10 000",
     location: "Lviv",
     transmission: "mechanical",
     fuelType: "Gas 1.6",
@@ -79,7 +80,7 @@ const carData = [
   {
     id: 6,
     name: "Car 6",
-    description: "This is Car 6",
+    price: "10 000",
     location: "Lviv",
     transmission: "mechanical",
     fuelType: "Gas 1.6",
@@ -93,6 +94,7 @@ const CarsList = () => {
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'end' }}>
+      <Link to="/sell">
         <Button
           style={{
             backgroundColor: "#393E46",
@@ -103,6 +105,7 @@ const CarsList = () => {
         >
           Продати авто
         </Button>
+        </Link>
       </div>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <div
@@ -247,11 +250,11 @@ const CarsList = () => {
                 style={{ width: 380, height: 250, objectFit: "cover" }}
               />
               <CardContent style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", flex: 1 }}>
-                <Typography gutterBottom variant="h6" component="div" style={{ textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                <Typography gutterBottom variant="h6" component="div" fontWeight="bold" style={{ textOverflow: "ellipsis", color: "#393E46", whiteSpace: "nowrap" }}>
                   {car.name}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {car.description}
+                <Typography variant="h7" fontWeight="bold" color="#222831"  >
+                  {car.price}$
                 </Typography>
                 <Grid container spacing={1} style={{ flexDirection: "row", justifyContent: "space-between" }}>
                   <Grid item xs={6} style={{ display: 'flex', alignItems: 'center' }}>
@@ -281,9 +284,11 @@ const CarsList = () => {
                   </Grid>
                 </Grid>
                 <CardActions>
-                  <Button size="small" color="primary">
-                    More
-                  </Button>
+                  <Link to="/about">
+                    <Button variant="outlined" style={{ color: "#00ADB5" }}>
+                      More
+                    </Button>
+                  </Link>
                 </CardActions>
               </CardContent>
             </Card>
