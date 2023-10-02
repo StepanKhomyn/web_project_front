@@ -50,6 +50,8 @@ const SellCar = () => {
     condition: "",
     hasAccident: "",
     price: "",
+    vin_code: "",
+    car_run: "",
     phoneNumber: "",
   });
 
@@ -301,6 +303,26 @@ const SellCar = () => {
                     label="Технічний стан"
                     name="condition"
                     value={formData.condition}
+                    onChange={handleInputChange}
+                    required
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                    fullWidth
+                    label="Пробіг (км)"
+                    name="condition"
+                    value={formData.car_run}
+                    onChange={handleInputChange}
+                    required
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                    fullWidth
+                    label="Vin номер"
+                    name="condition"
+                    value={formData.vin_code}
                     onChange={handleInputChange}
                     required
                 />
