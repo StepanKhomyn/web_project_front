@@ -20,3 +20,25 @@
     display: flex;
     justify-content: center;
 }
+
+/* SellCar.css */
+
+
+
+ 
+  
+ 
+  /* Додано стилі для червоного бордера у випадку помилки валідації */
+  .MuiFormControl-root.MuiTextField-root {
+    margin-bottom: 20px;
+  }
+  
+  .MuiFormControl-root.MuiSelect-root,
+  .MuiFormControl-root.MuiCheckbox-root,
+  .MuiFormControl-root.MuiFormControlLabel-root {
+    margin-bottom: 20px;
+  }
+  
+  .MuiFormHelperText-root {
+    color: red;
+  }
