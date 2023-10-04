@@ -51,6 +51,8 @@ const SellCar = () => {
     condition: "",
     hasAccident: "",
     price: "",
+    vin_code: "",
+    car_run: "",
     phoneNumber: "",
   });
 
@@ -224,7 +226,8 @@ const SellCar = () => {
           />
         </Box>
 
-        <Box className="box-container">
+          {/* Характеристики */}
+          <Box className="box-container">
           <Typography variant="h6" component="h2" gutterBottom>
             Характеристики
           </Typography>
@@ -349,6 +352,34 @@ const SellCar = () => {
             </Grid>
           </Grid>
         </Box>
+          {/* Локація */}
+          <Box className="box-container">
+            <Typography variant="h6" component="h2" gutterBottom>
+              Локація
+            </Typography>
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <TextField
+                    fullWidth
+                    label="Регіон"
+                    name="region"
+                    value={formData.region}
+                    onChange={handleInputChange}
+                    required
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                    fullWidth
+                    label="Місто"
+                    name="city"
+                    value={formData.city}
+                    onChange={handleInputChange}
+                    required
+                />
+              </Grid>
+            </Grid>
+          </Box>
 
         <Box className="box-container">
           <Typography variant="h6" component="h2" gutterBottom>
