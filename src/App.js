@@ -13,13 +13,11 @@ import Profile from './pages/profile/Profile';
 
 
 function App() {
-    // const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(true);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const handleLogout = () => {
         // Implement your logout logic here
-        // setIsLoggedIn(false);
-        setIsLoggedIn(true);
+        setIsLoggedIn(false);
     };
 
     return (
