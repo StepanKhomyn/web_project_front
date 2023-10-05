@@ -85,7 +85,7 @@ const LoginPage = () => {
                         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
                         </Avatar>
                         <Typography component="h1" variant="h5">
-                            Sign in
+                            Вхід
                         </Typography>
                         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                             <TextField
@@ -93,7 +93,7 @@ const LoginPage = () => {
                                 required
                                 fullWidth
                                 id="email"
-                                label="Email Address"
+                                label="Адреса електронної пошти"
                                 name="email"
                                 autoComplete="email"
                                 autoFocus
@@ -106,7 +106,7 @@ const LoginPage = () => {
                                 required
                                 fullWidth
                                 name="password"
-                                label="Password"
+                                label="Пароль"
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
@@ -116,26 +116,27 @@ const LoginPage = () => {
                             />
                             <FormControlLabel
                                 control={<Checkbox value="remember" color="primary" />}
-                                label="Remember me"
+                                label="Запам'ятати мене"
                             />
                             <Button
                                 type="submit"
                                 fullWidth
                                 variant="contained"
-                                sx={{ mt: 3, mb: 2 }}
+                                sx={{ mt: 3, mb: 2, backgroundColor: "#222831"}}
                                 disabled={!formValid}
+                                
                             >
-                                Sign In
+                                Увійти
                             </Button>
                             <Grid container>
                                 <Grid item xs>
                                     <Link href="#" variant="body2">
-                                        Forgot password?
+                                        Забули пароль?
                                     </Link>
                                 </Grid>
                                 <Grid item>
                                     <Link href="/register" variant="body2">
-                                        {"Don't have an account? Sign Up"}
+                                        {"Немає облікового запису? Реєстрація"}
                                     </Link>
                                 </Grid>
                             </Grid>

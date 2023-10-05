@@ -88,7 +88,7 @@ const RegisterPage = () => {
                         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
                         </Avatar>
                         <Typography component="h1" variant="h5">
-                            Sign up
+                            Реєстрація
                         </Typography>
                         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                             {/* Ось тут ваші поля для вводу додаткових даних */}
@@ -99,7 +99,7 @@ const RegisterPage = () => {
                                         required
                                         fullWidth
                                         id="email"
-                                        label="Email Address"
+                                        label="Адреса електронної пошти"
                                         name="email"
                                         autoComplete="email"
                                         color={emailDirty ? 'error' : 'primary'}
@@ -114,7 +114,7 @@ const RegisterPage = () => {
                                         required
                                         fullWidth
                                         name="password"
-                                        label="Password"
+                                        label="Пароль"
                                         type="password"
                                         id="password"
                                         autoComplete="new-password"
@@ -130,15 +130,15 @@ const RegisterPage = () => {
                                 type="submit"
                                 fullWidth
                                 variant="contained"
-                                sx={{ mt: 3, mb: 2 }}
+                                sx={{ mt: 3, mb: 2, backgroundColor: "#222831" }}
                                 disabled={!formValid}
                             >
-                                Sign Up
+                               Реєстрація
                             </Button>
                             <Grid container justifyContent="flex-end">
                                 <Grid item>
                                     <Link href="/login" variant="body2">
-                                        Already have an account? Sign in
+                                        У вас вже є акаунт? Увійти
                                     </Link>
                                 </Grid>
                             </Grid>
