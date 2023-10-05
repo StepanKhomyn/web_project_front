@@ -60,12 +60,14 @@ const Header = ({ isLoggedIn, onLogout }) => {
       onClose={handleMenuClose}
     >
       <Link to="/profile" style={{ textDecoration: "none", color: "inherit" }}>
-        <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+        <MenuItem onClick={handleMenuClose}>Профіль</MenuItem>
       </Link>
+      <Link to="/" style={{ color: "inherit", textDecoration: "none"}}>
       <MenuItem onClick={onLogout} color="inherit">
-        Logout
+        Вийти з аккаунту
         <ExitToAppIcon />
       </MenuItem>
+      </Link>
     </Menu>
   );
 
@@ -98,7 +100,7 @@ const Header = ({ isLoggedIn, onLogout }) => {
             </Badge>
           </IconButton>
 
-          <p>Messages</p>
+          <p>Повідомлення</p>
         </MenuItem>
       </Link>
       <Link to="/favourites" style={{ color: "black", textDecoration: "none"}}>
@@ -113,7 +115,7 @@ const Header = ({ isLoggedIn, onLogout }) => {
             </Badge>
           </IconButton>
 
-          <p>Favourites</p>
+          <p>Вибрані</p>
         </MenuItem>
       </Link>
       <MenuItem onClick={handleProfileMenuOpen}>
@@ -126,7 +128,7 @@ const Header = ({ isLoggedIn, onLogout }) => {
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        <p>Профіль</p>
       </MenuItem>
     </Menu>
   );
@@ -211,7 +213,7 @@ const Header = ({ isLoggedIn, onLogout }) => {
                 style={{ textDecoration: "none", color: "#EEEEEE" }}
               >
                 <Button color="inherit" startIcon={<ExitToAppIcon />}>
-                  Login
+                  Увійти
                 </Button>
               </Link>
               <Link
@@ -219,7 +221,7 @@ const Header = ({ isLoggedIn, onLogout }) => {
                 style={{ textDecoration: "none", color: "#EEEEEE" }}
               >
                 <Button color="inherit" startIcon={<ExitToAppIcon />}>
-                  Sign up
+                  Зареєструватися
                 </Button>
               </Link>
             </div>
