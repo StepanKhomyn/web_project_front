@@ -7,13 +7,19 @@ import Header from './pages/Header';
 import AboutCar from './pages/about/AboutCar';
 import SellCar from './pages/sellCar/SellCar';
 import MyCar from './pages/sellCar/MyCar';
+import Favourites from './pages/favourites/Favourites';
+import Messages from './pages/messages/Messages';
+import Profile from './pages/profile/Profile';
+
 
 function App() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    // const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(true);
 
     const handleLogout = () => {
         // Implement your logout logic here
-        setIsLoggedIn(false);
+        // setIsLoggedIn(false);
+        setIsLoggedIn(true);
     };
 
     return (
@@ -28,7 +34,9 @@ function App() {
                 <Route path="/about" element={<AboutCar />} />
                 <Route path="/sell" element={<SellCar />} />
                 <Route path="/mycar" element={<MyCar />} />
-
+                <Route path="/favourites" element={<Favourites/>} />
+                <Route path="/messages" element={<Messages/>}/>
+                <Route path="/profile" element={<Profile/>}/>
             </Routes>
         </div>
     );
