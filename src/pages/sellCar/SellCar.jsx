@@ -59,7 +59,6 @@ const SellCar = () => {
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
 
-    // Clear the validation error for the current field
     const updatedValidationErrors = { ...validationErrors };
     updatedValidationErrors[name] = "";
 

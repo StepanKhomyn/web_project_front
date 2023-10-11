@@ -13,17 +13,17 @@ import Profile from './pages/profile/Profile';
 
 
 function App() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(true);
 
     const handleLogout = () => {
-        // Implement your logout logic here
+        
         setIsLoggedIn(false);
     };
 
     return (
         <div>
-            {/* Include the Header component */}
-            <Header isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+            
+           {/* <Header isLoggedIn={isLoggedIn} onLogout={handleLogout} />*/}
 
             <Routes>
                 <Route path="/" element={<CarsList />} />
