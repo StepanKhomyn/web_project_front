@@ -28,12 +28,12 @@
 .navbar {
   display: flex;
   justify-content: center;
-  width: 1119.556px;
+  /* width: 1119.556px; */
   height: 90.09px;
   flex-shrink: 0;
   border-bottom: 0.938px solid #D1D1D1;
   background: #FFF;
-  margin-left: 232px;
+  margin-left: 200px;
 }
 
 .navbar--menu {
@@ -49,21 +49,22 @@
 }
 
 .carsList--page {
-  width: 1351.351px;
+  max-width: 1351.351px;
   max-height: 962.837px;
   border-radius: 16.533px;
-  background: #FFF;
+  /* background: #FFF; */
   margin-left: 70px;
 }
 
+/*  */
+
 
 .right--menu {
-  width: 231.794px;
   height: 960.96px;
   flex-shrink: 0;
   border-right: 0.938px solid #D1D1D1;
   background: #FFF;
-  position: absolute;
+  margin-top: -90px;
 }
 
 .logo-rst-exit {
@@ -83,13 +84,12 @@
 }
 
 .rst {
-  width: 141px;
   height: 38px;
   color: #7C7C7C;
 }
 
 .home {
-  width: 201.764px;
+  width: 201.764px; /**/
   padding: 7.508px 15.015px;
   align-items: center;
   gap: 9.384px;
@@ -123,12 +123,12 @@
 }
 
 .post {
-  width: 171.734px;
   height: 126.689px;
   flex-shrink: 0;
   border-radius: 7.508px;
   background: #F3F3F3;
   margin-left: 30px;
+  margin-right: 30px;
 }
 
 .post--text {
@@ -142,7 +142,6 @@
 }
 
 .post--btn {
-  width: 141.704px;
   padding: 7.508px 43.168px 7.508px 39.414px;
   justify-content: center;
   align-items: center;
@@ -153,10 +152,7 @@
 }
 
 .left--menu {
-  position: absolute;
-  top: 90px;
-  left: 1150px;
-  width: 271.209px;
+  width: 271.209px;  /**/
   min-height: 870px;
   flex-shrink: 0;
   border-left: 0.938px solid #D1D1D1;
@@ -186,7 +182,6 @@
 
 .all--cards {
   display: flex;
-  width: 77px;
   padding: 7px 11px;
   justify-content: center;
   align-items: center;
@@ -199,7 +194,6 @@
 
 .btn--used {
   display: flex;
-  width: 77px;
   padding: 7px 20px;
   justify-content: center;
   align-items: center;
@@ -226,7 +220,7 @@
 }
 
 .line--one {
-  width: 243px;
+  width: 85%;
   height: 1px;
   background: #D1D1D1;
   margin: 18px 0px 0px 20px;
@@ -234,7 +228,7 @@
 
 .filter--select {
   display: flex;
-  width: 243px;
+  width: 95%;
   padding: 8px 16px;
   justify-content: space-between;
   align-items: center;
@@ -310,7 +304,7 @@
   border-radius: 8px;
   border: 1.2px solid #E6E3E0;
   background: #FFF;
-  width: 73px;
+  width: 60%;
   height: 24px;
   flex-direction: column;
   justify-content: center;
@@ -324,7 +318,6 @@
 
 .additional-select {
   display: flex;
-  width: 117px;
   padding: 8px 16px;
   justify-content: space-between;
   align-items: center;
@@ -335,10 +328,6 @@
 }
 
 .center-page {
-  position: absolute;
-  left: 317px;
-  top: 90.09px;
-  /*width: 904px;*/
   height: 930px;
 }
 
@@ -346,10 +335,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 824px;
   height: 40px;
   margin-top: 40px;
-  margin-left: 10px;
+  margin-left: 40px;
 }
 
 .center-page-top-two {
@@ -360,7 +348,7 @@
 
 .sort--select {
   display: flex;
-  width: 234px;
+  width: 234px; /**/
   padding: 8px 16px;
   justify-content: space-between;
   align-items: center;
@@ -370,19 +358,14 @@
 }
 
 .card--list--cars {
-  position: absolute;
   display: flex;
   flex-wrap: wrap;
-  top: 170px;
-  left: 300px;
-  width: 850px;
+  /* width: 850px; */
   height: 930px;
   padding-top: 30px;
 }
 
 .card--list--car {
-  position: relative;
-  width: 370px;
   height: 420px;
   border-radius: 8px;
   border: 1px solid #D1D1D1;
@@ -391,7 +374,6 @@
 }
 
 .car-image {
-  width: 370px;
   height: 234px;
   flex-shrink: 0;
   border-radius: 8px 8px 0px 0px;
@@ -418,7 +400,6 @@
 
 .btn-used {
   display: flex;
-  width: 77px;
   padding: 3px 20px;
   justify-content: center;
   align-items: center;

@@ -77,10 +77,13 @@ const carData = [
 const CarsList = () => {
   return (
     <div className="carsList--page">
-      <Menu />
-      <Filter />
-      <List />
       <Header />
+      <div style={{display: "flex"}}>
+        <Menu />
+        <List />
+        <Filter />
+      </div>
+
     </div>
 
   );
