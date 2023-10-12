@@ -338,7 +338,7 @@
   position: absolute;
   left: 317px;
   top: 90.09px;
-  width: 904px;
+  /*width: 904px;*/
   height: 930px;
 }
 
@@ -459,3 +459,6 @@
   font-weight: 700;
   line-height: 150%;
 }
+
+
+

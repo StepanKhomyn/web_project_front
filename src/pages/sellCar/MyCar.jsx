@@ -1,11 +1,12 @@
 import { Breadcrumbs, Button, Card, CardActions, CardContent, Container, Grid, IconButton, InputBase, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PlaceIcon from '@mui/icons-material/Place';
 import SpeedIcon from '@mui/icons-material/Speed';
 import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
 import HandymanIcon from '@mui/icons-material/Handyman';
 import { Link, useNavigate } from "react-router-dom";
 import SearchIcon from '@mui/icons-material/Search';
+import "./MyCar.css"
 
 const MyCar = () => {
 
@@ -56,6 +57,14 @@ const MyCar = () => {
         },
     ]
 
+    const [carsData , setcarsData] = useState(carData)
+
+    const deleteCars = (carId) => {
+        setcarsData(carsData.filter(car => car.id !== carId));
+    };
+    
+      
+
     const [soldStatus, setSoldStatus] = useState({});
 
     const handleSoldClick = (carId) => {
@@ -80,17 +89,7 @@ const MyCar = () => {
                 </Breadcrumbs>
             </Container>
             <Container style={{ display: "flex", justifyContent: "center", marginTop: 16, marginBottom: 16, width: 760 }}>
-                <InputBase
-                    sx={{
-                        ml: 1,
-                        flex: 1,
-                        padding: '10px 15px',
-                        fontSize: '16px',
-                        border: '1px solid #d1d1d6',
-                        borderRadius: '8px',
-                        backgroundColor: '#f0f0f5',
-                        color: '#000',
-                    }}
+                <InputBase className='search-car'
                     placeholder="Search"
                     inputProps={{ 'aria-label': 'search' }}
                 />
@@ -99,26 +98,16 @@ const MyCar = () => {
                 </IconButton>
             </Container>
             <Container style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                {carData.map((car) => (
+                {carsData.length === 0 ? (
+                    <Typography variant="h5" style={{ marginTop: 20 }}>
+                        Оголошень немає
+                    </Typography>
+                ) : (
+                    carsData.map((car) => (
                     <div key={car.id} style={{ marginBottom: '16px' }}>
                         <Card style={{ width: 760, display: "flex", position: 'relative' }}>
                             {soldStatus[car.id] && (
-                                <div
-                                    style={{
-                                        position: 'absolute',
-                                        top: 0,
-                                        left: 0,
-                                        width: '100%',
-                                        height: '100%',
-                                        background: 'rgba(255, 255, 255, 0.5)',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        fontSize: '24px',
-                                        fontWeight: 'bold',
-                                        color: 'green',
-                                    }}
-                                >
+                                <div className='sold-status'>
                                     <p1 style={{ marginRight: 380 }} > Продано</p1>
                                 </div>
                             )}
@@ -173,14 +162,14 @@ const MyCar = () => {
                                     >
                                         {soldStatus[car.id] ? 'Відмінити' : 'Продано'}
                                     </Button>
-                                    <Button variant="outlined" style={{ color: "red" }}>
+                                    <Button onClick={() => deleteCars(car.id)} variant="outlined" style={{ color: "red" }}>
                                         Видалити
                                     </Button>
                                 </CardActions>
                             </CardContent>
                         </Card>
                     </div>
-                ))}
+                )))}
             </Container>
         </>
 
