@@ -1,0 +1,126 @@
+html,
+body {
+  height: 100%;
+  /* overflow: hidden; */
+  margin: 0; /* Add this to remove default body margin */
+  background-color: #f0f0f0;
+  color:#282828;
+}
+
+#main {
+  display: flex;
+  flex-direction: column;
+  max-width: 80%;
+  margin: auto;
+  height: 100%;
+}
+
+.main-container {
+  display: flex;
+  gap: 10px;
+  flex: 1; /* Change height to flex: 1 to make it take up all available vertical space */
+  height: 650px;
+}
+
+.chats {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: scroll;
+  height: 600px;
+}
+
+.chat-img {
+  height: 64px;
+  width: 64px;
+  border-radius: 64px;
+}
+
+.chat-card {
+  display: flex;
+  gap: 10px;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 5px;
+  text-decoration: none;
+  color: #282828;
+  /* margin: auto; */
+
+  /* flex:1; */
+}
+
+.seller-name {
+  text-decoration: none;
+}
+
+.car-name {
+  text-decoration: none;
+}
+
+.last-message {
+  text-decoration: none;
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Set flex: 1 to make it fill the remaining vertical space */
+  background-color: #fff;
+  border-radius: 10px;
+
+  overflow: hidden;
+}
+
+.chat-container-seller {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  padding: 5px;
+}
+
+.line-separator {
+  height: 1px;
+  background-color: #d3d3d3;
+}
+
+.messages {
+  margin-top: 5px;
+  height: 515px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  overflow-y: scroll;
+}
+
+.message {
+  padding: 2px;
+  background-color: #f0f0f0;
+  border-radius: 3px;
+  margin: 3px;
+  display: flex;
+  width: 30ch;
+}
+
+.message-r {
+  margin-left: auto;
+}
+
+.message-l {
+    margin-right:auto;
+}
+
+.message-text {
+  /* text-align: end; */
+}
+
+.message-input-container {
+  display: flex;
+  flex: 1;
+}
+
+.message-input {
+  flex: 1;
+  border: 0;
+}

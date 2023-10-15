@@ -1,25 +1,9 @@
-import React from "react";
-import {
-  Card,
-  CardContent,
-  CardActions,
-  Typography,
-  Button,
-  TextField,
-  Checkbox,
-  FormControlLabel,
-  Select,
-  MenuItem,
-  InputLabel,
-  FormControl,
-  Icon,
-  Grid,
-} from "@mui/material";
-import PlaceIcon from '@mui/icons-material/Place';
-import SpeedIcon from '@mui/icons-material/Speed';
-import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
-import HandymanIcon from '@mui/icons-material/Handyman';
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import "./CarsList.css"
+import Header from "../Header";
+import Menu from "./components/Menu";
+import Filter from "./components/Filter";
+import List from "./components/List";
 
 const carData = [
   {
@@ -92,7 +76,26 @@ const carData = [
 
 const CarsList = () => {
   return (
-    <div>
+    <div className="carsList--page">
+      <Header />
+      <div style={{display: "flex"}}>
+        <Menu />
+        <List />
+        <Filter />
+      </div>
+
+    </div>
+
+  );
+};
+
+export default CarsList;
+
+
+
+/*
+
+ <div>
       <div style={{ display: 'flex', justifyContent: 'end' }}>
       <Link to="/sell">
         <Button
@@ -296,8 +299,4 @@ const CarsList = () => {
         </div>
       </div>
     </div>
-  );
-};
-
-export default CarsList;
-
+*/

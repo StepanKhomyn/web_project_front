@@ -1,4 +1,61 @@
-import React from "react";
+import { Avatar, IconButton } from '@mui/material'
+import React from 'react'
+import { Link } from 'react-router-dom'
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+import MessageIcon from '@mui/icons-material/Message';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import "./cars-list/CarsList.css"
+
+const Header = () => {
+  return (
+    <div className="navbar" >
+    <div>
+      <input placeholder="     Search" className="searh-input" />
+    </div>
+    <div>
+      <Link to="/sell">
+        <button className="sell--button" >Sell a car</button>
+      </Link>
+    </div>
+    <div className="navbar--menu" >
+      <div className="navbar--icon">
+        <Link className="navbar--star" to="/favourites">
+          <IconButton>
+            <StarBorderIcon />
+          </IconButton>
+        </Link>
+        <Link to="/messages">
+          <IconButton>
+            <MessageIcon />
+          </IconButton>
+        </Link>
+        <Link to="/messages">
+          <IconButton>
+            <NotificationsIcon />
+          </IconButton>
+        </Link>
+      </div>
+      <IconButton sx={{ p: 0 }}>
+        <Avatar alt="" />
+      </IconButton>
+    </div>
+  </div>
+  )
+}
+
+export default Header
+
+
+
+
+
+
+
+
+
+
+
+/*import React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -163,7 +220,6 @@ const Header = ({ isLoggedIn, onLogout }) => {
                     color="white"
                   >
                     <Badge badgeContent={4} color="error">
-                      {/* <MailIcon style={{ filter: "invert(100)"}} /> */}
                       <MailOutlineIcon
                         style={{ filter: "invert(100)", fill: "black" }}
                       />
@@ -235,3 +291,4 @@ const Header = ({ isLoggedIn, onLogout }) => {
 };
 
 export default Header;
+*/
