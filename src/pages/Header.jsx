@@ -1,4 +1,4 @@
-import { Avatar, IconButton } from '@mui/material'
+import { AppBar, Avatar, IconButton } from '@mui/material'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import StarBorderIcon from '@mui/icons-material/StarBorder';
@@ -8,38 +8,38 @@ import "./cars-list/CarsList.css"
 
 const Header = () => {
   return (
-    <div className="navbar" >
-    <div>
-      <input placeholder="     Search" className="searh-input" />
-    </div>
-    <div>
-      <Link to="/sell">
-        <button className="sell--button" >Sell a car</button>
-      </Link>
-    </div>
-    <div className="navbar--menu" >
-      <div className="navbar--icon">
-        <Link className="navbar--star" to="/favourites">
-          <IconButton>
-            <StarBorderIcon />
+      <div className="navbar" >
+        <div>
+          <input placeholder="     Search" className="searh-input" />
+        </div>
+        <div>
+          <Link to="/sell">
+            <button className="sell--button" >Sell a car</button>
+          </Link>
+        </div>
+        <div className="navbar--menu" >
+          <div className="navbar--icon">
+            <Link className="navbar--star" to="/favourites">
+              <IconButton>
+                <StarBorderIcon />
+              </IconButton>
+            </Link>
+            <Link to="/messages">
+              <IconButton>
+                <MessageIcon />
+              </IconButton>
+            </Link>
+            <Link to="/messages">
+              <IconButton>
+                <NotificationsIcon />
+              </IconButton>
+            </Link>
+          </div>
+          <IconButton sx={{ p: 0 }}>
+            <Avatar alt="" />
           </IconButton>
-        </Link>
-        <Link to="/messages">
-          <IconButton>
-            <MessageIcon />
-          </IconButton>
-        </Link>
-        <Link to="/messages">
-          <IconButton>
-            <NotificationsIcon />
-          </IconButton>
-        </Link>
+        </div>
       </div>
-      <IconButton sx={{ p: 0 }}>
-        <Avatar alt="" />
-      </IconButton>
-    </div>
-  </div>
   )
 }
 

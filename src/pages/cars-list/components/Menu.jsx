@@ -13,8 +13,11 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import TransitEnterexitIcon from '@mui/icons-material/TransitEnterexit';
 import "../CarsList.css"
+import { useLocation } from 'react-router-dom';
 
 const Menu = () => {
+  const location = useLocation();
+ /* const dynamicClass = location.pathname === '/sell' ? "selected" : "selectedd";*/
   return (
     <div className="right--menu">
         <div className="logo-rst-exit" >
@@ -42,7 +45,7 @@ const Menu = () => {
         <Link to="" className="link">
           <div className="right--menu--btn">
             <button className="home" style={{ backgroundColor: "#282828" }}>
-              <div className="right--menu--button" style={{ color: "#FFFFFF" }} >
+              <div className={`right--menu--button`} style={{ color: "#FFFFFF" }} > {/*  <div className={`right--menu--button ${dynamicClass}`} style={{ color: "#FFFFFF" }} >*/}
                 <DirectionsCarIcon style={{ marginRight: 10 }} /> Car Market
               </div>
             </button>
@@ -51,7 +54,7 @@ const Menu = () => {
         <Link to="sell" className="link">
           <div className="right--menu--btn" >
             <button className="home">
-              <div className="right--menu--button" >
+              <div className="right--menu--button">
                 <SellIcon style={{ marginRight: 10 }} /> Sell a Car
               </div>
             </button>

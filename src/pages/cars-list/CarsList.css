@@ -3,7 +3,7 @@
   border: 0.938px solid #D1D1D1;
   background: #FFF;
   display: flex;
-  width: 365.052px;
+  width: 230.052px; /*365*/
   height: 45.045px;
   align-items: center;
   gap: 15.015px;
@@ -22,18 +22,18 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  margin: 26.5px 27.5px 24px 0px;
+  margin: 26.5px 27.5px 24px 180px;
 }
 
 .navbar {
   display: flex;
-  justify-content: center;
   /* width: 1119.556px; */
   height: 90.09px;
   flex-shrink: 0;
   border-bottom: 0.938px solid #D1D1D1;
   background: #FFF;
   margin-left: 200px;
+ 
 }
 
 .navbar--menu {
@@ -91,7 +91,7 @@
 .home {
   width: 201.764px; /**/
   padding: 7.508px 15.015px;
-  align-items: center;
+  /* align-items: center; */
   gap: 9.384px;
   border: none;
   background: #FFF;
@@ -99,13 +99,12 @@
 
 .right--menu--btn {
   display: flex;
-  justify-content: center;
   margin-bottom: 18px;
 }
 
 .right--menu--button {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   color: #7C7C7C;
   font-family: Poppins;
   font-size: 15.015px;
@@ -143,7 +142,7 @@
 
 .post--btn {
   padding: 7.508px 43.168px 7.508px 39.414px;
-  justify-content: center;
+  /*justify-content: center; */
   align-items: center;
   gap: 9.384px;
   border-radius: 7.508px;
@@ -183,7 +182,7 @@
 .all--cards {
   display: flex;
   padding: 7px 11px;
-  justify-content: center;
+  /*justify-content: center;*/
   align-items: center;
   gap: 10px;
   border-radius: 4px;
@@ -195,8 +194,8 @@
 .btn--used {
   display: flex;
   padding: 7px 20px;
-  justify-content: center;
-  align-items: center;
+  /*justify-content: center;
+  align-items: center;*/
   gap: 10px;
   border-radius: 4px;
   background: #FFF;
@@ -439,6 +438,13 @@
   font-style: normal;
   font-weight: 700;
   line-height: 150%;
+}
+.selected{
+  background-color: red;
+}
+
+.selectedd{
+  background-color: blue;
 }
 
 
