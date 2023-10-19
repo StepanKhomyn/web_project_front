@@ -20,9 +20,6 @@ const Menu = () => {
   const location = useLocation();
   const isActivePage = (path) => location.pathname === path;
   
-
-  /*const location = useLocation();*/
-  /* const dynamicClass = location.pathname === '/sell' ? "selected" : "selectedd";*/
   return (
     <div className="right--menu">
       <div className="logo-rst-exit" >

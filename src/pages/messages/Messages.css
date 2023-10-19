@@ -11,7 +11,7 @@
 .main-container {
   display: flex;
   gap: 10px;
-  flex: 1; /* Change height to flex: 1 to make it take up all available vertical space */
+  flex: 1; 
   height: 650px;
 }
 

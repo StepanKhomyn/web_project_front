@@ -8,26 +8,6 @@ import HandymanIcon from '@mui/icons-material/Handyman';
 import { Link } from "react-router-dom";
 import "../CarsList.css"
 
-<style>
-  {`
-    .card--list--cars {
-      display: flex;
-      flex-wrap: wrap;
-    }
-
-    .card--list--car {
-      flex: 1;
-      max-width: 300px; // Змініть на необхідний розмір
-      margin: 10px;
-    }
-
-    @media screen and (max-width: 600px) {
-      .card--list--car {
-        flex: 100%;
-      }
-    }
-  `}
-</style>
 
 const List = ({ sortedData, setSortingOption }) => {
 
@@ -49,14 +29,6 @@ const List = ({ sortedData, setSortingOption }) => {
               <option value="option2">За назвою</option>
               <option value="option3">За ціною</option>
             </select>
-            {/* <h5 className="filter--select--text" style={{ margin: "18px 0px 8px 0px" }}>Type of vehicle</h5>
-            <select className="filter--select" onChange={(e) => setVehicleType(e.target.value)}>
-              <option value="option1">All types</option>
-              <option value="Passenger">Passenger</option>
-              <option value="Bus">Bus</option>
-              <option value="Ship">Ship</option>
-              <option value="Plane">Plane</option>
-  </select>*/}
             <MenuIcon style={{ marginRight: '8' }} />
             <AppsIcon />
           </div>

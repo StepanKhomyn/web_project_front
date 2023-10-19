@@ -91,8 +91,7 @@ const RegisterPage = () => {
                             Реєстрація
                         </Typography>
                         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-                            {/* Ось тут ваші поля для вводу додаткових даних */}
-                            {/* Додайте їх та обробники подій, які вам потрібні */}
+                           
                             <Grid container spacing={2}>
                                 <Grid item xs={12}>
                                     <TextField
@@ -125,7 +124,7 @@ const RegisterPage = () => {
                                     />
                                 </Grid>
                             </Grid>
-                            {/* Кінець полів для вводу додаткових даних */}
+                           
                             <Button
                                 type="submit"
                                 fullWidth

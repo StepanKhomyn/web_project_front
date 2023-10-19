@@ -8,7 +8,7 @@
   gap: 15.015px;
   flex-shrink: 0;
   margin: 22.5px 0;
-  padding: 0 15px; /* Додайте відступи всередину input */
+  padding: 0 15px; 
   margin-left: 50px;
 }
 
@@ -16,7 +16,7 @@
   min-width: 200px;
   border-radius: 7.508px;
   border: 0.938px solid #282828;
-  padding: 8.446px 20px; /* Зменште padding для адаптивності */
+  padding: 8.446px 20px; 
   background: #282828;
   color: #FFF;
   font-family: Poppins;
@@ -24,14 +24,14 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  margin: 26.5px 0 24px; /* Зменште margin для адаптивності */
+  margin: 26.5px 0 24px; 
   margin-left: 350px;
 }
 
 .navbar {
   display: flex;
-  flex-wrap: wrap; /* Додаємо обгортку для адаптивності */
-  justify-content: space-between; /* Розташування між елементами */
+  flex-wrap: wrap; 
+  justify-content: space-between; 
   width: 85.4%;
   height: 90.09px;
   flex-shrink: 0;
@@ -57,11 +57,10 @@
   max-width: 1351.351px;
   max-height: 962.837px;
   border-radius: 16.533px;
-  /* background: #FFF; */
   margin-left: 70px;
 }
 
-/*  */
+
 
 
 .right--menu {
@@ -155,7 +154,7 @@
 }
 
 .left--menu {
-  width: 271.209px;  /**/
+  width: 271.209px;  
   min-height: 870px;
   flex-shrink: 0;
   border-left: 0.938px solid #D1D1D1;
@@ -448,10 +447,6 @@
 }
 .selected{
   background-color: #282828;
-}
-
-.greay{
-  color: #951d1d;
 }
 
 .white{

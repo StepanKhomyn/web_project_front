@@ -80,7 +80,7 @@ const Favourites = () => {
                       color="success"
                       size="small"
                       startIcon={<SendIcon />}
-                      className="small-button" // Add the custom class
+                      className="small-button" 
                     >
                       Надіслати повідомлення
                     </Button>
@@ -91,7 +91,7 @@ const Favourites = () => {
                       variant="contained"
                       size="small"
                       startIcon={<DeleteIcon />}
-                      className="small-button" // Add the custom class
+                      className="small-button" 
                     >
                       Вилучити з списку
                     </Button>
