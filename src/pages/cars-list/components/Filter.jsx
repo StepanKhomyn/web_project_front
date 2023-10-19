@@ -2,7 +2,16 @@ import React from 'react'
 import CloseIcon from '@mui/icons-material/Close';
 import "../CarsList.css"
 
-const Filter = () => {
+const a = [
+  {modelName: "q8", type: "Audi"},
+  {modelName: "sivic", type: "Honda"}
+]
+
+const b = a.filter(i => i.type === "Audi")
+
+console.log(b)
+
+const Filter = ({setVehicleType, setBrandType}) => {
   return (
     <div className="left--menu">
         <div className="fiteres--menu">
@@ -33,23 +42,31 @@ const Filter = () => {
         <div className="line--one"></div>
         <div className="filter--select-all">
           <h5 className="filter--select--text" style={{ margin: "18px 0px 8px 0px" }}>Type of vehicle</h5>
-          <select className="filter--select">
+          <select className="filter--select" onChange={(e) => setVehicleType(e.target.value)}>
             <option value="option1">All types</option>
-            <option value="option2">Варіант 2</option>
-            <option value="option3">Варіант 3</option>
+            <option value="Passenger">Passenger</option>
+            <option value="Bus">Bus</option>
+            <option value="Ship">Ship</option>
+            <option value="Plane">Plane</option>
           </select>
         </div>
         <div className="filter--select-all">
           <h5 style={{ margin: "18px 0px 8px 0px" }} className="filter--select--text">Car brand</h5>
-          <select className="filter--select">
+          <select className="filter--select" onChange={(e) => setBrandType(e.target.value)}>
             <option value="option1">All brand</option>
-            <option value="option2">Варіант 2</option>
-            <option value="option3">Варіант 3</option>
+            <option value="Mersedes-Benz">Mersedes-Benz</option>
+            <option value="Audi">Audi</option>
+            <option value="Tesla">Tesla</option>
+            <option value="Kia">Kia</option>
+            <option value="Skoda">Skoda</option>
           </select>
         </div>
         <div className="filter--select-all">
           <h5 className="filter--select--text" style={{ margin: "18px 0px 8px 0px" }}>Car model</h5>
           <select className="filter--select">
+            {b.map(i => {
+            /*  return <option value="option1">{i.modelName}</option>*/
+            })}
             <option value="option1">All model</option>
             <option value="option2">Варіант 2</option>
             <option value="option3">Варіант 3</option>

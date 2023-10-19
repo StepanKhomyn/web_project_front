@@ -6,40 +6,45 @@ import MessageIcon from '@mui/icons-material/Message';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import "./cars-list/CarsList.css"
 
-const Header = () => {
+const Header = ({ setSearchTerm }) => {
+
   return (
-      <div className="navbar" >
-        <div>
-          <input placeholder="     Search" className="searh-input" />
-        </div>
-        <div>
-          <Link to="/sell">
-            <button className="sell--button" >Sell a car</button>
+    <div className="navbar">
+      <div className="search-container">
+        <input
+          placeholder="Search"
+          className="search-input"
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+      <div className="sell-container">
+        <Link to="/sell">
+          <button className="sell-button">Sell a car</button>
+        </Link>
+      </div>
+      <div className="navbar-menu">
+        <div className="navbar-icon">
+          <Link className="navbar-star" to="/favourites">
+            <IconButton>
+              <StarBorderIcon />
+            </IconButton>
+          </Link>
+          <Link to="/messages">
+            <IconButton>
+              <MessageIcon />
+            </IconButton>
+          </Link>
+          <Link to="/messages">
+            <IconButton>
+              <NotificationsIcon />
+            </IconButton>
           </Link>
         </div>
-        <div className="navbar--menu" >
-          <div className="navbar--icon">
-            <Link className="navbar--star" to="/favourites">
-              <IconButton>
-                <StarBorderIcon />
-              </IconButton>
-            </Link>
-            <Link to="/messages">
-              <IconButton>
-                <MessageIcon />
-              </IconButton>
-            </Link>
-            <Link to="/messages">
-              <IconButton>
-                <NotificationsIcon />
-              </IconButton>
-            </Link>
-          </div>
-          <IconButton sx={{ p: 0 }}>
-            <Avatar alt="" />
-          </IconButton>
-        </div>
+        <IconButton sx={{ p: 0 }}>
+          <Avatar alt="" />
+        </IconButton>
       </div>
+    </div>
   )
 }
 

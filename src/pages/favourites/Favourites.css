@@ -9,6 +9,7 @@
     display: flex;
     flex-direction: column;
     width: 60%;
+    margin-right: 300px;
 }
 
 .container-header {

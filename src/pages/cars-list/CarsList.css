@@ -1,20 +1,22 @@
-.searh-input {
+.search-input {
   border-radius: 7.508px;
   border: 0.938px solid #D1D1D1;
   background: #FFF;
-  display: flex;
-  width: 230.052px; /*365*/
+  width: 100%;
   height: 45.045px;
   align-items: center;
   gap: 15.015px;
   flex-shrink: 0;
-  margin: 22.5px 320px 22.5px 37.5px;
+  margin: 22.5px 0;
+  padding: 0 15px; /* Додайте відступи всередину input */
+  margin-left: 50px;
 }
 
-.sell--button {
+.sell-button {
+  min-width: 200px;
   border-radius: 7.508px;
   border: 0.938px solid #282828;
-  padding: 8.446px 43.168px;
+  padding: 8.446px 20px; /* Зменште padding для адаптивності */
   background: #282828;
   color: #FFF;
   font-family: Poppins;
@@ -22,31 +24,34 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  margin: 26.5px 27.5px 24px 180px;
+  margin: 26.5px 0 24px; /* Зменште margin для адаптивності */
+  margin-left: 350px;
 }
 
 .navbar {
   display: flex;
-  /* width: 1119.556px; */
+  flex-wrap: wrap; /* Додаємо обгортку для адаптивності */
+  justify-content: space-between; /* Розташування між елементами */
+  width: 85.4%;
   height: 90.09px;
   flex-shrink: 0;
   border-bottom: 0.938px solid #D1D1D1;
   background: #FFF;
   margin-left: 200px;
- 
 }
 
-.navbar--menu {
-  display: inline-flex;
+.navbar-menu {
+  display: flex;
   align-items: center;
+  margin-right: 30px;
 }
 
-
-
-.navbar--icon {
+.navbar-icon {
   display: flex;
   margin-right: 20px;
 }
+
+
 
 .carsList--page {
   max-width: 1351.351px;
@@ -89,7 +94,6 @@
 }
 
 .home {
-  width: 201.764px; /**/
   padding: 7.508px 15.015px;
   /* align-items: center; */
   gap: 9.384px;
@@ -328,6 +332,7 @@
 
 .center-page {
   height: 930px;
+  min-width: 53.125rem;
 }
 
 .center-page-top-one {
@@ -371,6 +376,8 @@
   margin-left: 35px;
   margin-bottom: 20px;
 }
+
+
 
 .car-image {
   height: 234px;
@@ -440,11 +447,15 @@
   line-height: 150%;
 }
 .selected{
-  background-color: red;
+  background-color: #282828;
 }
 
-.selectedd{
-  background-color: blue;
+.greay{
+  color: #951d1d;
+}
+
+.white{
+  background-color: #fff;
 }
 
 

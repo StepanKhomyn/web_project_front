@@ -121,7 +121,6 @@ const SellCar = () => {
       <Header />
       <div style={{ display: "flex" }}>
         <Menu />
-
         <Container  className="form-container">
           <Container style={{ display: "flex", justifyContent: "center", }}>
             <Breadcrumbs aria-label="breadcrumb" mb={2}>

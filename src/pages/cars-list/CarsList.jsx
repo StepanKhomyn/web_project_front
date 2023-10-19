@@ -9,81 +9,144 @@ const carData = [
   {
     id: 1,
     name: "Tesla Model X 2022",
-    price: "10 000",
+    type: "Passenger",
+    price: 10000,
     location: "Lviv",
     transmission: "mechanical",
     fuelType: "Gas 1.6",
     distance: "11 000",
+    breand: "Mersedes-Benz",
     image:
       "https://cdn3.riastatic.com/photosnew/auto/photo/tesla_model-3__515756233f.webp",
+    model: "Q8"
   },
   {
     id: 2,
     name: "Volkswagen Passat 2020",
-    price: "10 000",
+    type: "Passenger",
+    price: 4000,
     location: "Lviv",
     transmission: "mechanical",
     fuelType: "Gas 1.6",
     distance: "11 000",
+    breand: "Kia",
     image:
       "https://cdn.riastatic.com/photos/ria/news_text/16/1692/169281/169281.jpg",
+    model: "Q8"
   },
   {
     id: 3,
     name: "Volkswagen Tiguan 2022",
-    price: "10 000",
+    type: "Passenger",
+    price: 1000,
     location: "Lviv",
     transmission: "mechanical",
     fuelType: "Gas 1.6",
     distance: "11 000",
+    breand: "Audi",
     image:
       "https://cdn.riastatic.com/photosnewr/auto/new_auto_storage/volkswagen-id-4-crozz__2080542-620x465x72.webp",
+    model: "Q8"
   },
   {
     id: 4,
-    name: "Car 4",
-    price: "10 000",
+    name: "Audi Q5",
+    type: "Ship",
+    price: 6700,
     location: "Lviv",
     transmission: "mechanical",
     fuelType: "Gas 1.6",
     distance: "11 000",
+    breand: "Skoda",
     image:
       "https://cdn4.riastatic.com/photosnew/auto/photo/peugeot_4007__516197674f.webp",
+    model: "Q8"
   },
   {
     id: 5,
-    name: "Car 5",
-    price: "10 000",
+    name: "Skoda",
+    type: "Plane",
+    price: 7000,
     location: "Lviv",
     transmission: "mechanical",
     fuelType: "Gas 1.6",
     distance: "11 000",
+    breand: "Tesla",
     image:
       "https://cdn.riastatic.com/photos/ria/news_text/16/1692/169281/169281.jpg",
+    model: "Q8"
   },
   {
     id: 6,
-    name: "Car 6",
-    price: "10 000",
+    name: "Kia",
+    type: "Plane",
+    price: 5000,
     location: "Lviv",
     transmission: "mechanical",
     fuelType: "Gas 1.6",
     distance: "11 000",
+    breand: "Tesla",
     image:
       "https://cdn.riastatic.com/photosnewr/auto/new_auto_storage/volkswagen-id-4-crozz__2080542-620x465x72.webp",
+    model: "Q8"
   },
 ];
 
+
+
 const CarsList = () => {
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const [sortingOption, setSortingOption] = useState('');
+  const [vehicleType, setVehicleType] = useState('');
+  const [brandType, setBrandType] = useState('');
+  const [modelType, setModelType] = useState('');
+
+  /*  let filteredData = .filter(i => i.type === "Audi")*/
+
+  const filteredData = carData.filter((car) =>
+    car.breand.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const sortData = () => {
+    let sortedArray = [...filteredData];
+
+    if (sortingOption === 'option2') {
+      sortedArray = sortedArray.sort((a, b) => a.breand.localeCompare(b.breand));
+    } else if (sortingOption === 'option3') {
+      sortedArray = sortedArray.sort((a, b) => a.price - b.price);
+    }
+
+    if (vehicleType && vehicleType !== 'option1') {
+      sortedArray = sortedArray.filter(car =>
+        car.type.toLowerCase().includes(vehicleType.toLowerCase())
+      );
+    }
+
+    if (brandType && brandType !== 'option1') {
+      sortedArray = sortedArray.filter(car =>
+        car.breand.toLowerCase().includes(brandType.toLowerCase())
+      );
+    }
+
+    return sortedArray;
+  };
+
+  const sortedData = sortData();
+
+
+
+
+
+
   return (
     <div className="carsList--page">
-      <Header />
-      <div style={{display: "flex"}}>
+      <Header setSearchTerm={setSearchTerm} />
+      <div style={{ display: "flex" }}>
         <Menu />
-        <List />
-        <Filter />
+        <List sortedData={sortedData} setSortingOption={setSortingOption} />
+        <Filter setVehicleType={setVehicleType} setBrandType={setBrandType} />
       </div>
-
     </div>
 
   );

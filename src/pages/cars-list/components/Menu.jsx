@@ -16,125 +16,130 @@ import "../CarsList.css"
 import { useLocation } from 'react-router-dom';
 
 const Menu = () => {
+
   const location = useLocation();
- /* const dynamicClass = location.pathname === '/sell' ? "selected" : "selectedd";*/
+  const isActivePage = (path) => location.pathname === path;
+  
+
+  /*const location = useLocation();*/
+  /* const dynamicClass = location.pathname === '/sell' ? "selected" : "selectedd";*/
   return (
     <div className="right--menu">
-        <div className="logo-rst-exit" >
-          <h1 className="rst" >RST</h1>
-          <TransitEnterexitIcon className="rst--exit" />
+      <div className="logo-rst-exit" >
+        <h1 className="rst" >RST</h1>
+        <TransitEnterexitIcon className="rst--exit" />
+      </div>
+      <Link to="" className="link">
+        <div className="right--menu--btn" >
+          <button className={`home ${isActivePage('/home') ? 'selected' : ''}`}>
+            <div className="right--menu--button" style={{ color: isActivePage('/home') ? '#fff' : '#7C7C7C' }} >
+              <HomeIcon style={{ marginRight: 10 }} /> Home
+            </div>
+          </button>
         </div>
-        <Link to="" className="link">
-          <div className="right--menu--btn" >
-            <button className="home">
-              <div className="right--menu--button" >
-                <HomeIcon style={{ marginRight: 10 }} /> Home
-              </div>
-            </button>
-          </div>
-        </Link>
-        <Link to="" className="link" >
-          <div className="right--menu--btn" >
-            <button className="home">
-              <div className="right--menu--button" >
-                <HomeRepairServiceIcon style={{ marginRight: 10 }} /> Car Dealerships
-              </div>
-            </button>
-          </div>
-        </Link>
-        <Link to="" className="link">
-          <div className="right--menu--btn">
-            <button className="home" style={{ backgroundColor: "#282828" }}>
-              <div className={`right--menu--button`} style={{ color: "#FFFFFF" }} > {/*  <div className={`right--menu--button ${dynamicClass}`} style={{ color: "#FFFFFF" }} >*/}
-                <DirectionsCarIcon style={{ marginRight: 10 }} /> Car Market
-              </div>
-            </button>
-          </div>
-        </Link>
-        <Link to="sell" className="link">
-          <div className="right--menu--btn" >
-            <button className="home">
-              <div className="right--menu--button">
-                <SellIcon style={{ marginRight: 10 }} /> Sell a Car
-              </div>
-            </button>
-          </div>
-        </Link>
-        <Link to="" className="link">
-          <div className="right--menu--btn" >
-            <button className="home">
-              <div className="right--menu--button" >
-                <ChangeCircleIcon style={{ marginRight: 10 }} /> Car Exchange
-              </div>
-            </button>
-          </div>
-        </Link>
-        <Link to="" className="link">
-          <div className="right--menu--btn" >
-            <button className="home">
-              <div className="right--menu--button" >
-                <RecordVoiceOverIcon style={{ marginRight: 10 }} /> Announcements
-              </div>
-            </button>
-          </div>
-        </Link>
-        <Link to="" className="link">
-          <div className="right--menu--btn" >
-            <button className="home">
-              <div className="right--menu--button" >
-                <NewspaperIcon style={{ marginRight: 10 }} /> Auto News
-              </div>
-            </button>
-          </div>
-        </Link>
-        <Link to="" className="link">
-          <div className="right--menu--btn" >
-            <button className="home">
-              <div className="right--menu--button" >
-                <ReviewsIcon style={{ marginRight: 10 }} /> Reviews
-              </div>
-            </button>
-          </div>
-        </Link>
-        <Link to="" className="link">
-          <div className="right--menu--btn" >
-            <button className="home">
-              <div className="right--menu--button" >
-                <TrendingUpIcon style={{ marginRight: 10 }} /> Autosite Rating
-              </div>
-            </button>
-          </div>
-        </Link>
-        <Link to="" className="link">
-          <div className="right--menu--btn" >
-            <button className="home">
-              <div className="right--menu--button" >
-                <SettingsIcon style={{ marginRight: 10 }} /> Setting
-              </div>
-            </button>
-          </div>
-        </Link>
+      </Link>
+      <Link to="" className="link" >
+        <div className="right--menu--btn" >
+          <button className={`home ${isActivePage('/dealerships') ? 'selected' : ''}`}>
+            <div className="right--menu--button" style={{ color: isActivePage('/dealerships') ? '#fff' : '#7C7C7C' }} >
+              <HomeRepairServiceIcon style={{ marginRight: 10 }} /> Car Dealerships
+            </div>
+          </button>
+        </div>
+      </Link>
+      <Link to="/" className="link">
+        <div className="right--menu--btn">
+          <button className={`home ${isActivePage('/') ? 'selected' : 'white'}`}>
+            <div className="right--menu--button" style={{ color: isActivePage('/') ? '#fff' : '#7C7C7C' }}>
+              <DirectionsCarIcon style={{ marginRight: 10 }} /> Car Market
+            </div>
+          </button>
+        </div>
+      </Link>
+      <Link to="/sell" className="link">
+        <div className="right--menu--btn" >
+          <button className={`home ${isActivePage('/sell') ? 'selected' : 'white'}`}>
+            <div className="right--menu--button" style={{ color: isActivePage('/sell') ? '#fff' : '#7C7C7C' }}>
+              <SellIcon style={{ marginRight: 10 }} /> Sell a Car
+            </div>
+          </button>
+        </div>
+      </Link>
+      <Link to="" className="link">
+        <div className="right--menu--btn" >
+          <button className={`home ${isActivePage('/carExchange') ? 'selected' : 'white'}`}>
+            <div className="right--menu--button" style={{ color: isActivePage('/carExchange') ? '#fff' : '#7C7C7C' }} >
+              <ChangeCircleIcon style={{ marginRight: 10 }} /> Car Exchange
+            </div>
+          </button>
+        </div>
+      </Link>
+      <Link to="/mycar" className="link">
+        <div className="right--menu--btn" >
+          <button className={`home ${isActivePage('/mycar') ? 'selected' : 'white'}`}>
+            <div className="right--menu--button" style={{ color: isActivePage('/mycar') ? '#fff' : '#7C7C7C' }} >
+              <RecordVoiceOverIcon style={{ marginRight: 10 }} /> My Car
+            </div>
+          </button>
+        </div>
+      </Link>
+      <Link to="/messages" className="link">
+        <div className="right--menu--btn" >
+          <button className={`home ${isActivePage('/messages') ? 'selected' : 'white'}`}>
+            <div className="right--menu--button" style={{ color: isActivePage('/messages') ? '#fff' : '#7C7C7C' }}  >
+              <NewspaperIcon style={{ marginRight: 10 }} /> Messages
+            </div>
+          </button>
+        </div>
+      </Link>
+      <Link to="/favourites" className="link">
+        <div className="right--menu--btn" >
+          <button className={`home ${isActivePage('/favourites') ? 'selected' : 'white'}`}>
+            <div className="right--menu--button" style={{ color: isActivePage('/favourites') ? '#fff' : '#7C7C7C' }}  >
+              <ReviewsIcon style={{ marginRight: 10 }} /> Favourites
+            </div>
+          </button>
+        </div>
+      </Link>
+      <Link to="" className="link">
+        <div className="right--menu--btn" >
+          <button className={`home ${isActivePage('/autositeRatings') ? 'selected' : 'white'}`}>
+            <div className="right--menu--button" style={{ color: isActivePage('/autositeRatings') ? '#fff' : '#7C7C7C' }}>
+              <TrendingUpIcon style={{ marginRight: 10 }} /> Autosite Rating
+            </div>
+          </button>
+        </div>
+      </Link>
+      <Link to="" className="link">
+        <div className="right--menu--btn" >
+          <button  className={`home ${isActivePage('/setting') ? 'selected' : 'white'}`}>
+            <div className="right--menu--button"  style={{ color: isActivePage('/setting') ? '#fff' : '#7C7C7C' }}>
+              <SettingsIcon style={{ marginRight: 10 }} /> Setting
+            </div>
+          </button>
+        </div>
+      </Link>
 
-        <div className="logout">
-          <Link to="login" className="link">
-            <div className="right--menu--btn" style={{ marginTop: "20px" }} >
-              <button className="home">
-                <div className="right--menu--button" >
-                  <LogoutIcon style={{ marginRight: 10 }} /> Logout
-                </div>
-              </button>
-            </div>
-          </Link>
-          <div className="post">
-            <div className="post--text">
-              <p className="post--text-add"><b>Post an add,</b>  free,<br /> without registration!</p>
-            </div>
-            <div>
-              <button className="post--btn" >+ Post ad</button>
-            </div>
+      <div className="logout">
+        <Link to="login" className="link">
+          <div className="right--menu--btn" style={{ marginTop: "20px" }} >
+            <button className="home">
+              <div className="right--menu--button" >
+                <LogoutIcon style={{ marginRight: 10 }} /> Logout
+              </div>
+            </button>
+          </div>
+        </Link>
+        <div className="post">
+          <div className="post--text">
+            <p className="post--text-add"><b>Post an add,</b>  free,<br /> without registration!</p>
+          </div>
+          <div>
+            <button className="post--btn" >+ Post ad</button>
           </div>
         </div>
       </div>
+    </div>
   )
 }
 
