@@ -1,0 +1,91 @@
+.defines-list-title{
+    width: 130px;
+    height: 40px;
+    flex: none;
+}
+
+.defines-list-value{
+    width: calc(100% - 130px);
+    height: 40px;
+    margin-left: 0;
+    margin-bottom: 10px;
+}
+
+.about-car {
+    position: absolute;
+  left: 302px;
+  top: 90.09px;
+  width: 849px;
+  height: 930px;
+}
+
+.car-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 20px;
+    margin-left: 20px;
+    padding: auto;
+}
+
+.title {
+    color: #282828;
+    font-family: Poppins;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 140%;
+    margin: 10px 0px;
+}
+
+.exchange {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.checkbox-checked {
+    border-radius: 2px;
+    border: 1.2px solid #E6E3E0;
+    
+    width: 24px;
+    height: 24px;
+}
+
+.number {
+    text-align: center;
+}
+
+.seller{
+    margin-top: 16px;
+    display: flex;
+}
+
+.btn-chat {
+    align-items: center;
+    justify-content: center;
+}
+
+.left-marg{
+    margin-left: 6px;
+}
+
+.price-ua{
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.price{
+    color: #282828;
+    font-family: Poppins;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%;
+}
+
+.test{
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
