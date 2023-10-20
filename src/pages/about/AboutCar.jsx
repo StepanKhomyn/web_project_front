@@ -1,6 +1,5 @@
 import React from 'react'
-import './AboutCar.css'
-// import '/workspaces/web_project_front/src/pages/cars-list/CarsList.css'
+/*import './AboutCar.css'*/
 import {
   IconButton,
   Avatar,
