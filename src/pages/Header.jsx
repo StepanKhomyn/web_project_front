@@ -17,11 +17,11 @@ const Header = ({ setSearchTerm }) => {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
-      <div className="sell-container">
+      {/*<div className="sell-container">
         <Link to="/sell">
           <button className="sell-button">Sell a car</button>
         </Link>
-      </div>
+         </div>*/}
       <div className="navbar-menu">
         <div className="navbar-icon">
           <Link className="navbar-star" to="/favourites">

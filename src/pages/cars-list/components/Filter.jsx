@@ -1,25 +1,34 @@
 import React from 'react'
-import CloseIcon from '@mui/icons-material/Close';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import FilterAltOffIcon from '@mui/icons-material/FilterAltOff';
 import "../CarsList.css"
+import { useState } from 'react';
 
 const a = [
-  {modelName: "q8", type: "Audi"},
-  {modelName: "sivic", type: "Honda"}
+  { modelName: "q8", type: "Audi" },
+  { modelName: "sivic", type: "Honda" }
 ]
 
 const b = a.filter(i => i.type === "Audi")
 
 console.log(b)
 
-const Filter = ({setVehicleType, setBrandType}) => {
+const Filter = ({ setVehicleType, setBrandType }) => {
+
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleCloseIconClick = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+
   return (
-    <div className="left--menu">
+    <>
+      {menuOpen ? <FilterAltIcon className="close--icon" onClick={handleCloseIconClick} /> : <FilterAltOffIcon className="close--icon" onClick={handleCloseIconClick} />}
+      <div className={`left--menu ${menuOpen ? 'active' : ''}`}>
         <div className="fiteres--menu">
           <div>
             <h2 className="filteres" >Filters</h2>
-          </div>
-          <div>
-            <CloseIcon className="close--icon" />
           </div>
         </div>
         <div className="right-menu-list">
@@ -65,7 +74,7 @@ const Filter = ({setVehicleType, setBrandType}) => {
           <h5 className="filter--select--text" style={{ margin: "18px 0px 8px 0px" }}>Car model</h5>
           <select className="filter--select">
             {b.map(i => {
-            /*  return <option value="option1">{i.modelName}</option>*/
+              /*  return <option value="option1">{i.modelName}</option>*/
             })}
             <option value="option1">All model</option>
             <option value="option2">Варіант 2</option>
@@ -194,6 +203,7 @@ const Filter = ({setVehicleType, setBrandType}) => {
           </select>
         </div>
       </div>
+    </>
   )
 }
 

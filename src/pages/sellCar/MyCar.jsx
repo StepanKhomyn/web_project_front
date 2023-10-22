@@ -95,7 +95,7 @@ const MyCar = () => {
                                 </Link>
                             </Breadcrumbs>
                         </Container>
-                        <Container style={{ display: "flex", justifyContent: "center", marginTop: 16, marginBottom: 16, width: 760 }}>
+                        {/*<Container style={{ display: "flex", justifyContent: "center", marginTop: 16, marginBottom: 16, width: 760 }}>
                             <InputBase className='search-car'
                                 placeholder="Search"
                                 inputProps={{ 'aria-label': 'search' }}
@@ -103,7 +103,7 @@ const MyCar = () => {
                             <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
                                 <SearchIcon />
                             </IconButton>
-                        </Container>
+                        </Container>*/}
                         <Container style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                             {carsData.length === 0 ? (
                                 <Typography variant="h5" style={{ marginTop: 20 }}>

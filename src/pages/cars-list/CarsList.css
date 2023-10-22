@@ -67,8 +67,16 @@
   height: 960.96px;
   flex-shrink: 0;
   border-right: 0.938px solid #D1D1D1;
+  border-bottom: 0.938px solid #D1D1D1;
   background: #FFF;
   margin-top: -90px;
+  /* Додайте transition для плавного ефекту */
+  transition: transform 0.6s ease;
+  transform: translateY(-871px); /* Змініть translateX на -100%, щоб меню було за межами екрану */
+}
+
+.right--menu.active {
+  transform: translateX(0);
 }
 
 .logo-rst-exit {
@@ -76,6 +84,7 @@
   align-items: center;
   justify-content: space-between;
   margin-left: 32px;
+  
 }
 
 .rst--exit {
@@ -85,6 +94,11 @@
   border-radius: 6px 0px 0px 6px;
   border: 1px solid #D1D1D1;
   color: #7C7C7C;
+  position: absolute;
+  z-index: 5;
+  left: 270px;
+  top: 30px;
+  
 }
 
 .rst {
@@ -159,6 +173,13 @@
   flex-shrink: 0;
   border-left: 0.938px solid #D1D1D1;
   background: #F3F3F3;
+  transition: opacity 0.3s ease-in-out; /* Додано анімацію для opacity */
+  opacity: 1;
+}
+
+.left--menu.active {
+  opacity: 0; /* Зробити елементи невидимими */
+  pointer-events: none;
 }
 
 .fiteres--menu {
@@ -177,6 +198,11 @@
   margin: 26px 140px 25px 20px;
 }
 
+.close--icon{
+  position: absolute;
+  top: 139px;
+  left: 1125px;
+}
 
 .right-menu-list {
   display: flex;

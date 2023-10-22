@@ -1,6 +1,5 @@
 import React from 'react'
 import "../AboutCar.css"
-/*import "/workspaces/web_project_front/src/pages/about/AboutCar.css"*/
 const RightMenu = ({carData}) => {
   return (
     <div className="left--menu" style={{position: "sticky"}}>
