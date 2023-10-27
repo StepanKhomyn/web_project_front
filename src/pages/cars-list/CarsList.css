@@ -2,14 +2,14 @@
   border-radius: 7.508px;
   border: 0.938px solid #D1D1D1;
   background: #FFF;
-  width: 100%;
+  width: 20%;
   height: 45.045px;
   align-items: center;
   gap: 15.015px;
   flex-shrink: 0;
   margin: 22.5px 0;
   padding: 0 15px; 
-  margin-left: 50px;
+  margin-left: 250px;
 }
 
 .sell-button {
@@ -30,14 +30,12 @@
 
 .navbar {
   display: flex;
-  flex-wrap: wrap; 
   justify-content: space-between; 
-  width: 85.4%;
+  width: 100%;
   height: 90.09px;
   flex-shrink: 0;
   border-bottom: 0.938px solid #D1D1D1;
   background: #FFF;
-  margin-left: 200px;
 }
 
 .navbar-menu {
@@ -64,6 +62,7 @@
 
 
 .right--menu {
+  position: absolute;
   height: 960.96px;
   flex-shrink: 0;
   border-right: 0.938px solid #D1D1D1;
@@ -71,12 +70,15 @@
   background: #FFF;
   margin-top: -90px;
   /* Додайте transition для плавного ефекту */
-  transition: transform 0.6s ease;
+  transition: transform 0.3s ease;
   transform: translateY(-871px); /* Змініть translateX на -100%, щоб меню було за межами екрану */
 }
 
 .right--menu.active {
   transform: translateX(0);
+  position: static
+  
+  
 }
 
 .logo-rst-exit {
@@ -168,18 +170,19 @@
 }
 
 .left--menu {
-  width: 271.209px;  
+  position: static;
+  width: 271.209px;   /*20%*/
   min-height: 870px;
   flex-shrink: 0;
   border-left: 0.938px solid #D1D1D1;
   background: #F3F3F3;
-  transition: opacity 0.3s ease-in-out; /* Додано анімацію для opacity */
   opacity: 1;
 }
 
 .left--menu.active {
   opacity: 0; /* Зробити елементи невидимими */
   pointer-events: none;
+  position: absolute;
 }
 
 .fiteres--menu {
@@ -199,9 +202,7 @@
 }
 
 .close--icon{
-  position: absolute;
-  top: 139px;
-  left: 1125px;
+  
 }
 
 .right-menu-list {
@@ -357,7 +358,7 @@
 
 .center-page {
   height: 930px;
-  min-width: 53.125rem;
+  /*min-width: 53.125rem; */
 }
 
 .center-page-top-one {
@@ -377,7 +378,6 @@
 
 .sort--select {
   display: flex;
-  width: 234px; /**/
   padding: 8px 16px;
   justify-content: space-between;
   align-items: center;
@@ -392,7 +392,10 @@
   /* width: 850px; */
   height: 930px;
   padding-top: 30px;
+  padding-right: 25px;
 }
+
+
 
 .card--list--car {
   height: 420px;

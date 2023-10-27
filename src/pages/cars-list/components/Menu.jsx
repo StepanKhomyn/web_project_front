@@ -24,23 +24,7 @@ const Menu = () => {
     setMenuOpen(!menuOpen);
   };
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth <= 670) {
-        setMenuOpen(false);
-      } else {
-        setMenuOpen(true);
-      }
-    };
-
-    // Викликаємо функцію handleResize одразу після додавання події
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  
 
   const location = useLocation();
   const isActivePage = (path) => location.pathname === path;

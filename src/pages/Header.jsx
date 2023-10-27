@@ -10,13 +10,11 @@ const Header = ({ setSearchTerm }) => {
 
   return (
     <div className="navbar">
-      <div className="search-container">
         <input
           placeholder="Search"
           className="search-input"
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-      </div>
       {/*<div className="sell-container">
         <Link to="/sell">
           <button className="sell-button">Sell a car</button>

@@ -13,19 +13,13 @@ const b = a.filter(i => i.type === "Audi")
 
 console.log(b)
 
-const Filter = ({ setVehicleType, setBrandType }) => {
+const Filter = ({ setVehicleType, setBrandType, setExchange, dataFromChild }) => {
 
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const handleCloseIconClick = () => {
-    setMenuOpen(!menuOpen);
-  };
 
 
   return (
     <>
-      {menuOpen ? <FilterAltIcon className="close--icon" onClick={handleCloseIconClick} /> : <FilterAltOffIcon className="close--icon" onClick={handleCloseIconClick} />}
-      <div className={`left--menu ${menuOpen ? 'active' : ''}`}>
+      <div className={`left--menu ${dataFromChild ? 'active' : ''}`}>
         <div className="fiteres--menu">
           <div>
             <h2 className="filteres" >Filters</h2>
@@ -44,7 +38,7 @@ const Filter = ({ setVehicleType, setBrandType }) => {
         </div>
         <div className="exchange--menu">
           <label class="form-control">
-            <input className="checkbox-exchange" type="checkbox" name="checkbox" />
+            <input className="checkbox-exchange" type="checkbox" name="checkbox" onChange={(e) => setExchange(e.target.checked)} />
             Exchange
           </label>
         </div>

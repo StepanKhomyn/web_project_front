@@ -4,6 +4,31 @@ import Header from "../Header";
 import Menu from "./components/Menu";
 import Filter from "./components/Filter";
 import List from "./components/List";
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import FilterAltOffIcon from '@mui/icons-material/FilterAltOff';
+
+const apiKey = '81106b36bdb74941883a5389d7b0af62';
+
+ /* async function getExchangeRate() {
+    try {
+      const response = await fetch(`https://open.er-api.com/v6/latest/USD?apikey=${apiKey}`);
+      const data = await response.json();
+      return data.rates.UAH;
+    } catch (error) {
+      console.error('Помилка при отриманні курсу обміну:', error);
+      return null;
+    }
+  }
+  
+  async function convertDollarsToUAH(dollars) {
+    const exchangeRate = await getExchangeRate();
+    if (exchangeRate !== null) {
+      const uah = dollars * exchangeRate;
+      return uah.toFixed(0); // Округлюємо до двох знаків після коми
+    } else {
+      return null;
+    }
+  }*/
 
 const carData = [
   {
@@ -16,6 +41,7 @@ const carData = [
     fuelType: "Gas 1.6",
     distance: "11 000",
     breand: "Mersedes-Benz",
+    exchange: true,
     image:
       "https://cdn3.riastatic.com/photosnew/auto/photo/tesla_model-3__515756233f.webp",
     model: "Q8"
@@ -30,6 +56,7 @@ const carData = [
     fuelType: "Gas 1.6",
     distance: "11 000",
     breand: "Kia",
+    exchange: true,
     image:
       "https://cdn.riastatic.com/photos/ria/news_text/16/1692/169281/169281.jpg",
     model: "Q8"
@@ -44,6 +71,7 @@ const carData = [
     fuelType: "Gas 1.6",
     distance: "11 000",
     breand: "Audi",
+    exchange: true,
     image:
       "https://cdn.riastatic.com/photosnewr/auto/new_auto_storage/volkswagen-id-4-crozz__2080542-620x465x72.webp",
     model: "Q8"
@@ -58,6 +86,7 @@ const carData = [
     fuelType: "Gas 1.6",
     distance: "11 000",
     breand: "Skoda",
+    exchange: false,
     image:
       "https://cdn4.riastatic.com/photosnew/auto/photo/peugeot_4007__516197674f.webp",
     model: "Q8"
@@ -72,6 +101,7 @@ const carData = [
     fuelType: "Gas 1.6",
     distance: "11 000",
     breand: "Tesla",
+    exchange: true,
     image:
       "https://cdn.riastatic.com/photos/ria/news_text/16/1692/169281/169281.jpg",
     model: "Q8"
@@ -86,6 +116,7 @@ const carData = [
     fuelType: "Gas 1.6",
     distance: "11 000",
     breand: "Tesla",
+    exchange: false,
     image:
       "https://cdn.riastatic.com/photosnewr/auto/new_auto_storage/volkswagen-id-4-crozz__2080542-620x465x72.webp",
     model: "Q8"
@@ -94,18 +125,27 @@ const carData = [
 
 
 
+
+
+
+
 const CarsList = () => {
+
+
+
+
 
   const [searchTerm, setSearchTerm] = useState('');
   const [sortingOption, setSortingOption] = useState('');
   const [vehicleType, setVehicleType] = useState('');
   const [brandType, setBrandType] = useState('');
-  const [modelType, setModelType] = useState('');
+  const [exchange, setExchange] = useState(false);
 
   /*  let filteredData = .filter(i => i.type === "Audi")*/
 
   const filteredData = carData.filter((car) =>
-    car.breand.toLowerCase().includes(searchTerm.toLowerCase())
+    car.breand.toLowerCase().includes(searchTerm.toLowerCase()) &&
+    (exchange === false || car.exchange === (exchange === true))
   );
 
   const sortData = () => {
@@ -135,17 +175,20 @@ const CarsList = () => {
   const sortedData = sortData();
 
 
+  const [menuOpen, setMenuOpen] = useState(null);
 
-
-
+  const onMenuOpen = (data) => {
+    setMenuOpen(data);
+  };
+  
 
   return (
     <div className="carsList--page">
       <Header setSearchTerm={setSearchTerm} />
       <div style={{ display: "flex" }}>
         <Menu />
-        <List sortedData={sortedData} setSortingOption={setSortingOption} />
-        <Filter setVehicleType={setVehicleType} setBrandType={setBrandType} />
+        <List sortedData={sortedData} setSortingOption={setSortingOption} onMenuOpen={onMenuOpen}  />   {/*convertDollarsToUAH={convertDollarsToUAH} */}
+        <Filter setVehicleType={setVehicleType} setBrandType={setBrandType} setExchange={setExchange} dataFromChild={menuOpen} />
       </div>
     </div>
 
