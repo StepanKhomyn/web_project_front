@@ -1,10 +1,10 @@
-.defines-list-title{
+.defines-list-title {
     width: 130px;
     height: 40px;
     flex: none;
 }
 
-.defines-list-value{
+.defines-list-value {
     width: calc(100% - 130px);
     height: 40px;
     margin-left: 0;
@@ -13,10 +13,10 @@
 
 .about-car {
     position: absolute;
-  left: 302px;
-  top: 90.09px;
-  width: 849px;
-  height: 930px;
+    left: 302px;
+    top: 90.09px;
+    width: 849px;
+    height: 930px;
 }
 
 .car-btn {
@@ -47,7 +47,7 @@
 .checkbox-checked {
     border-radius: 2px;
     border: 1.2px solid #E6E3E0;
-    
+
     width: 24px;
     height: 24px;
 }
@@ -56,7 +56,7 @@
     text-align: center;
 }
 
-.seller{
+.seller {
     margin-top: 16px;
     display: flex;
 }
@@ -66,16 +66,15 @@
     justify-content: center;
 }
 
-.left-marg{
+.left-marg {
     margin-left: 6px;
 }
 
-.price-ua{
+.price-ua {
     font-size: 20px;
-    margin-left: 10px;
 }
 
-.price{
+.price {
     color: #282828;
     font-family: Poppins;
     font-size: 30px;
@@ -84,8 +83,46 @@
     line-height: 150%;
 }
 
-.test{
+.test {
     display: flex;
     align-items: center;
     margin-top: 10px;
+}
+
+.right-menu {
+    width: 271.209px;
+    height: 715px;
+    flex-shrink: 0;
+    border-left: 0.938px solid #D1D1D1;
+    background: #F3F3F3;
+    transition: opacity 0.3s ease-in-out;
+    /* Додано анімацію для opacity */
+    opacity: 1;
+}
+
+.margin-for-svg {
+    margin-left: 4px;
+}
+
+.margin-for-span-right-menu {
+    margin-left: 36px;
+}
+
+.description {
+    margin-top: 16px;
+    padding: 8px;
+    border: solid 1px;
+    border-radius: 10px;
+    border-color: #D1D1D1;
+}
+
+.span-point {
+    margin: 0px 6px;
+}
+
+.right-menu-font {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #444444;
+    margin: 6px 0px 6px 0px;
 }

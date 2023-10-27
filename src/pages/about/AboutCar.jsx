@@ -109,11 +109,11 @@ const AboutCar = () => {
           <div style={{ display: 'block' }}>
             <div className='test'>
               <span className='price'>{carData.price}</span>
-              <span class="point" className='price-ua'>•</span>
+              <span class="point" className='span-point price-ua'>•</span>
               <span className='price-ua' >
                 400000 ₴
               </span>
-              <span class="point" className='price-ua'>•</span>
+              <span class="point" className='span-point price-ua'>•</span>
               <span className='price-ua' >
                 9000 Є
               </span>
@@ -158,23 +158,23 @@ const AboutCar = () => {
               <div style={{ marginRight: '20px' }}>
                 <div className='price-ua' style={{ marginBottom: '16px', display: 'flex' }}>
                   <label class="form-control--four" style={{ width: '200px' }}>
-                    Пробіг
                     <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="SpeedIcon">
                       <path d="m20.38 8.57-1.23 1.85a8 8 0 0 1-.22 7.58H5.07A8 8 0 0 1 15.58 6.85l1.85-1.23A10 10 0 0 0 3.35 19a2 2 0 0 0 1.72 1h13.85a2 2 0 0 0 1.74-1 10 10 0 0 0-.27-10.44zm-9.79 6.84a2 2 0 0 0 2.83 0l5.66-8.49-8.49 5.66a2 2 0 0 0 0 2.83z"></path>
                     </svg>
+                    <span className='margin-for-svg'>Пробіг</span>
                   </label>
                   11 000 тис. км
                 </div>
                 <div className='price-ua' style={{ display: 'flex' }}>
                   <label class="form-control--four" style={{ width: '200px' }}>
-                    Локація
                     <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="PlaceIcon">
                       <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"></path>
                     </svg>
+                    <span className='margin-for-svg'>Локація</span>
                   </label>
                   <div>
                     Lviv
-                    <span class="point" style={{ margin: '0px 6px' }}>•</span>
+                    <span class="point" className='span-point'>•</span>
                     Sokilnyky
                   </div>
                 </div>
@@ -182,39 +182,40 @@ const AboutCar = () => {
               <div>
                 <div className='price-ua' style={{ marginBottom: '16px', display: 'flex' }}>
                   <label class="form-control--four" style={{ width: '200px' }}>
-                    Двигун
                     <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="LocalGasStationIcon">
                       <path d="m19.77 7.23.01-.01-3.72-3.72L15 4.56l2.11 2.11c-.94.36-1.61 1.26-1.61 2.33 0 1.38 1.12 2.5 2.5 2.5.36 0 .69-.08 1-.21v7.21c0 .55-.45 1-1 1s-1-.45-1-1V14c0-1.1-.9-2-2-2h-1V5c0-1.1-.9-2-2-2H6c-1.1 0-2 .9-2 2v16h10v-7.5h1.5v5c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5V9c0-.69-.28-1.32-.73-1.77zM12 10H6V5h6v5zm6 0c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"></path>
                     </svg>
+                    <span className='margin-for-svg'>Двигун</span>
                   </label>
                   <div>
                     Gas
-                    <span class="point" style={{ margin: '0px 6px' }}>•</span>
+                    <span class="point" className='span-point'>•</span>
                     1.6
                   </div>
                 </div>
-                <div className='price-ua' style={{display: 'flex' }}>
+                <div className='price-ua' style={{ display: 'flex' }}>
                   <label class="form-control--four" style={{ width: '200px' }}>
-                    Коробка передач
                     <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="HandymanIcon">
                       <path d="m21.67 18.17-5.3-5.3h-.99l-2.54 2.54v.99l5.3 5.3c.39.39 1.02.39 1.41 0l2.12-2.12c.39-.38.39-1.02 0-1.41z"></path><path d="m17.34 10.19 1.41-1.41 2.12 2.12c1.17-1.17 1.17-3.07 0-4.24l-3.54-3.54-1.41 1.41V1.71l-.7-.71-3.54 3.54.71.71h2.83l-1.41 1.41 1.06 1.06-2.89 2.89-4.13-4.13V5.06L4.83 2.04 2 4.87 5.03 7.9h1.41l4.13 4.13-.85.85H7.6l-5.3 5.3c-.39.39-.39 1.02 0 1.41l2.12 2.12c.39.39 1.02.39 1.41 0l5.3-5.3v-2.12l5.15-5.15 1.06 1.05z"></path>
                     </svg>
+                    <span className='margin-for-svg'>Коробка передач</span>
                   </label>
                   mechanical
                 </div>
               </div>
             </div>
-            <div className='price-ua'>
-              <h3 style={{marginLeft: '24px'}}>Опис</h3>
+            <div className='description price-ua'>
+              <h3 style={{ margin: '6px 24px' }}>Опис</h3>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi bibendum est ut ipsum placerat, in suscipit nibh iaculis. Duis tortor leo, fringilla vitae urna non, aliquam molestie metus. Phasellus rutrum, erat sit amet imperdiet posuere, justo sem dignissim erat, ut mollis libero sapien ut lorem. Mauris sollicitudin dignissim aliquet. Maecenas eu euismod erat, quis pharetra lacus. Sed id augue eget libero mattis porttitor vitae et lorem. Mauris non condimentum velit, et interdum purus.
               </p>
               <p>Aliquam fringilla scelerisque sem, non commodo elit fermentum sed. Nullam sem nunc, consequat vitae lacus ut, sagittis pulvinar ligula. Vivamus elementum fermentum dui vitae posuere. Donec sed odio commodo, cursus risus nec, rutrum est. Donec rutrum urna ut tortor venenatis sagittis. Maecenas commodo ipsum in feugiat vehicula. Ut dictum ipsum est, vitae dictum massa cursus ut. Phasellus imperdiet sem non mi varius, et porta felis eleifend.</p>
             </div>
           </div>
         </div>
-        <RightMenu carData={carData} />
+        <div>
+          <RightMenu carData={carData} />
+        </div>
       </div>
-
     </div >
 
   );
