@@ -9,12 +9,28 @@ const a = [
   { modelName: "sivic", type: "Honda" }
 ]
 
+const typeOfCar = [
+  { typeCar: "Sedan" },
+  { typeCar: "Minivan" },
+  { typeCar: "SUV Pickup" },
+  { typeCar: "Microvan" },
+  { typeCar: "Сoupe" },
+  { typeCar: "Crossover" },
+  { typeCar: "Hatchback" },
+  { typeCar: "Convertible" },
+  { typeCar: "Sports car" },
+  { typeCar: "Compact car" },
+]
+
 const b = a.filter(i => i.type === "Audi")
 
 console.log(b)
 
 const Filter = ({ setVehicleType, setBrandType, setExchange, dataFromChild }) => {
 
+  const [showAllTypes, setShowAllTypes] = useState(false);
+
+  const displayedTypes = showAllTypes ? typeOfCar : typeOfCar.slice(0, 4);
 
 
   return (
@@ -75,36 +91,22 @@ const Filter = ({ setVehicleType, setBrandType, setExchange, dataFromChild }) =>
             <option value="option3">Варіант 3</option>
           </select>
         </div>
+
         <div className="line--one"></div>
         <h3 className="type--of--car">Type of car</h3>
         <div className="four--change" style={{ display: "flex", flexWrap: "wrap" }}>
-          <div style={{ flex: "45%", marginBottom: "6px" }}>
-            <label className="form-control--four">
-              <input className="checkbox-exchange" type="checkbox" name="checkbox" />
-              Sedan
-            </label>
-          </div>
-          <div style={{ flex: "45%", marginBottom: "6px" }}>
-            <label className="form-control--four">
-              <input className="checkbox-exchange" type="checkbox" name="checkbox" />
-              Minivan
-            </label>
-          </div>
-          <div style={{ flex: "45%" }}>
-            <label className="form-control--four">
-              <input className="checkbox-exchange" type="checkbox" name="checkbox" />
-              SUV pickup
-            </label>
-          </div>
-          <div style={{ flex: "45%" }}>
-            <label className="form-control--four">
-              <input className="checkbox-exchange" type="checkbox" name="checkbox" />
-              Microvan
-            </label>
-          </div>
+          {displayedTypes.map(typer => (
+            <div style={{ flex: "45%", marginBottom: "6px" }}>
+              <label className="form-control--four">
+                <input className="checkbox-exchange" type="checkbox" name="checkbox" />
+                {typer.typeCar}
+              </label>
+            </div>
+          ))}
         </div>
-        <h3 className="view--all--types">View all types</h3>
-
+        <h3 className="view--all--types" onClick={() => setShowAllTypes(!showAllTypes)}>
+          {showAllTypes ? 'Show Less Types' : 'View All Types'}
+        </h3>
         <div className="line--one"></div>
         <div className="price-filter">
           <div>

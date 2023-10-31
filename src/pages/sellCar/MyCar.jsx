@@ -84,7 +84,7 @@ const MyCar = () => {
                 <Header />
                 <div style={{ display: "flex" }}>
                     <Menu />
-                    <Container>
+                    <Container style={{marginLeft: "40px"}}>
                         <Container style={{ display: "flex", justifyContent: "center" }}>
                             <Breadcrumbs aria-label="breadcrumb" mt={4} mb={1}>
                                 <Typography color="text.primary">СПИСОК АВТО</Typography>
@@ -104,7 +104,7 @@ const MyCar = () => {
                                 <SearchIcon />
                             </IconButton>
                         </Container>*/}
-                        <Container style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                        <Container style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
                             {carsData.length === 0 ? (
                                 <Typography variant="h5" style={{ marginTop: 20 }}>
                                     Оголошень немає
@@ -112,17 +112,15 @@ const MyCar = () => {
                             ) : (
                                 carsData.map((car) => (
                                     <div key={car.id} style={{ marginBottom: '16px' }}>
-                                        <Card style={{ width: 760, display: "flex", position: 'relative' }}>
-                                            {soldStatus[car.id] && (
-                                                <div className='sold-status'>
-                                                    <p1 style={{ marginRight: 380 }} > Продано</p1>
-                                                </div>
-                                            )}
-                                            <img
-                                                src={car.image}
-                                                alt={car.name}
-                                                style={{ width: 380, height: 250, objectFit: "cover" }}
-                                            />
+                                        <Card className='card'>
+                                           
+                                            <div style={{width: "380px"}}>
+                                                <img
+                                                    src={car.image}
+                                                    alt={car.name}
+                                                    style={{ width: "100%", height: 250, objectFit: "cover" }}
+                                                />
+                                            </div>
                                             <CardContent style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", flex: 1 }}>
                                                 <Typography gutterBottom variant="h6" component="div" fontWeight="bold" style={{ textOverflow: "ellipsis", color: "#393E46", whiteSpace: "nowrap" }}>
                                                     {car.name}
@@ -158,7 +156,7 @@ const MyCar = () => {
                                                 </Grid>
                                                 <CardActions>
                                                     <Link to="/about">
-                                                        <Button variant="outlined" style={{ color: "#00ADB5" }}>
+                                                        <Button variant="outlined" style={{ color: "#00ADB5", zIndex: 0 }}>
                                                             Більше
                                                         </Button>
                                                     </Link>

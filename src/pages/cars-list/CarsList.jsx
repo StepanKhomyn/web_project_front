@@ -121,6 +121,37 @@ const carData = [
       "https://cdn.riastatic.com/photosnewr/auto/new_auto_storage/volkswagen-id-4-crozz__2080542-620x465x72.webp",
     model: "Q8"
   },
+  {
+    id: 7,
+    name: "Kia",
+    type: "Plane",
+    price: 5000,
+    location: "Lviv",
+    transmission: "mechanical",
+    fuelType: "Gas 1.6",
+    distance: "11 000",
+    breand: "Tesla",
+    exchange: false,
+    image:
+      "https://cdn.riastatic.com/photosnewr/auto/new_auto_storage/volkswagen-id-4-crozz__2080542-620x465x72.webp",
+    model: "Q8"
+  },
+  {
+    id: 8,
+    name: "Kia",
+    type: "Plane",
+    price: 5000,
+    location: "Lviv",
+    transmission: "mechanical",
+    fuelType: "Gas 1.6",
+    distance: "11 000",
+    breand: "Tesla",
+    exchange: false,
+    image:
+      "https://cdn.riastatic.com/photosnewr/auto/new_auto_storage/volkswagen-id-4-crozz__2080542-620x465x72.webp",
+    model: "Q8"
+  },
+  
 ];
 
 
