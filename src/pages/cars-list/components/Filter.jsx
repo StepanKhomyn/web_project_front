@@ -26,12 +26,27 @@ const b = a.filter(i => i.type === "Audi")
 
 console.log(b)
 
-const Filter = ({ setVehicleType, setBrandType, setExchange, dataFromChild }) => {
+const Filter = ({ setVehicleType, setBrandType, setExchange, setSelectedTypes, dataFromChild }) => {
 
+  const [selectedTypes, setSelectedTypesLocal] = useState([]);
   const [showAllTypes, setShowAllTypes] = useState(false);
+  
 
   const displayedTypes = showAllTypes ? typeOfCar : typeOfCar.slice(0, 4);
 
+  const handleTypeOfCarChange = (typeCar) => {
+    const updatedSelectedTypes = [...selectedTypes];
+    const index = updatedSelectedTypes.indexOf(typeCar);
+
+    if (index !== -1) {
+      updatedSelectedTypes.splice(index, 1);
+    } else {
+      updatedSelectedTypes.push(typeCar);
+    }
+
+    setSelectedTypesLocal(updatedSelectedTypes);
+    setSelectedTypes(updatedSelectedTypes);
+  };
 
   return (
     <>
@@ -96,9 +111,14 @@ const Filter = ({ setVehicleType, setBrandType, setExchange, dataFromChild }) =>
         <h3 className="type--of--car">Type of car</h3>
         <div className="four--change" style={{ display: "flex", flexWrap: "wrap" }}>
           {displayedTypes.map(typer => (
-            <div style={{ flex: "45%", marginBottom: "6px" }}>
+            <div style={{ flex: "45%", marginBottom: "6px" }} key={typer.typeCar}>
               <label className="form-control--four">
-                <input className="checkbox-exchange" type="checkbox" name="checkbox" />
+                <input
+                  className="checkbox-exchange"
+                  type="checkbox"
+                  name="checkbox"
+                  onChange={() => handleTypeOfCarChange(typer.typeCar)}
+                />
                 {typer.typeCar}
               </label>
             </div>

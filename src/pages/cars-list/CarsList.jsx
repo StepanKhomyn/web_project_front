@@ -9,26 +9,26 @@ import FilterAltOffIcon from '@mui/icons-material/FilterAltOff';
 
 const apiKey = '81106b36bdb74941883a5389d7b0af62';
 
- /* async function getExchangeRate() {
-    try {
-      const response = await fetch(`https://open.er-api.com/v6/latest/USD?apikey=${apiKey}`);
-      const data = await response.json();
-      return data.rates.UAH;
-    } catch (error) {
-      console.error('Помилка при отриманні курсу обміну:', error);
-      return null;
-    }
-  }
-  
-  async function convertDollarsToUAH(dollars) {
-    const exchangeRate = await getExchangeRate();
-    if (exchangeRate !== null) {
-      const uah = dollars * exchangeRate;
-      return uah.toFixed(0); // Округлюємо до двох знаків після коми
-    } else {
-      return null;
-    }
-  }*/
+/* async function getExchangeRate() {
+   try {
+     const response = await fetch(`https://open.er-api.com/v6/latest/USD?apikey=${apiKey}`);
+     const data = await response.json();
+     return data.rates.UAH;
+   } catch (error) {
+     console.error('Помилка при отриманні курсу обміну:', error);
+     return null;
+   }
+ }
+ 
+ async function convertDollarsToUAH(dollars) {
+   const exchangeRate = await getExchangeRate();
+   if (exchangeRate !== null) {
+     const uah = dollars * exchangeRate;
+     return uah.toFixed(0); // Округлюємо до двох знаків після коми
+   } else {
+     return null;
+   }
+ }*/
 
 const carData = [
   {
@@ -44,7 +44,8 @@ const carData = [
     exchange: true,
     image:
       "https://cdn3.riastatic.com/photosnew/auto/photo/tesla_model-3__515756233f.webp",
-    model: "Q8"
+    model: "Q8",
+    typeOfCar: "Sedan"
   },
   {
     id: 2,
@@ -59,7 +60,8 @@ const carData = [
     exchange: true,
     image:
       "https://cdn.riastatic.com/photos/ria/news_text/16/1692/169281/169281.jpg",
-    model: "Q8"
+    model: "Q8",
+    typeOfCar: "Minivan"
   },
   {
     id: 3,
@@ -74,7 +76,8 @@ const carData = [
     exchange: true,
     image:
       "https://cdn.riastatic.com/photosnewr/auto/new_auto_storage/volkswagen-id-4-crozz__2080542-620x465x72.webp",
-    model: "Q8"
+    model: "Q8",
+    typeOfCar: "Sedan"
   },
   {
     id: 4,
@@ -89,7 +92,7 @@ const carData = [
     exchange: false,
     image:
       "https://cdn4.riastatic.com/photosnew/auto/photo/peugeot_4007__516197674f.webp",
-    model: "Q8"
+    typeOfCar: "Crossover"
   },
   {
     id: 5,
@@ -104,7 +107,8 @@ const carData = [
     exchange: true,
     image:
       "https://cdn.riastatic.com/photos/ria/news_text/16/1692/169281/169281.jpg",
-    model: "Q8"
+    model: "Q8",
+    typeOfCar: "Сoupe"
   },
   {
     id: 6,
@@ -119,7 +123,8 @@ const carData = [
     exchange: false,
     image:
       "https://cdn.riastatic.com/photosnewr/auto/new_auto_storage/volkswagen-id-4-crozz__2080542-620x465x72.webp",
-    model: "Q8"
+    model: "Q8",
+    typeOfCar: "Convertible"
   },
   {
     id: 7,
@@ -134,7 +139,8 @@ const carData = [
     exchange: false,
     image:
       "https://cdn.riastatic.com/photosnewr/auto/new_auto_storage/volkswagen-id-4-crozz__2080542-620x465x72.webp",
-    model: "Q8"
+    model: "Q8",
+    typeOfCar: "Sports car"
   },
   {
     id: 8,
@@ -149,9 +155,10 @@ const carData = [
     exchange: false,
     image:
       "https://cdn.riastatic.com/photosnewr/auto/new_auto_storage/volkswagen-id-4-crozz__2080542-620x465x72.webp",
-    model: "Q8"
+    model: "Q8",
+    typeOfCar: "Microvan"
   },
-  
+
 ];
 
 
@@ -171,6 +178,7 @@ const CarsList = () => {
   const [vehicleType, setVehicleType] = useState('');
   const [brandType, setBrandType] = useState('');
   const [exchange, setExchange] = useState(false);
+  const [selectedTypes, setSelectedTypes] = useState([]);
 
   /*  let filteredData = .filter(i => i.type === "Audi")*/
 
@@ -211,15 +219,15 @@ const CarsList = () => {
   const onMenuOpen = (data) => {
     setMenuOpen(data);
   };
-  
+
 
   return (
     <div className="carsList--page">
       <Header setSearchTerm={setSearchTerm} />
       <div style={{ display: "flex" }}>
         <Menu />
-        <List sortedData={sortedData} setSortingOption={setSortingOption} onMenuOpen={onMenuOpen}  />   {/*convertDollarsToUAH={convertDollarsToUAH} */}
-        <Filter setVehicleType={setVehicleType} setBrandType={setBrandType} setExchange={setExchange} dataFromChild={menuOpen} />
+        <List sortedData={sortedData} setSortingOption={setSortingOption} onMenuOpen={onMenuOpen} selectedTypes={selectedTypes} />   {/*convertDollarsToUAH={convertDollarsToUAH} */}
+        <Filter setVehicleType={setVehicleType} setBrandType={setBrandType} setExchange={setExchange} setSelectedTypes={setSelectedTypes} dataFromChild={menuOpen} />
       </div>
     </div>
 

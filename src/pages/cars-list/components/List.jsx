@@ -14,7 +14,7 @@ import { useEffect } from 'react';
 
 
 
-const List = ({ sortedData, setSortingOption, onMenuOpen }) => {   /*convertDollarsToUAH */
+const List = ({ sortedData, setSortingOption, onMenuOpen, selectedTypes }) => {   /*convertDollarsToUAH */
     
   /*const [convertedPrices, setConvertedPrices] = useState([]);
 
@@ -37,6 +37,10 @@ const List = ({ sortedData, setSortingOption, onMenuOpen }) => {   /*convertDoll
 */
 
 const [menuOpen, setMenuOpen] = useState(true);
+
+const filterByTypeOfCar = (car) => {
+  return selectedTypes.length === 0 || selectedTypes.includes(car.typeOfCar);
+};
 
 
 const handleCloseIconClick = () => {
@@ -67,8 +71,10 @@ const handleCloseIconClick = () => {
           </div>
         </div>
         <div className="card--list--cars">
-          {sortedData.length > 0 ? (
-            sortedData.map((car) => (    /*  convertedPrices.map((car) => ( */
+        {sortedData.length > 0 ? (
+          sortedData
+            .filter(filterByTypeOfCar) // Додаємо фільтрацію за типом автомобіля
+            .map((car) => (    /*  convertedPrices.map((car) => ( */
               <div className="card--list--car" key={car.id}>
                 {console.log('Рендеринг авто:', car.type)}
                 <Link style={{ textDecoration: 'none' }} to={`/about/${car.id}`}>
@@ -116,7 +122,7 @@ const handleCloseIconClick = () => {
               </div>
             ))
           ) : (
-            <p style={{ fontSize: '24px', textAlign: 'center', marginTop: '20px', marginLeft: "330px" }}>Немає автомобілів</p>
+            <div style={{ width: "823px", fontSize: '24px', textAlign: 'center', marginTop: '20px', }}>Немає автомобілів</div>
           )}
         </div>
       </div>
