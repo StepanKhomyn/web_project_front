@@ -14,7 +14,7 @@ import { useEffect } from 'react';
 
 
 
-const List = ({ sortedData, setSortingOption, onMenuOpen, selectedTypes }) => {   /*convertDollarsToUAH */
+const List = ({ sortedData, setSortingOption, onMenuOpen, selectedTypes, priceFrom, priceTo, yearFrom, yearTo }) => {   /*convertDollarsToUAH */
     
   /*const [convertedPrices, setConvertedPrices] = useState([]);
 
@@ -39,7 +39,11 @@ const List = ({ sortedData, setSortingOption, onMenuOpen, selectedTypes }) => { 
 const [menuOpen, setMenuOpen] = useState(true);
 
 const filterByTypeOfCar = (car) => {
-  return selectedTypes.length === 0 || selectedTypes.includes(car.typeOfCar);
+  return selectedTypes.length === 0 || selectedTypes.includes(car.typeOfCar) &&
+  (priceFrom === '' || car.price >= parseFloat(priceFrom)) &&
+  (priceTo === '' || car.price <= parseFloat(priceTo)) &&
+  (yearFrom === '' || car.year >= parseFloat(yearFrom)) &&
+  (yearTo === '' || car.year <= parseFloat(yearTo))
 };
 
 
@@ -62,8 +66,8 @@ const handleCloseIconClick = () => {
               onChange={(e) => setSortingOption(e.target.value)}
             >
               <option value="option1">sort by</option>
-              <option value="option2">За назвою</option>
-              <option value="option3">За ціною</option>
+              <option value="option2">sort by name</option>
+              <option value="option3">sort by price</option>
             </select>
             <MenuIcon style={{ marginRight: '8' }} />
             <AppsIcon />
@@ -80,7 +84,7 @@ const handleCloseIconClick = () => {
                 <Link style={{ textDecoration: 'none' }} to={`/about/${car.id}`}>
                   <img
                     className="car-image"
-                    src="https://cdn3.riastatic.com/photosnew/auto/photo/tesla_model-3__515756233f.webp"
+                    src={car.image}
                     alt="car"
                   />
                   <div className="car-btn">
@@ -101,19 +105,19 @@ const handleCloseIconClick = () => {
                     <div style={{ flex: "45%", marginBottom: "6px" }}>
                       <label className="form-control--four icon-car">
                         <PlaceIcon />
-                        {car.location}
+                        {car.sity}
                       </label>
                     </div>
                     <div className="icon-car" style={{ flex: "45%" }}>
                       <label className="form-control--four icon-car">
                         <LocalGasStationIcon />
-                        {car.fuelType}
+                        {car.fuel}
                       </label>
                     </div>
                     <div style={{ flex: "45%" }}>
                       <label className="form-control--four icon-car">
                         <HandymanIcon />
-                        {car.transmission}
+                        {car.driveUnit}
                       </label>
                     </div>
                   </div>

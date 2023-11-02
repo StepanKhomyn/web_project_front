@@ -8,7 +8,7 @@
   gap: 15.015px;
   flex-shrink: 0;
   margin: 22.5px 0;
-  padding: 0 15px; 
+  padding: 0 15px;
   margin-left: 250px;
 }
 
@@ -16,7 +16,7 @@
   min-width: 200px;
   border-radius: 7.508px;
   border: 0.938px solid #282828;
-  padding: 8.446px 20px; 
+  padding: 8.446px 20px;
   background: #282828;
   color: #FFF;
   font-family: Poppins;
@@ -24,18 +24,30 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  margin: 26.5px 0 24px; 
+  margin: 26.5px 0 24px;
   margin-left: 350px;
 }
 
 .navbar {
   display: flex;
-  justify-content: space-between; 
-  width: 100%;
+  justify-content: space-between;
+  margin-left: 15%;
+  min-width: 85%;
   height: 90.09px;
   flex-shrink: 0;
   border-bottom: 0.938px solid #D1D1D1;
   background: #FFF;
+}
+
+@media screen and (max-width: 756px) {
+  .navbar {
+    background: #F3F3F3;
+    border-bottom: none;
+    margin-right: 20px;
+  }
+  .search-input {
+    margin-left: 195px;
+  }
 }
 
 .navbar-menu {
@@ -71,14 +83,13 @@
   margin-top: -90px;
   /* Додайте transition для плавного ефекту */
   transition: transform 0.3s ease;
-  transform: translateY(-871px); /* Змініть translateX на -100%, щоб меню було за межами екрану */
+  transform: translateY(-871px);
+  /* Змініть translateX на -100%, щоб меню було за межами екрану */
 }
 
 .right--menu.active {
   transform: translateX(0);
   position: static
-  
-  
 }
 
 .logo-rst-exit {
@@ -86,7 +97,7 @@
   align-items: center;
   justify-content: space-between;
   margin-left: 32px;
-  
+
 }
 
 .rst--exit {
@@ -100,7 +111,7 @@
   z-index: 5;
   left: 270px;
   top: 30px;
-  
+
 }
 
 .rst {
@@ -171,7 +182,8 @@
 
 .left--menu {
   position: static;
-  width: 271.209px;   /*20%*/
+  width: 271.209px;
+  /*20%*/
   min-height: 870px;
   flex-shrink: 0;
   border-left: 0.938px solid #D1D1D1;
@@ -180,7 +192,8 @@
 }
 
 .left--menu.active {
-  opacity: 0; /* Зробити елементи невидимими */
+  opacity: 0;
+  /* Зробити елементи невидимими */
   pointer-events: none;
   position: absolute;
 }
@@ -201,9 +214,7 @@
   margin: 26px 140px 25px 20px;
 }
 
-.close--icon{
-  
-}
+.close--icon {}
 
 .right-menu-list {
   display: flex;
@@ -409,6 +420,7 @@
 
 
 .car-image {
+  width: 374px;
   height: 234px;
   flex-shrink: 0;
   border-radius: 8px 8px 0px 0px;
@@ -475,13 +487,11 @@
   font-weight: 700;
   line-height: 150%;
 }
-.selected{
+
+.selected {
   background-color: #282828;
 }
 
-.white{
+.white {
   background-color: #fff;
 }
-
-
-
