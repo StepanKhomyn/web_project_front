@@ -1,254 +1,204 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Messages.css";
 
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import ChatListItem from "./messages-components/ChatListItem";
+
 import Header from "../Header";
 import Menu from "../cars-list/components/Menu";
+import ChatCard from "./messages-components/ChatCard";
+
+
+
+
+const chatsData = [
+  {
+    sellerName: "Ігор",
+    carImg:
+      "https://cdn3.riastatic.com/photosnew/auto/photo/tesla_model-3__515756233f.webp",
+    carName: "Tesla Model X 2022",
+    chatHistory: [
+      {
+        iSendThisMessage: true,
+        messageText: "Доброго дня, це авто ще в наявності?",
+      },
+      {
+        iSendThisMessage: false,
+        messageText: "Доброго дня, так",
+      },
+      {
+        iSendThisMessage: true,
+        messageText: "Яка причина продажу?",
+      },
+      {
+        iSendThisMessage: false,
+        messageText: "Покатався на теслі і зрозумів, що це не моє",
+      },
+      {
+        iSendThisMessage: false,
+        messageText:
+          "До того ж, мені часто доводиться їздити по областях у зв'язку із роботою",
+      },
+      {
+        iSendThisMessage: false,
+        messageText: "А для такого це авто явно не розраховане",
+      },
+      {
+        iSendThisMessage: true,
+        messageText: "Зрозуміло",
+      },
+      {
+        iSendThisMessage: true,
+        messageText: "Чи буде торг?",
+      },
+      {
+        iSendThisMessage: false,
+        messageText: "Ні, оскільки авто майже з салону",
+      },
+      {
+        iSendThisMessage: true,
+        messageText: "Навіть 100$ не опустите?",
+      },
+      {
+        iSendThisMessage: false,
+        messageText: "За 100$ ще можна буде домовитися",
+      },
+      {
+        iSendThisMessage: true,
+        messageText: "Чудово)",
+      },
+      {
+        iSendThisMessage: true,
+        messageText: "Коли б можна було під'їхати та оглянути авто?",
+      },
+      {
+        iSendThisMessage: false,
+        messageText: "Я вільний на цих вихідних",
+      },
+      {
+        iSendThisMessage: true,
+        messageText: "Добре, я буду десь біля обіду",
+      },
+      {
+        iSendThisMessage: false,
+        messageText: "Добре, чекатиму",
+      },
+      {
+        iSendThisMessage: true,
+        messageText:
+          "Залиште свій номер телефону щоб у разі чого можна було подзвонити",
+      },
+      {
+        iSendThisMessage: false,
+        messageText: "+38067*******",
+      },
+      {
+        iSendThisMessage: true,
+        messageText: "Мій: +38099*******",
+      },
+    ],
+    // lastMessage: chatsData[0].chatHistory[chatsData[0].chatHistory.length - 1].messageText,
+    // lastMessage: "vscwcvvc",
+  },
+  {
+    sellerName: "Юра",
+    // lastMessage: "Ладно, ок",
+    carImg:
+      "https://cdn3.riastatic.com/photosnew/auto/photo/tesla_model-3__515756233f.webp",
+    carName: "Kia Optima",
+    chatHistory: [
+      {
+        iSendThisMessage: true,
+        messageText: "Продайте машину",
+      },
+      {
+        iSendThisMessage: false,
+        messageText: "Ладно, ок",
+      }
+    ],
+  },
+  {
+    sellerName: "Іван",
+    // lastMessage: "Ні, я просто вимахуюся",
+    carImg:
+      "https://cdn3.riastatic.com/photosnew/auto/photo/tesla_model-3__515756233f.webp",
+    carName: "Mercedes-benz w126 Coupe",
+    chatHistory: [
+      {
+        iSendThisMessage: true,
+        messageText: "Машина ще в наявності?",
+      },
+      {
+        iSendThisMessage: false,
+        messageText: "Ні, я просто вимахуюся",
+      }
+    ],
+  },
+
+  {
+    sellerName: "Олександр Лях",
+    // lastMessage: "Торгу не буде",
+    carImg:
+      "https://cdn3.riastatic.com/photosnew/auto/photo/tesla_model-3__515756233f.webp",
+    carName: "Skoda Octavia",
+    chatHistory: [
+      {
+        iSendThisMessage: true,
+        messageText: "Опустите трохи?",
+      },
+      {
+        iSendThisMessage: false,
+        messageText: "Торгу не буде",
+      }
+    ],
+  },
+];
+
+chatsData.forEach((chat) => {
+  if (chat.chatHistory && chat.chatHistory.length > 0) {
+    chat.lastMessage = chat.chatHistory[chat.chatHistory.length - 1].messageText;
+  }
+});
+
+
 
 const Messages = () => {
+  const [lastClickedIndex, setLastClickedIndex] = useState(-1);
+  const [currChatData, setCurrChatData] = useState(chatsData[0]);
+
+
+
+  const handleChatItemClick = (chatData, index) => {
+    setLastClickedIndex(index);
+    setCurrChatData(chatData);
+  };
+
+  console.log(currChatData);
+
   return (
     <div style={{ marginLeft: "70px", marginRight: "70px" }}>
       <Header />
       <div style={{ display: "flex" }}>
         <Menu />
-        <div id="main">
+        <div id="main" style={{ width: "100%" }}>
           <h2>Всі повідомлення</h2>
 
           <div className="main-container">
             <div className="chats">
-
-              <a href="#" className="chat-card">
-                <div>
-                  <img className="chat-img" src={'https://cdn3.riastatic.com/photosnew/auto/photo/tesla_model-3__515756233f.webp'}></img>
-                </div>
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                  <div className="seller-name">Ігор</div>
-                  <div className="car-name">Tesla Model X 2022</div>
-                  <div className="last-message">Мій: +38099*******</div>
-                </div>
-              </a>
-
-              <a href="#" className="chat-card">
-                <div>
-                  <img className="chat-img" src={'https://cdn3.riastatic.com/photosnew/auto/photo/tesla_model-3__515756233f.webp'}></img>
-                </div>
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                  <div className="seller-name">Ігор</div>
-                  <div className="car-name">Tesla Model X 2022</div>
-                  <div className="last-message">Мій: +38099*******</div>
-                </div>
-              </a>
-
-
-              <a href="#" className="chat-card">
-                <div>
-                  <img className="chat-img" src={'https://cdn3.riastatic.com/photosnew/auto/photo/tesla_model-3__515756233f.webp'}></img>
-                </div>
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                  <div className="seller-name">Ігор</div>
-                  <div className="car-name">Tesla Model X 2022</div>
-                  <div className="last-message">Мій: +38099*******</div>
-                </div>
-              </a>
-
-
-              <a href="#" className="chat-card">
-                <div>
-                  <img className="chat-img" src={'https://cdn3.riastatic.com/photosnew/auto/photo/tesla_model-3__515756233f.webp'}></img>
-                </div>
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                  <div className="seller-name">Ігор</div>
-                  <div className="car-name">Tesla Model X 2022</div>
-                  <div className="last-message">Мій: +38099*******</div>
-                </div>
-              </a>
-
-              <a href="#" className="chat-card">
-                <div>
-                  <img className="chat-img" src={'https://cdn3.riastatic.com/photosnew/auto/photo/tesla_model-3__515756233f.webp'}></img>
-                </div>
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                  <div className="seller-name">Ігор</div>
-                  <div className="car-name">Tesla Model X 2022</div>
-                  <div className="last-message">Мій: +38099*******</div>
-                </div>
-              </a>
-
-
-              <a href="#" className="chat-card">
-                <div>
-                  <img className="chat-img" src={'https://cdn3.riastatic.com/photosnew/auto/photo/tesla_model-3__515756233f.webp'}></img>
-                </div>
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                  <div className="seller-name">Ігор</div>
-                  <div className="car-name">Tesla Model X 2022</div>
-                  <div className="last-message">Мій: +38099*******</div>
-                </div>
-              </a>
-
-
-              <a href="#" className="chat-card">
-                <div>
-                  <img className="chat-img" src={'https://cdn3.riastatic.com/photosnew/auto/photo/tesla_model-3__515756233f.webp'}></img>
-                </div>
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                  <div className="seller-name">Ігор</div>
-                  <div className="car-name">Tesla Model X 2022</div>
-                  <div className="last-message">Мій: +38099*******</div>
-                </div>
-              </a>
-
-
-              <a href="#" className="chat-card">
-                <div>
-                  <img className="chat-img" src={'https://cdn3.riastatic.com/photosnew/auto/photo/tesla_model-3__515756233f.webp'}></img>
-                </div>
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                  <div className="seller-name">Ігор</div>
-                  <div className="car-name">Tesla Model X 2022</div>
-                  <div className="last-message">Мій: +38099*******</div>
-                </div>
-              </a>
-
-
-              <a href="#" className="chat-card">
-                <div>
-                  <img className="chat-img" src={'https://cdn3.riastatic.com/photosnew/auto/photo/tesla_model-3__515756233f.webp'}></img>
-                </div>
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                  <div className="seller-name">Ігор</div>
-                  <div className="car-name">Tesla Model X 2022</div>
-                  <div className="last-message">Мій: +38099*******</div>
-                </div>
-              </a>
-
-
-              <a href="#" className="chat-card">
-                <div>
-                  <img className="chat-img" src={'https://cdn3.riastatic.com/photosnew/auto/photo/tesla_model-3__515756233f.webp'}></img>
-                </div>
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                  <div className="seller-name">Ігор</div>
-                  <div className="car-name">Tesla Model X 2022</div>
-                  <div className="last-message">Мій: +38099*******</div>
-                </div>
-              </a>
-
-              <a href="#" className="chat-card">
-                <div>
-                  <img className="chat-img" src={'https://cdn3.riastatic.com/photosnew/auto/photo/tesla_model-3__515756233f.webp'}></img>
-                </div>
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                  <div className="seller-name">Ігор</div>
-                  <div className="car-name">Tesla Model X 2022</div>
-                  <div className="last-message">Мій: +38099*******</div>
-                </div>
-              </a>
-
-              <a href="#" className="chat-card">
-                <div>
-                  <img className="chat-img" src={'https://cdn3.riastatic.com/photosnew/auto/photo/tesla_model-3__515756233f.webp'}></img>
-                </div>
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                  <div className="seller-name">Ігор</div>
-                  <div className="car-name">Tesla Model X 2022</div>
-                  <div className="last-message">Мій: +38099*******</div>
-                </div>
-              </a>
-
-              <a href="#" className="chat-card">
-                <div>
-                  <img className="chat-img" src={'https://cdn3.riastatic.com/photosnew/auto/photo/tesla_model-3__515756233f.webp'}></img>
-                </div>
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                  <div className="seller-name">Ігор</div>
-                  <div className="car-name">Tesla Model X 2022</div>
-                  <div className="last-message">Мій: +38099*******</div>
-                </div>
-              </a>
-
+              {chatsData.map((chatData, index) => (
+                <ChatListItem
+                  key={chatData.sellerName} // Add a unique key for each item
+                  sellerName={chatData.sellerName}
+                  carImg={chatData.carImg}
+                  carName={chatData.carName}
+                  lastMessage={chatData.lastMessage}
+                  onClick={() => handleChatItemClick(chatData, index)} // Pass the chat data and index 
+                  isLastClicked={index === lastClickedIndex}
+                />
+              ))}
             </div>
 
-            <div className="chat-container">
-              <div className="chat-container-seller">
-                <AccountCircleIcon /> Ігор
-              </div>
-              <div className="line-separator"></div>
-
-
-              <div className="messages">
-                <div className="message message-r">
-                  Доброго дня, це авто ще в наявності?
-                </div>
-                <div className="message message-l">
-                  Доброго дня, так
-                </div>
-                <div className="message message-r">
-                  Яка причина продажу?
-                </div>
-                <div className="message message-l">
-                  Покатався на теслі і зрозумів, що це не моє
-                </div>
-                <div className="message message-l">
-                  До того ж, мені часто доводиться їздити по областях у зв'язку із роботою  
-                </div>
-                <div className="message message-l">
-                  А для такого це авто явно не розраховане  
-                </div>
-                <div className="message message-r">
-                  Зрозуміло
-                </div>
-                <div className="message message-r">
-                  Чи буде торг?
-                </div>
-                <div className="message message-l">
-                  Ні, оскільки авто майже з салону
-                </div>
-                <div className="message message-r">
-                  Навіть 100$ не опустите?
-                </div>
-                <div className="message message-l">
-                  За 100$ ще можна буде домовитися  
-                </div>
-                <div className="message message-r">
-                  Чудово)
-                </div>
-                <div className="message message-r">
-                  Коли б можна було під'їхати та оглянути авто?  
-                </div>
-                <div className="message message-l">
-                  Я вільний на цих вихідних
-                </div>
-                <div className="message message-r">
-                  Добре, я буду десь біля обіду 
-                </div>
-                <div className="message message-l">
-                  Добре, чекатиму  
-                </div>
-                <div className="message message-r">
-                  Залиште свій номер телефону щоб у разі чого можна було подзвонити
-                </div>
-                <div className="message message-l">
-                +38067*******
-                </div>
-                <div className="message message-r">
-                  Мій: +38099*******
-                </div>
-              </div>
-
-              <div className="line-separator"></div>
-
-              <div className="message-input-container">
-                <input type="text" className="message-input" placeholder="Напишіть повідомлення"></input>
-                <div className="message-send-container">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none">
-<path d="M11.5003 12H5.41872M5.24634 12.7972L4.24158 15.7986C3.69128 17.4424 3.41613 18.2643 3.61359 18.7704C3.78506 19.21 4.15335 19.5432 4.6078 19.6701C5.13111 19.8161 5.92151 19.4604 7.50231 18.7491L17.6367 14.1886C19.1797 13.4942 19.9512 13.1471 20.1896 12.6648C20.3968 12.2458 20.3968 11.7541 20.1896 11.3351C19.9512 10.8529 19.1797 10.5057 17.6367 9.81135L7.48483 5.24303C5.90879 4.53382 5.12078 4.17921 4.59799 4.32468C4.14397 4.45101 3.77572 4.78336 3.60365 5.22209C3.40551 5.72728 3.67772 6.54741 4.22215 8.18767L5.24829 11.2793C5.34179 11.561 5.38855 11.7019 5.407 11.8459C5.42338 11.9738 5.42321 12.1032 5.40651 12.231C5.38768 12.375 5.34057 12.5157 5.24634 12.7972Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-                </div>
-              </div>
-            </div>
+            <ChatCard chatData={currChatData}/>
           </div>
-
         </div>
       </div>
     </div>
