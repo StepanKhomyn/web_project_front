@@ -36,127 +36,151 @@ const carData = [
     name: "Tesla Model X 2022",
     type: "Passenger",
     price: 10000,
-    location: "Lviv",
-    transmission: "mechanical",
-    fuelType: "Gas 1.6",
+    sity: "Ternopil",
+    driveUnit: "AMT",
     distance: "11 000",
     breand: "Mersedes-Benz",
     exchange: true,
     image:
       "https://cdn3.riastatic.com/photosnew/auto/photo/tesla_model-3__515756233f.webp",
     model: "Q8",
-    typeOfCar: "Sedan"
+    typeOfCar: "Sedan",
+    year: 2008,
+    region: "Ternopil Oblast",
+    state: "New (Factory)",
+    fuel: "Diesel Fuel",
   },
   {
     id: 2,
     name: "Volkswagen Passat 2020",
     type: "Passenger",
     price: 4000,
-    location: "Lviv",
-    transmission: "mechanical",
-    fuelType: "Gas 1.6",
+    sity: "Kyiv",
+    driveUnit: "Automatic",
     distance: "11 000",
     breand: "Kia",
     exchange: true,
     image:
       "https://cdn.riastatic.com/photos/ria/news_text/16/1692/169281/169281.jpg",
     model: "Q8",
-    typeOfCar: "Minivan"
+    typeOfCar: "Minivan",
+    year: 2023,
+    region: "Kyiv Oblast",
+    state: "Restored",
+    fuel: "Gasoline",
   },
   {
     id: 3,
     name: "Volkswagen Tiguan 2022",
     type: "Passenger",
     price: 1000,
-    location: "Lviv",
-    transmission: "mechanical",
-    fuelType: "Gas 1.6",
+    sity: "Lviv",
+    driveUnit: "AMT",
     distance: "11 000",
     breand: "Audi",
     exchange: true,
     image:
       "https://cdn.riastatic.com/photosnewr/auto/new_auto_storage/volkswagen-id-4-crozz__2080542-620x465x72.webp",
     model: "Q8",
-    typeOfCar: "Sedan"
+    typeOfCar: "Sedan",
+    year: 1990,
+    region: "Lviv Oblast",
+    state: "Restored",
+    fuel: "Diesel Fuel",
   },
   {
     id: 4,
     name: "Audi Q5",
     type: "Ship",
     price: 6700,
-    location: "Lviv",
-    transmission: "mechanical",
-    fuelType: "Gas 1.6",
+    sity: "Ternopil",
+    driveUnit: "Automatic",
     distance: "11 000",
     breand: "Skoda",
     exchange: false,
     image:
-      "https://cdn4.riastatic.com/photosnew/auto/photo/peugeot_4007__516197674f.webp",
-    typeOfCar: "Crossover"
+      "https://cdn.riastatic.com/photosnewr/auto/new_auto_storage/volkswagen-id-4-crozz__2080542-620x465x72.webp",
+    typeOfCar: "Crossover",
+    year: 1998,
+    region: "Ternopil Oblast",
+    state: "New (Factory)",
+    fuel: "Diesel Fuel",
   },
   {
     id: 5,
     name: "Skoda",
     type: "Plane",
     price: 7000,
-    location: "Lviv",
-    transmission: "mechanical",
-    fuelType: "Gas 1.6",
+    sity: "Lviv",
+    driveUnit: "Automatic",
     distance: "11 000",
     breand: "Tesla",
     exchange: true,
     image:
       "https://cdn.riastatic.com/photos/ria/news_text/16/1692/169281/169281.jpg",
     model: "Q8",
-    typeOfCar: "Сoupe"
+    typeOfCar: "Сoupe",
+    year: 1998,
+    region: "Lviv Oblast",
+    state: "Restored",
+    fuel: "Diesel Fuel",
   },
   {
     id: 6,
     name: "Kia",
     type: "Plane",
     price: 5000,
-    location: "Lviv",
-    transmission: "mechanical",
-    fuelType: "Gas 1.6",
+    sity: "Ternopil",
+    driveUnit: "Manual",
     distance: "11 000",
     breand: "Tesla",
     exchange: false,
     image:
       "https://cdn.riastatic.com/photosnewr/auto/new_auto_storage/volkswagen-id-4-crozz__2080542-620x465x72.webp",
     model: "Q8",
-    typeOfCar: "Convertible"
+    typeOfCar: "Convertible",
+    year: 2000,
+    region: "Ternopil Oblast",
+    state: "Leased (Under Lease)",
+    fuel: "Natural Gas",
   },
   {
     id: 7,
     name: "Kia",
     type: "Plane",
     price: 5000,
-    location: "Lviv",
-    transmission: "mechanical",
-    fuelType: "Gas 1.6",
+    sity: "Lviv",
+    driveUnit: "Manual",
     distance: "11 000",
     breand: "Tesla",
     exchange: false,
     image:
       "https://cdn.riastatic.com/photosnewr/auto/new_auto_storage/volkswagen-id-4-crozz__2080542-620x465x72.webp",
     model: "Q8",
-    typeOfCar: "Sports car"
+    typeOfCar: "Sports car",
+    year: 2005,
+    region: "Lviv Oblast",
+    state: "New (Factory)",
+    fuel: "Natural Gas",
   },
   {
     id: 8,
     name: "Kia",
     type: "Plane",
     price: 5000,
-    location: "Lviv",
-    transmission: "mechanical",
-    fuelType: "Gas 1.6",
+    sity: "Ternopil",
+    driveUnit: "Manual",
     distance: "11 000",
     breand: "Tesla",
     exchange: false,
     image:
       "https://cdn.riastatic.com/photosnewr/auto/new_auto_storage/volkswagen-id-4-crozz__2080542-620x465x72.webp",
     model: "Q8",
-    typeOfCar: "Microvan"
+    typeOfCar: "Microvan",
+    year: 2020,
+    region: "Ternopil Oblast",
+    state: "Leased (Under Lease)",
+    fuel: "Gasoline",
   },
 
 ];
@@ -179,12 +203,24 @@ const CarsList = () => {
   const [brandType, setBrandType] = useState('');
   const [exchange, setExchange] = useState(false);
   const [selectedTypes, setSelectedTypes] = useState([]);
+  const [priceFrom, setPriceFrom] = useState('');
+  const [priceTo, setPriceTo] = useState('');
+  const [yearFrom, setYearFrom] = useState('');
+  const [yearTo, setYearTo] = useState('');
+  const [region, setRegion] = useState('');
+  const [state, setState] = useState('');
+  const [fuel, setFuel] = useState('');
+  const [driveUnit, setDriveUnit] = useState('');
 
   /*  let filteredData = .filter(i => i.type === "Audi")*/
 
   const filteredData = carData.filter((car) =>
     car.breand.toLowerCase().includes(searchTerm.toLowerCase()) &&
-    (exchange === false || car.exchange === (exchange === true))
+    (exchange === false || car.exchange === (exchange === true)) &&
+    (priceFrom === '' || car.price >= parseFloat(priceFrom)) &&
+    (priceTo === '' || car.price <= parseFloat(priceTo)) &&
+    (yearFrom === '' || car.year >= parseInt(yearFrom)) &&
+    (yearTo === '' || car.year <= parseInt(yearTo))
   );
 
   const sortData = () => {
@@ -202,11 +238,39 @@ const CarsList = () => {
       );
     }
 
+    if (region && region !== 'option1') {
+      sortedArray = sortedArray.filter(car =>
+        car.region.toLowerCase().includes(region.toLowerCase())
+      );
+    }
+
+    if (state && state !== 'option1') {
+      sortedArray = sortedArray.filter(car =>
+        car.state.toLowerCase().includes(state.toLowerCase())
+      );
+    }
+
+    if (fuel && fuel !== 'option1') {
+      sortedArray = sortedArray.filter(car =>
+        car.fuel.toLowerCase().includes(fuel.toLowerCase())
+      );
+    }
+    
+    if (driveUnit && driveUnit !== 'option1') {
+      sortedArray = sortedArray.filter(car =>
+        car.driveUnit.toLowerCase().includes(driveUnit.toLowerCase())
+      );
+    }
+
     if (brandType && brandType !== 'option1') {
       sortedArray = sortedArray.filter(car =>
         car.breand.toLowerCase().includes(brandType.toLowerCase())
       );
     }
+
+    
+
+    
 
     return sortedArray;
   };
@@ -226,11 +290,10 @@ const CarsList = () => {
       <Header setSearchTerm={setSearchTerm} />
       <div style={{ display: "flex" }}>
         <Menu />
-        <List sortedData={sortedData} setSortingOption={setSortingOption} onMenuOpen={onMenuOpen} selectedTypes={selectedTypes} />   {/*convertDollarsToUAH={convertDollarsToUAH} */}
-        <Filter setVehicleType={setVehicleType} setBrandType={setBrandType} setExchange={setExchange} setSelectedTypes={setSelectedTypes} dataFromChild={menuOpen} />
+        <List sortedData={sortedData} setSortingOption={setSortingOption} onMenuOpen={onMenuOpen} selectedTypes={selectedTypes}  priceFrom={priceFrom} priceTo={priceTo} yearFrom={yearFrom} yearTo={yearTo} />   {/*convertDollarsToUAH={convertDollarsToUAH} */}
+        <Filter setDriveUnit={setDriveUnit} setFuel={setFuel} setState={setState} setRegion={setRegion} setVehicleType={setVehicleType} setBrandType={setBrandType} setExchange={setExchange} setSelectedTypes={setSelectedTypes} setPriceFrom={setPriceFrom} setPriceTo={setPriceTo} setYearFrom={setYearFrom} setYearTo={setYearTo} dataFromChild={menuOpen} />
       </div>
     </div>
-
   );
 };
 

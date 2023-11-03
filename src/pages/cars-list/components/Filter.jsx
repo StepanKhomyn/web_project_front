@@ -9,6 +9,48 @@ const a = [
   { modelName: "sivic", type: "Honda" }
 ]
 
+const region = [
+  { region: "Vinnytsia Oblast" },
+  { region: "Volyn Oblast" },
+  { region: "Dnipropetrovsk Oblast" },
+  { region: "Donetsk Oblast" },
+  { region: "Zhytomyr Oblast" },
+  { region: "Zakarpattia Oblast" },
+  { region: "Zaporizhzhia Oblast" },
+  { region: "Ivano-Frankivsk Oblast" },
+  { region: "Kyiv" },
+  { region: "Kyiv Oblast" },
+  { region: "Kirovohrad Oblast" },
+  { region: "Luhansk Oblast" },
+  { region: "Lviv Oblast" },
+  { region: "Mykolaiv Oblast" },
+  { region: "Odesa Oblast" },
+  { region: "Poltava Oblast" },
+  { region: "Rivne Oblast" },
+  { region: "Sumy Oblast" },
+  { region: "Ternopil Oblast" },
+  { region: "Kharkiv Oblast" },
+  { region: "Kherson Oblast" },
+  { region: "Khmelnytskyi Oblast" },
+  { region: "Cherkasy Oblast" },
+  { region: "Chernivtsi Oblast" },
+  { region: "Chernihiv Oblast" },
+  { region: "Autonomous Republic of Crimea" },
+  { region: "Sevastopol" },
+]
+
+const state = [
+  {state: "New (Factory)"},
+  {state: "Used (Second-hand)"},
+  {state: "Restored"},
+  {state: "Demonstration (Test Drive)"},
+  {state: "Damaged (Accident)"},
+  {state: "Faulty (Needs Repair)"},
+  {state: "Electric (Fuel Type-based)"},
+  {state: "Stored (Not in Use for a Long Time)"},
+  {state: "Leased (Under Lease)"},
+]
+
 const typeOfCar = [
   { typeCar: "Sedan" },
   { typeCar: "Minivan" },
@@ -22,15 +64,30 @@ const typeOfCar = [
   { typeCar: "Compact car" },
 ]
 
+const fuel = [
+  {fuel: "Gasoline"},
+  {fuel: "Diesel Fuel"},
+  {fuel: "Electricity"},
+  {fuel: "Hybrid Systems"},
+  {fuel: "Natural Gas"},
+]
+
+const driveUnit = [
+  {driveUnit : "Manual"},
+  {driveUnit : "Automatic"},
+  {driveUnit : "AMT"},
+  {driveUnit : "CVT"},
+]
+
 const b = a.filter(i => i.type === "Audi")
 
 console.log(b)
 
-const Filter = ({ setVehicleType, setBrandType, setExchange, setSelectedTypes, dataFromChild }) => {
+const Filter = ({setDriveUnit, setFuel, setState, setRegion, setVehicleType, setBrandType, setExchange, setSelectedTypes, setPriceFrom, setPriceTo, setYearFrom, setYearTo, dataFromChild }) => {
 
   const [selectedTypes, setSelectedTypesLocal] = useState([]);
+
   const [showAllTypes, setShowAllTypes] = useState(false);
-  
 
   const displayedTypes = showAllTypes ? typeOfCar : typeOfCar.slice(0, 4);
 
@@ -47,7 +104,6 @@ const Filter = ({ setVehicleType, setBrandType, setExchange, setSelectedTypes, d
     setSelectedTypesLocal(updatedSelectedTypes);
     setSelectedTypes(updatedSelectedTypes);
   };
-
   return (
     <>
       <div className={`left--menu ${dataFromChild ? 'active' : ''}`}>
@@ -131,39 +187,41 @@ const Filter = ({ setVehicleType, setBrandType, setExchange, setSelectedTypes, d
         <div className="price-filter">
           <div>
             <h5 className="price--from--text">Price from</h5>
-            <input placeholder="Price from" className="price--from--input" />
+            <input placeholder="Price from" className="price--from--input" onChange={(e) => setPriceFrom(e.target.value)} />
           </div>
           <div >
             <h5 className="price--from--text">Price to</h5>
-            <input placeholder="Price to" className="price--from--input" />
+            <input placeholder="Price to" className="price--from--input" onChange={(e) => setPriceTo(e.target.value)} />
           </div>
         </div>
         <div className="line--one"></div>
         <div className="price-filter">
           <div>
             <h5 className="price--from--text">Year from</h5>
-            <input placeholder="Year from" className="price--from--input" />
+            <input placeholder="Year from" className="price--from--input" onChange={(e) => setYearFrom(e.target.value)} />
           </div>
           <div >
             <h5 className="price--from--text">Year to</h5>
-            <input placeholder="Year to" className="price--from--input" />
+            <input placeholder="Year to" className="price--from--input" onChange={(e) => setYearTo(e.target.value)} />
           </div>
         </div>
         <div className="line--one"></div>
         <div className="filter--select-all">
           <h5 className="filter--select--text" style={{ margin: "18px 0px 8px 0px" }}>Region</h5>
-          <select className="filter--select">
+          <select className="filter--select" onChange={(e) => setRegion(e.target.value)}>
             <option value="option1">All region</option>
-            <option value="option2">Варіант 2</option>
-            <option value="option3">Варіант 3</option>
+            {region.map(region => {
+              return <option value={region.region}>{region.region}</option>
+            })}
           </select>
         </div>
         <div className="filter--select-all">
           <h5 className="filter--select--text" style={{ margin: "18px 0px 8px 0px" }}>State</h5>
-          <select className="filter--select">
-            <option value="option1">All state</option>
-            <option value="option2">Варіант 2</option>
-            <option value="option3">Варіант 3</option>
+          <select className="filter--select" onChange={(e) => setState(e.target.value)}>
+          <option value="option1">All state</option>
+            {state.map(state => {
+              return <option value={state.state}>{state.state}</option>
+            })}
           </select>
         </div>
         <div className="line--one"></div>
@@ -188,10 +246,11 @@ const Filter = ({ setVehicleType, setBrandType, setExchange, setSelectedTypes, d
         </div>
         <div className="filter--select-all">
           <h5 className="filter--select--text" style={{ margin: "18px 0px 8px 0px" }}>Fuel</h5>
-          <select className="filter--select">
+          <select className="filter--select" onChange={(e) => setFuel(e.target.value)}>
             <option value="option1">-</option>
-            <option value="option2">Варіант 2</option>
-            <option value="option3">Варіант 3</option>
+            {fuel.map(fuel => {
+              return <option value={fuel.fuel}>{fuel.fuel}</option>
+            })}
           </select>
         </div>
         <div className="filter--select-all">
@@ -204,10 +263,11 @@ const Filter = ({ setVehicleType, setBrandType, setExchange, setSelectedTypes, d
         </div>
         <div className="filter--select-all">
           <h5 className="filter--select--text" style={{ margin: "18px 0px 8px 0px" }}>Drive unit</h5>
-          <select className="filter--select">
+          <select className="filter--select" onChange={(e) => setDriveUnit(e.target.value)}>
             <option value="option1">-</option>
-            <option value="option2">Варіант 2</option>
-            <option value="option3">Варіант 3</option>
+            {driveUnit.map(driveUnit => {
+              return <option value={driveUnit.driveUnit}>{driveUnit.driveUnit}</option>
+            })}
           </select>
         </div>
         <div className="filter--select-all" style={{ marginBottom: "40px" }} >
