@@ -18,7 +18,15 @@ import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 
 const Menu = () => {
-  const [menuOpen, setMenuOpen] = useState(true);
+
+  const localStorageBooll = localStorage.getItem('menuOpenLeft') === "false" ? false : true
+
+  const [menuOpen, setMenuOpen] = useState(localStorageBooll);
+  
+  useEffect(() => {
+    window.localStorage.setItem('menuOpenLeft', menuOpen);
+  }, [menuOpen]);
+
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./CarsList.css"
 import Header from "../Header";
 import Menu from "./components/Menu";
@@ -8,8 +8,8 @@ import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FilterAltOffIcon from '@mui/icons-material/FilterAltOff';
 
 const apiKey = '81106b36bdb74941883a5389d7b0af62';
-
-/* async function getExchangeRate() {
+/*
+ async function getExchangeRate() {
    try {
      const response = await fetch(`https://open.er-api.com/v6/latest/USD?apikey=${apiKey}`);
      const data = await response.json();
@@ -28,8 +28,8 @@ const apiKey = '81106b36bdb74941883a5389d7b0af62';
    } else {
      return null;
    }
- }*/
-
+ }
+*/
 const carData = [
   {
     id: 1,
@@ -192,27 +192,42 @@ const carData = [
 
 
 const CarsList = () => {
-
-
-
-
-
-  const [searchTerm, setSearchTerm] = useState('');
-  const [sortingOption, setSortingOption] = useState('');
-  const [vehicleType, setVehicleType] = useState('');
-  const [brandType, setBrandType] = useState('');
-  const [exchange, setExchange] = useState(false);
-  const [selectedTypes, setSelectedTypes] = useState([]);
-  const [priceFrom, setPriceFrom] = useState('');
-  const [priceTo, setPriceTo] = useState('');
-  const [yearFrom, setYearFrom] = useState('');
-  const [yearTo, setYearTo] = useState('');
-  const [region, setRegion] = useState('');
-  const [state, setState] = useState('');
-  const [fuel, setFuel] = useState('');
-  const [driveUnit, setDriveUnit] = useState('');
+  const storedSelectedTypes = localStorage.getItem('selectedTypes');
+  const initialSelectedTypes = storedSelectedTypes ? JSON.parse(storedSelectedTypes) : [];
+  const localStorageBool = localStorage.getItem('exchange') === "true" ? true : false
+  const [searchTerm, setSearchTerm] = useState(localStorage.getItem('searchTerm') || '');
+  const [sortingOption, setSortingOption] = useState(localStorage.getItem('sortingOption') || '');
+  const [vehicleType, setVehicleType] = useState(localStorage.getItem('vehicleType') || '');
+  const [brandType, setBrandType] = useState(localStorage.getItem('brandType') || '');
+  const [exchange, setExchange] = useState(localStorageBool);
+  const [selectedTypes, setSelectedTypes] = useState(initialSelectedTypes);
+  const [priceFrom, setPriceFrom] = useState(localStorage.getItem('priceFrom') || 0);
+  const [priceTo, setPriceTo] = useState(localStorage.getItem('priceTo') || '');
+  const [yearFrom, setYearFrom] = useState(localStorage.getItem('yearFrom') || 1900);
+  const [yearTo, setYearTo] = useState(localStorage.getItem('yearTo') || '');
+  const [region, setRegion] = useState(localStorage.getItem('region') || '');
+  const [state, setState] = useState(localStorage.getItem('state') || '');
+  const [fuel, setFuel] = useState(localStorage.getItem('fuel') || '');
+  const [driveUnit, setDriveUnit] = useState(localStorage.getItem('driveUnit') || '');
 
   /*  let filteredData = .filter(i => i.type === "Audi")*/
+
+  useEffect(() => {
+    window.localStorage.setItem('exchange', exchange);
+    window.localStorage.setItem('priceFrom', priceFrom);
+    window.localStorage.setItem('priceTo', priceTo);
+    window.localStorage.setItem('yearFrom', yearFrom);
+    window.localStorage.setItem('yearTo', yearTo);
+    window.localStorage.setItem('vehicleType', vehicleType);
+    window.localStorage.setItem('brandType', brandType);
+    window.localStorage.setItem('region', region);
+    window.localStorage.setItem('state', state);
+    window.localStorage.setItem('fuel', fuel);
+    window.localStorage.setItem('driveUnit', driveUnit);
+    window.localStorage.setItem('selectedTypes', JSON.stringify(selectedTypes));
+    window.localStorage.setItem('sortingOption', sortingOption);
+    window.localStorage.setItem('searchTerm', searchTerm);
+  }, [exchange, priceFrom, priceTo, yearFrom, yearTo, vehicleType, brandType, region, state, fuel, driveUnit, selectedTypes, sortingOption, searchTerm]);
 
   const filteredData = carData.filter((car) =>
     car.breand.toLowerCase().includes(searchTerm.toLowerCase()) &&
@@ -255,7 +270,7 @@ const CarsList = () => {
         car.fuel.toLowerCase().includes(fuel.toLowerCase())
       );
     }
-    
+
     if (driveUnit && driveUnit !== 'option1') {
       sortedArray = sortedArray.filter(car =>
         car.driveUnit.toLowerCase().includes(driveUnit.toLowerCase())
@@ -268,17 +283,22 @@ const CarsList = () => {
       );
     }
 
-    
 
-    
+
+
 
     return sortedArray;
   };
 
   const sortedData = sortData();
+  const localStorageBooll = localStorage.getItem('menuOpen') === "false" ? false : true
 
+  const [menuOpen, setMenuOpen] = useState(localStorageBooll);
 
-  const [menuOpen, setMenuOpen] = useState(null);
+  useEffect(() => {
+    window.localStorage.setItem('menuOpen', menuOpen);
+  }, [menuOpen]);
+
 
   const onMenuOpen = (data) => {
     setMenuOpen(data);
@@ -287,11 +307,11 @@ const CarsList = () => {
 
   return (
     <div className="carsList--page">
-      <Header setSearchTerm={setSearchTerm} />
+      <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <div style={{ display: "flex" }}>
         <Menu />
-        <List sortedData={sortedData} setSortingOption={setSortingOption} onMenuOpen={onMenuOpen} selectedTypes={selectedTypes}  priceFrom={priceFrom} priceTo={priceTo} yearFrom={yearFrom} yearTo={yearTo} />   {/*convertDollarsToUAH={convertDollarsToUAH} */}
-        <Filter setDriveUnit={setDriveUnit} setFuel={setFuel} setState={setState} setRegion={setRegion} setVehicleType={setVehicleType} setBrandType={setBrandType} setExchange={setExchange} setSelectedTypes={setSelectedTypes} setPriceFrom={setPriceFrom} setPriceTo={setPriceTo} setYearFrom={setYearFrom} setYearTo={setYearTo} dataFromChild={menuOpen} />
+        <List sortingOption={sortingOption} sortedData={sortedData} setSortingOption={setSortingOption} onMenuOpen={onMenuOpen} selectedTypes={selectedTypes} priceFrom={priceFrom} priceTo={priceTo} yearFrom={yearFrom} yearTo={yearTo} />   {/*convertDollarsToUAH={convertDollarsToUAH}*/}
+        <Filter selectedTypess={selectedTypes} driveUnitType={driveUnit} fuelType={fuel} stateType={state} regionType={region} brandType={brandType} vehicleType={vehicleType} yearTo={yearTo} yearFrom={yearFrom} priceTo={priceTo} priceFrom={priceFrom} setDriveUnit={setDriveUnit} setFuel={setFuel} setState={setState} setRegion={setRegion} setVehicleType={setVehicleType} setBrandType={setBrandType} setExchange={setExchange} setSelectedTypes={setSelectedTypes} setPriceFrom={setPriceFrom} setPriceTo={setPriceTo} setYearFrom={setYearFrom} setYearTo={setYearTo} dataFromChild={menuOpen} exchange={exchange} />
       </div>
     </div>
   );

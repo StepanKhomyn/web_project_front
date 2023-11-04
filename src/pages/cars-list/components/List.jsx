@@ -14,9 +14,11 @@ import { useEffect } from 'react';
 
 
 
-const List = ({ sortedData, setSortingOption, onMenuOpen, selectedTypes, priceFrom, priceTo, yearFrom, yearTo }) => {   /*convertDollarsToUAH */
+const List = ({sortingOption, sortedData, setSortingOption, onMenuOpen, selectedTypes, priceFrom, priceTo, yearFrom, yearTo}) => {   /*convertDollarsToUAH */
     
-  /*const [convertedPrices, setConvertedPrices] = useState([]);
+
+/*
+const [convertedPrices, setConvertedPrices] = useState([]);
 
   useEffect(() => {
     const fetchConvertedPrices = async () => {
@@ -36,7 +38,15 @@ const List = ({ sortedData, setSortingOption, onMenuOpen, selectedTypes, priceFr
   }, [sortedData]);
 */
 
-const [menuOpen, setMenuOpen] = useState(true);
+const localStorageBooll = localStorage.getItem('menuOpenIcon') === "false" ? false : true
+
+const [menuOpen, setMenuOpen] = useState(localStorageBooll);
+
+useEffect(() => {
+  window.localStorage.setItem('menuOpenIcon', menuOpen);
+}, [menuOpen]);
+
+
 
 const filterByTypeOfCar = (car) => {
   return selectedTypes.length === 0 || selectedTypes.includes(car.typeOfCar) &&
@@ -48,7 +58,7 @@ const filterByTypeOfCar = (car) => {
 
 
 const handleCloseIconClick = () => {
-   setMenuOpen(!menuOpen);
+   setMenuOpen(prev => !prev);
    onMenuOpen(menuOpen)
 };
  
@@ -64,6 +74,7 @@ const handleCloseIconClick = () => {
               className="sort--select"
               style={{ marginRight: '26px', marginLeft: '14px' }}
               onChange={(e) => setSortingOption(e.target.value)}
+              value={sortingOption}
             >
               <option value="option1">sort by</option>
               <option value="option2">sort by name</option>
@@ -80,7 +91,6 @@ const handleCloseIconClick = () => {
             .filter(filterByTypeOfCar) // Додаємо фільтрацію за типом автомобіля
             .map((car) => (    /*  convertedPrices.map((car) => ( */
               <div className="card--list--car" key={car.id}>
-                {console.log('Рендеринг авто:', car.type)}
                 <Link style={{ textDecoration: 'none' }} to={`/about/${car.id}`}>
                   <img
                     className="car-image"
@@ -92,7 +102,7 @@ const handleCloseIconClick = () => {
                     <button className="btn-used">Used</button>
                   </div>
                   <div className="price-car">
-                    <p1 className="price-dollar">{`${car.price} $`} <span style={{ marginLeft: '15px', fontWeight: '500', fontSize: '16px' }}></span></p1>   {/*{`${car.convertedPrice} ₴`} */}
+                    <p1 className="price-dollar">{`${car.price} $`} <span style={{ marginLeft: '15px', fontWeight: '400', fontSize: '10px' }}></span></p1>   {/*{`${car.convertedPrice} ₴`} */}
                   </div>
                   <div className="line--two"></div>
                   <div className="four--change" style={{ display: 'flex', flexWrap: 'wrap' }}>

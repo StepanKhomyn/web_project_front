@@ -6,7 +6,7 @@ import MessageIcon from '@mui/icons-material/Message';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import "./cars-list/CarsList.css"
 
-const Header = ({ setSearchTerm }) => {
+const Header = ({searchTerm, setSearchTerm }) => {
 
   return (
     <div className="navbar">
@@ -14,6 +14,7 @@ const Header = ({ setSearchTerm }) => {
           placeholder="Search"
           className="search-input"
           onChange={(e) => setSearchTerm(e.target.value)}
+          value={searchTerm}
         />
       {/*<div className="sell-container">
         <Link to="/sell">

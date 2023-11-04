@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FilterAltOffIcon from '@mui/icons-material/FilterAltOff';
 import "../CarsList.css"
@@ -40,15 +40,15 @@ const region = [
 ]
 
 const state = [
-  {state: "New (Factory)"},
-  {state: "Used (Second-hand)"},
-  {state: "Restored"},
-  {state: "Demonstration (Test Drive)"},
-  {state: "Damaged (Accident)"},
-  {state: "Faulty (Needs Repair)"},
-  {state: "Electric (Fuel Type-based)"},
-  {state: "Stored (Not in Use for a Long Time)"},
-  {state: "Leased (Under Lease)"},
+  { state: "New (Factory)" },
+  { state: "Used (Second-hand)" },
+  { state: "Restored" },
+  { state: "Demonstration (Test Drive)" },
+  { state: "Damaged (Accident)" },
+  { state: "Faulty (Needs Repair)" },
+  { state: "Electric (Fuel Type-based)" },
+  { state: "Stored (Not in Use for a Long Time)" },
+  { state: "Leased (Under Lease)" },
 ]
 
 const typeOfCar = [
@@ -65,29 +65,36 @@ const typeOfCar = [
 ]
 
 const fuel = [
-  {fuel: "Gasoline"},
-  {fuel: "Diesel Fuel"},
-  {fuel: "Electricity"},
-  {fuel: "Hybrid Systems"},
-  {fuel: "Natural Gas"},
+  { fuel: "Gasoline" },
+  { fuel: "Diesel Fuel" },
+  { fuel: "Electricity" },
+  { fuel: "Hybrid Systems" },
+  { fuel: "Natural Gas" },
 ]
 
 const driveUnit = [
-  {driveUnit : "Manual"},
-  {driveUnit : "Automatic"},
-  {driveUnit : "AMT"},
-  {driveUnit : "CVT"},
+  { driveUnit: "Manual" },
+  { driveUnit: "Automatic" },
+  { driveUnit: "AMT" },
+  { driveUnit: "CVT" },
 ]
 
 const b = a.filter(i => i.type === "Audi")
 
 console.log(b)
 
-const Filter = ({setDriveUnit, setFuel, setState, setRegion, setVehicleType, setBrandType, setExchange, setSelectedTypes, setPriceFrom, setPriceTo, setYearFrom, setYearTo, dataFromChild }) => {
+const Filter = ({ selectedTypess, driveUnitType, fuelType, stateType, regionType, brandType, vehicleType, yearTo, yearFrom, priceTo, priceFrom, exchange, setDriveUnit, setFuel, setState, setRegion, setVehicleType, setBrandType, setExchange, setSelectedTypes, setPriceFrom, setPriceTo, setYearFrom, setYearTo, dataFromChild }) => {
 
-  const [selectedTypes, setSelectedTypesLocal] = useState([]);
+  const [selectedTypes, setSelectedTypesLocal] = useState(selectedTypess);
+  const localStorageBool = localStorage.getItem('showAllTypess') === "true" ? true : false
+  const [showAllTypes, setShowAllTypes] = useState(localStorageBool);
 
-  const [showAllTypes, setShowAllTypes] = useState(false);
+
+  useEffect(() => {
+    window.localStorage.setItem('showAllTypess', showAllTypes);
+  }, [showAllTypes]);
+
+
 
   const displayedTypes = showAllTypes ? typeOfCar : typeOfCar.slice(0, 4);
 
@@ -106,6 +113,7 @@ const Filter = ({setDriveUnit, setFuel, setState, setRegion, setVehicleType, set
   };
   return (
     <>
+    {console.log(dataFromChild)}
       <div className={`left--menu ${dataFromChild ? 'active' : ''}`}>
         <div className="fiteres--menu">
           <div>
@@ -125,14 +133,14 @@ const Filter = ({setDriveUnit, setFuel, setState, setRegion, setVehicleType, set
         </div>
         <div className="exchange--menu">
           <label class="form-control">
-            <input className="checkbox-exchange" type="checkbox" name="checkbox" onChange={(e) => setExchange(e.target.checked)} />
+            <input className="checkbox-exchange" type="checkbox" name="checkbox" onChange={(e) => setExchange(e.target.checked)} checked={exchange} />
             Exchange
           </label>
         </div>
         <div className="line--one"></div>
         <div className="filter--select-all">
           <h5 className="filter--select--text" style={{ margin: "18px 0px 8px 0px" }}>Type of vehicle</h5>
-          <select className="filter--select" onChange={(e) => setVehicleType(e.target.value)}>
+          <select className="filter--select" onChange={(e) => setVehicleType(e.target.value)} value={vehicleType} >
             <option value="option1">All types</option>
             <option value="Passenger">Passenger</option>
             <option value="Bus">Bus</option>
@@ -142,7 +150,7 @@ const Filter = ({setDriveUnit, setFuel, setState, setRegion, setVehicleType, set
         </div>
         <div className="filter--select-all">
           <h5 style={{ margin: "18px 0px 8px 0px" }} className="filter--select--text">Car brand</h5>
-          <select className="filter--select" onChange={(e) => setBrandType(e.target.value)}>
+          <select className="filter--select" onChange={(e) => setBrandType(e.target.value)} value={brandType}>
             <option value="option1">All brand</option>
             <option value="Mersedes-Benz">Mersedes-Benz</option>
             <option value="Audi">Audi</option>
@@ -174,41 +182,42 @@ const Filter = ({setDriveUnit, setFuel, setState, setRegion, setVehicleType, set
                   type="checkbox"
                   name="checkbox"
                   onChange={() => handleTypeOfCarChange(typer.typeCar)}
+                  checked={selectedTypes.includes(typer.typeCar)}
                 />
                 {typer.typeCar}
               </label>
             </div>
           ))}
         </div>
-        <h3 className="view--all--types" onClick={() => setShowAllTypes(!showAllTypes)}>
+        <h3 className="view--all--types" onClick={() => setShowAllTypes(prevState => !prevState)}>
           {showAllTypes ? 'Show Less Types' : 'View All Types'}
         </h3>
         <div className="line--one"></div>
         <div className="price-filter">
           <div>
             <h5 className="price--from--text">Price from</h5>
-            <input placeholder="Price from" className="price--from--input" onChange={(e) => setPriceFrom(e.target.value)} />
+            <input placeholder="Price from" className="price--from--input" onChange={(e) => setPriceFrom(e.target.value)} value={priceFrom} />
           </div>
           <div >
             <h5 className="price--from--text">Price to</h5>
-            <input placeholder="Price to" className="price--from--input" onChange={(e) => setPriceTo(e.target.value)} />
+            <input placeholder="Price to" className="price--from--input" onChange={(e) => setPriceTo(e.target.value)} value={priceTo} />
           </div>
         </div>
         <div className="line--one"></div>
         <div className="price-filter">
           <div>
             <h5 className="price--from--text">Year from</h5>
-            <input placeholder="Year from" className="price--from--input" onChange={(e) => setYearFrom(e.target.value)} />
+            <input placeholder="Year from" className="price--from--input" onChange={(e) => setYearFrom(e.target.value)} value={yearFrom} />
           </div>
           <div >
             <h5 className="price--from--text">Year to</h5>
-            <input placeholder="Year to" className="price--from--input" onChange={(e) => setYearTo(e.target.value)} />
+            <input placeholder="Year to" className="price--from--input" onChange={(e) => setYearTo(e.target.value)} value={yearTo} />
           </div>
         </div>
         <div className="line--one"></div>
         <div className="filter--select-all">
           <h5 className="filter--select--text" style={{ margin: "18px 0px 8px 0px" }}>Region</h5>
-          <select className="filter--select" onChange={(e) => setRegion(e.target.value)}>
+          <select className="filter--select" onChange={(e) => setRegion(e.target.value)} value={regionType}>
             <option value="option1">All region</option>
             {region.map(region => {
               return <option value={region.region}>{region.region}</option>
@@ -217,8 +226,8 @@ const Filter = ({setDriveUnit, setFuel, setState, setRegion, setVehicleType, set
         </div>
         <div className="filter--select-all">
           <h5 className="filter--select--text" style={{ margin: "18px 0px 8px 0px" }}>State</h5>
-          <select className="filter--select" onChange={(e) => setState(e.target.value)}>
-          <option value="option1">All state</option>
+          <select className="filter--select" onChange={(e) => setState(e.target.value)} value={stateType}>
+            <option value="option1">All state</option>
             {state.map(state => {
               return <option value={state.state}>{state.state}</option>
             })}
@@ -246,7 +255,7 @@ const Filter = ({setDriveUnit, setFuel, setState, setRegion, setVehicleType, set
         </div>
         <div className="filter--select-all">
           <h5 className="filter--select--text" style={{ margin: "18px 0px 8px 0px" }}>Fuel</h5>
-          <select className="filter--select" onChange={(e) => setFuel(e.target.value)}>
+          <select className="filter--select" onChange={(e) => setFuel(e.target.value)} value={fuelType}>
             <option value="option1">-</option>
             {fuel.map(fuel => {
               return <option value={fuel.fuel}>{fuel.fuel}</option>
@@ -263,7 +272,7 @@ const Filter = ({setDriveUnit, setFuel, setState, setRegion, setVehicleType, set
         </div>
         <div className="filter--select-all">
           <h5 className="filter--select--text" style={{ margin: "18px 0px 8px 0px" }}>Drive unit</h5>
-          <select className="filter--select" onChange={(e) => setDriveUnit(e.target.value)}>
+          <select className="filter--select" onChange={(e) => setDriveUnit(e.target.value)} value={driveUnitType}>
             <option value="option1">-</option>
             {driveUnit.map(driveUnit => {
               return <option value={driveUnit.driveUnit}>{driveUnit.driveUnit}</option>
