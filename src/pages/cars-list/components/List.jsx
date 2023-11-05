@@ -14,7 +14,7 @@ import { useEffect } from 'react';
 
 
 
-const List = ({sortingOption, sortedData, setSortingOption, onMenuOpen, selectedTypes, priceFrom, priceTo, yearFrom, yearTo}) => {   /*convertDollarsToUAH */
+const List = ({engineTo, engineFrom, sortingOption, sortedData, setSortingOption, onMenuOpen, selectedTypes, priceFrom, priceTo, yearFrom, yearTo, mileage}) => {   /*convertDollarsToUAH */
     
 
 /*
@@ -53,7 +53,10 @@ const filterByTypeOfCar = (car) => {
   (priceFrom === '' || car.price >= parseFloat(priceFrom)) &&
   (priceTo === '' || car.price <= parseFloat(priceTo)) &&
   (yearFrom === '' || car.year >= parseFloat(yearFrom)) &&
-  (yearTo === '' || car.year <= parseFloat(yearTo))
+  (yearTo === '' || car.year <= parseFloat(yearTo)) &&
+  (mileage === '' || car.mileage <= parseFloat(mileage)) &&
+  (engineFrom === '' || car.engine >= parseFloat(engineFrom)) &&
+  (engineTo === '' || car.engine <= parseFloat(engineTo))
 };
 
 
@@ -131,7 +134,6 @@ const handleCloseIconClick = () => {
                       </label>
                     </div>
                   </div>
-
                 </Link>
               </div>
             ))

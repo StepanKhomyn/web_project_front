@@ -33,26 +33,27 @@ const apiKey = '81106b36bdb74941883a5389d7b0af62';
 const carData = [
   {
     id: 1,
-    name: "Tesla Model X 2022",
     type: "Passenger",
     price: 10000,
     sity: "Ternopil",
     driveUnit: "AMT",
     distance: "11 000",
-    breand: "Mersedes-Benz",
+    breand: "Mercedes-Benz",
     exchange: true,
     image:
       "https://cdn3.riastatic.com/photosnew/auto/photo/tesla_model-3__515756233f.webp",
-    model: "Q8",
+    model: "A-Class",
     typeOfCar: "Sedan",
     year: 2008,
     region: "Ternopil Oblast",
     state: "New (Factory)",
     fuel: "Diesel Fuel",
+    mileage: 50000,
+    engine: 2.2,
+    color: "Blue",
   },
   {
     id: 2,
-    name: "Volkswagen Passat 2020",
     type: "Passenger",
     price: 4000,
     sity: "Kyiv",
@@ -62,16 +63,18 @@ const carData = [
     exchange: true,
     image:
       "https://cdn.riastatic.com/photos/ria/news_text/16/1692/169281/169281.jpg",
-    model: "Q8",
+    model: "Rio",
     typeOfCar: "Minivan",
     year: 2023,
     region: "Kyiv Oblast",
     state: "Restored",
     fuel: "Gasoline",
+    mileage: 100000,
+    engine: 3.2,
+    color: "Red",
   },
   {
     id: 3,
-    name: "Volkswagen Tiguan 2022",
     type: "Passenger",
     price: 1000,
     sity: "Lviv",
@@ -81,16 +84,18 @@ const carData = [
     exchange: true,
     image:
       "https://cdn.riastatic.com/photosnewr/auto/new_auto_storage/volkswagen-id-4-crozz__2080542-620x465x72.webp",
-    model: "Q8",
+    model: "A3",
     typeOfCar: "Sedan",
     year: 1990,
     region: "Lviv Oblast",
     state: "Restored",
     fuel: "Diesel Fuel",
+    mileage: 700000,
+    engine: 4.2,
+    color: "Black",
   },
   {
     id: 4,
-    name: "Audi Q5",
     type: "Ship",
     price: 6700,
     sity: "Ternopil",
@@ -100,15 +105,18 @@ const carData = [
     exchange: false,
     image:
       "https://cdn.riastatic.com/photosnewr/auto/new_auto_storage/volkswagen-id-4-crozz__2080542-620x465x72.webp",
+    model: "Octavia",
     typeOfCar: "Crossover",
     year: 1998,
     region: "Ternopil Oblast",
     state: "New (Factory)",
     fuel: "Diesel Fuel",
+    mileage: 900000,
+    engine: 3.0,
+    color: "Metallic",
   },
   {
     id: 5,
-    name: "Skoda",
     type: "Plane",
     price: 7000,
     sity: "Lviv",
@@ -118,16 +126,18 @@ const carData = [
     exchange: true,
     image:
       "https://cdn.riastatic.com/photos/ria/news_text/16/1692/169281/169281.jpg",
-    model: "Q8",
+    model: "Model 3",
     typeOfCar: "Сoupe",
     year: 1998,
     region: "Lviv Oblast",
     state: "Restored",
     fuel: "Diesel Fuel",
+    mileage: 100000,
+    engine: 0.9,
+    color: "Metallic",
   },
   {
     id: 6,
-    name: "Kia",
     type: "Plane",
     price: 5000,
     sity: "Ternopil",
@@ -137,16 +147,18 @@ const carData = [
     exchange: false,
     image:
       "https://cdn.riastatic.com/photosnewr/auto/new_auto_storage/volkswagen-id-4-crozz__2080542-620x465x72.webp",
-    model: "Q8",
+    model: "Model 3",
     typeOfCar: "Convertible",
     year: 2000,
     region: "Ternopil Oblast",
     state: "Leased (Under Lease)",
     fuel: "Natural Gas",
+    mileage: 250000,
+    engine: 1.2,
+    color: "Yellow",
   },
   {
     id: 7,
-    name: "Kia",
     type: "Plane",
     price: 5000,
     sity: "Lviv",
@@ -156,16 +168,18 @@ const carData = [
     exchange: false,
     image:
       "https://cdn.riastatic.com/photosnewr/auto/new_auto_storage/volkswagen-id-4-crozz__2080542-620x465x72.webp",
-    model: "Q8",
+    model: "Model 3",
     typeOfCar: "Sports car",
     year: 2005,
     region: "Lviv Oblast",
     state: "New (Factory)",
     fuel: "Natural Gas",
+    mileage: 150000,
+    engine: 1.2,
+    color: "Black",
   },
   {
     id: 8,
-    name: "Kia",
     type: "Plane",
     price: 5000,
     sity: "Ternopil",
@@ -175,12 +189,15 @@ const carData = [
     exchange: false,
     image:
       "https://cdn.riastatic.com/photosnewr/auto/new_auto_storage/volkswagen-id-4-crozz__2080542-620x465x72.webp",
-    model: "Q8",
+    model: "Model S",
     typeOfCar: "Microvan",
     year: 2020,
     region: "Ternopil Oblast",
     state: "Leased (Under Lease)",
     fuel: "Gasoline",
+    mileage: 100000,
+    engine: 1.8,
+    color: "Black",
   },
 
 ];
@@ -199,6 +216,7 @@ const CarsList = () => {
   const [sortingOption, setSortingOption] = useState(localStorage.getItem('sortingOption') || '');
   const [vehicleType, setVehicleType] = useState(localStorage.getItem('vehicleType') || '');
   const [brandType, setBrandType] = useState(localStorage.getItem('brandType') || '');
+  const [modelsType, setModelsType] = useState(localStorage.getItem('modelsType') || '');
   const [exchange, setExchange] = useState(localStorageBool);
   const [selectedTypes, setSelectedTypes] = useState(initialSelectedTypes);
   const [priceFrom, setPriceFrom] = useState(localStorage.getItem('priceFrom') || 0);
@@ -209,6 +227,10 @@ const CarsList = () => {
   const [state, setState] = useState(localStorage.getItem('state') || '');
   const [fuel, setFuel] = useState(localStorage.getItem('fuel') || '');
   const [driveUnit, setDriveUnit] = useState(localStorage.getItem('driveUnit') || '');
+  const [mileage, setMileage] = useState(localStorage.getItem('mileage') || '');
+  const [engineFrom, setEngineFrom] = useState(localStorage.getItem('engineFrom') || 0.5);
+  const [engineTo, setEngineTo] = useState(localStorage.getItem('engineTo') || '');
+  const [color, setColor] = useState(localStorage.getItem('color') || '');
 
   /*  let filteredData = .filter(i => i.type === "Audi")*/
 
@@ -227,7 +249,12 @@ const CarsList = () => {
     window.localStorage.setItem('selectedTypes', JSON.stringify(selectedTypes));
     window.localStorage.setItem('sortingOption', sortingOption);
     window.localStorage.setItem('searchTerm', searchTerm);
-  }, [exchange, priceFrom, priceTo, yearFrom, yearTo, vehicleType, brandType, region, state, fuel, driveUnit, selectedTypes, sortingOption, searchTerm]);
+    window.localStorage.setItem('modelsType', modelsType);
+    window.localStorage.setItem('mileage', mileage);
+    window.localStorage.setItem('engineFrom', engineFrom);
+    window.localStorage.setItem('engineTo', engineTo);
+    window.localStorage.setItem('color', color);
+  }, [exchange, priceFrom, priceTo, yearFrom, yearTo, vehicleType, brandType, region, state, fuel, driveUnit, selectedTypes, sortingOption, searchTerm, modelsType, mileage, engineFrom, engineTo, color]);
 
   const filteredData = carData.filter((car) =>
     car.breand.toLowerCase().includes(searchTerm.toLowerCase()) &&
@@ -235,7 +262,10 @@ const CarsList = () => {
     (priceFrom === '' || car.price >= parseFloat(priceFrom)) &&
     (priceTo === '' || car.price <= parseFloat(priceTo)) &&
     (yearFrom === '' || car.year >= parseInt(yearFrom)) &&
-    (yearTo === '' || car.year <= parseInt(yearTo))
+    (yearTo === '' || car.year <= parseInt(yearTo)) &&
+    (mileage === '' || car.mileage <= parseInt(mileage)) &&
+    (engineFrom === '' || car.engine >= parseFloat(engineFrom)) &&
+    (engineTo === '' || car.engine <= parseFloat(engineTo))
   );
 
   const sortData = () => {
@@ -283,10 +313,17 @@ const CarsList = () => {
       );
     }
 
+    if (modelsType && modelsType !== 'option1') {
+      sortedArray = sortedArray.filter(car =>
+        car.model.toLowerCase().includes(modelsType.toLowerCase())
+      );
+    }
 
-
-
-
+    if (color && color !== 'option1') {
+      sortedArray = sortedArray.filter(car =>
+        car.color.toLowerCase().includes(color.toLowerCase())
+      );
+    }
     return sortedArray;
   };
 
@@ -310,8 +347,8 @@ const CarsList = () => {
       <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <div style={{ display: "flex" }}>
         <Menu />
-        <List sortingOption={sortingOption} sortedData={sortedData} setSortingOption={setSortingOption} onMenuOpen={onMenuOpen} selectedTypes={selectedTypes} priceFrom={priceFrom} priceTo={priceTo} yearFrom={yearFrom} yearTo={yearTo} />   {/*convertDollarsToUAH={convertDollarsToUAH}*/}
-        <Filter selectedTypess={selectedTypes} driveUnitType={driveUnit} fuelType={fuel} stateType={state} regionType={region} brandType={brandType} vehicleType={vehicleType} yearTo={yearTo} yearFrom={yearFrom} priceTo={priceTo} priceFrom={priceFrom} setDriveUnit={setDriveUnit} setFuel={setFuel} setState={setState} setRegion={setRegion} setVehicleType={setVehicleType} setBrandType={setBrandType} setExchange={setExchange} setSelectedTypes={setSelectedTypes} setPriceFrom={setPriceFrom} setPriceTo={setPriceTo} setYearFrom={setYearFrom} setYearTo={setYearTo} dataFromChild={menuOpen} exchange={exchange} />
+        <List engineFrom={engineFrom} engineTo={engineTo} sortingOption={sortingOption} sortedData={sortedData} setSortingOption={setSortingOption} onMenuOpen={onMenuOpen} selectedTypes={selectedTypes} priceFrom={priceFrom} priceTo={priceTo} yearFrom={yearFrom} yearTo={yearTo} mileage={mileage} />   {/*convertDollarsToUAH={convertDollarsToUAH}*/}
+        <Filter setColor={setColor} colorType={color} engineTo={engineTo} setEngineTo={setEngineTo} setEngineFrom={setEngineFrom} engineFrom={engineFrom} mileage={mileage} modelsType={modelsType} selectedTypess={selectedTypes} driveUnitType={driveUnit} fuelType={fuel} stateType={state} regionType={region} brandType={brandType} vehicleType={vehicleType} yearTo={yearTo} yearFrom={yearFrom} priceTo={priceTo} mileage={mileage} priceFrom={priceFrom} setMileage={setMileage} setDriveUnit={setDriveUnit} setFuel={setFuel} setState={setState} setRegion={setRegion} setVehicleType={setVehicleType} setBrandType={setBrandType} setModelsType={setModelsType} setExchange={setExchange} setSelectedTypes={setSelectedTypes} setPriceFrom={setPriceFrom} setPriceTo={setPriceTo} setYearFrom={setYearFrom} setYearTo={setYearTo} dataFromChild={menuOpen} exchange={exchange} />
       </div>
     </div>
   );
