@@ -10,63 +10,77 @@ import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FilterAltOffIcon from '@mui/icons-material/FilterAltOff';
 import "../CarsList.css"
 import { useEffect } from 'react';
+import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 
 
 
 
-const List = ({engineTo, engineFrom, sortingOption, sortedData, setSortingOption, onMenuOpen, selectedTypes, priceFrom, priceTo, yearFrom, yearTo, mileage}) => {   /*convertDollarsToUAH */
-    
+const List = ({ engineTo, engineFrom, sortingOption, sortedData, setSortingOption, onMenuOpen, selectedTypes, priceFrom, priceTo, yearFrom, yearTo, mileage }) => {   /*convertDollarsToUAH */
 
-/*
-const [convertedPrices, setConvertedPrices] = useState([]);
+
+  /*
+  const [convertedPrices, setConvertedPrices] = useState([]);
+  
+    useEffect(() => {
+      const fetchConvertedPrices = async () => {
+        const prices = await Promise.all(
+          sortedData.map(async (car) => {
+            const convertedPrice = await convertDollarsToUAH(car.price);
+            return {
+              ...car,
+              convertedPrice,
+            };
+          })
+        );
+        setConvertedPrices(prices);
+      };
+  
+      fetchConvertedPrices();
+    }, [sortedData]);
+  */
+
+  const localStorageBooll = localStorage.getItem('menuOpenIcon') === "false" ? false : true
+
+  const [menuOpen, setMenuOpen] = useState(localStorageBooll);
 
   useEffect(() => {
-    const fetchConvertedPrices = async () => {
-      const prices = await Promise.all(
-        sortedData.map(async (car) => {
-          const convertedPrice = await convertDollarsToUAH(car.price);
-          return {
-            ...car,
-            convertedPrice,
-          };
-        })
-      );
-      setConvertedPrices(prices);
-    };
-
-    fetchConvertedPrices();
-  }, [sortedData]);
-*/
-
-const localStorageBooll = localStorage.getItem('menuOpenIcon') === "false" ? false : true
-
-const [menuOpen, setMenuOpen] = useState(localStorageBooll);
-
-useEffect(() => {
-  window.localStorage.setItem('menuOpenIcon', menuOpen);
-}, [menuOpen]);
+    window.localStorage.setItem('menuOpenIcon', menuOpen);
+  }, [menuOpen]);
 
 
 
-const filterByTypeOfCar = (car) => {
-  return selectedTypes.length === 0 || selectedTypes.includes(car.typeOfCar) &&
-  (priceFrom === '' || car.price >= parseFloat(priceFrom)) &&
-  (priceTo === '' || car.price <= parseFloat(priceTo)) &&
-  (yearFrom === '' || car.year >= parseFloat(yearFrom)) &&
-  (yearTo === '' || car.year <= parseFloat(yearTo)) &&
-  (mileage === '' || car.mileage <= parseFloat(mileage)) &&
-  (engineFrom === '' || car.engine >= parseFloat(engineFrom)) &&
-  (engineTo === '' || car.engine <= parseFloat(engineTo))
-};
+  const filterByTypeOfCar = (car) => {
+    return selectedTypes.length === 0 || selectedTypes.includes(car.typeOfCar) &&
+      (priceFrom === '' || car.price >= parseFloat(priceFrom)) &&
+      (priceTo === '' || car.price <= parseFloat(priceTo)) &&
+      (yearFrom === '' || car.year >= parseFloat(yearFrom)) &&
+      (yearTo === '' || car.year <= parseFloat(yearTo)) &&
+      (mileage === '' || car.mileage <= parseFloat(mileage)) &&
+      (engineFrom === '' || car.engine >= parseFloat(engineFrom)) &&
+      (engineTo === '' || car.engine <= parseFloat(engineTo))
+  };
+
+  const [imageModalOpen, setImageModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState('');
+
+  const handleCloseIconClick = () => {
+    setMenuOpen(prev => !prev);
+    onMenuOpen(menuOpen)
+  };
 
 
-const handleCloseIconClick = () => {
-   setMenuOpen(prev => !prev);
-   onMenuOpen(menuOpen)
-};
- 
+  const handleImageClick = (imageSrc) => {
+    setSelectedImage(imageSrc);
+    setImageModalOpen(true);
+  };
 
-  return ( 
+  const handleImageModalClose = () => {
+    setImageModalOpen(false);
+  };
+
+
+
+  return (
     <>
       <div className="center-page">
         <div className="center-page-top-one">
@@ -85,63 +99,119 @@ const handleCloseIconClick = () => {
             </select>
             <MenuIcon style={{ marginRight: '8' }} />
             <AppsIcon />
-            {menuOpen ? <FilterAltOffIcon className="close--icon" onClick={handleCloseIconClick} /> :  < FilterAltIcon className="close--icon" onClick={handleCloseIconClick} />}
+            {menuOpen ? <FilterAltOffIcon className="close--icon" onClick={handleCloseIconClick} /> : < FilterAltIcon className="close--icon" onClick={handleCloseIconClick} />}
           </div>
         </div>
         <div className="card--list--cars">
-        {sortedData.length > 0 ? (
-          sortedData
-            .filter(filterByTypeOfCar) // Додаємо фільтрацію за типом автомобіля
-            .map((car) => (    /*  convertedPrices.map((car) => ( */
-              <div className="card--list--car" key={car.id}>
-                <Link style={{ textDecoration: 'none' }} to={`/about/${car.id}`}>
+          {sortedData.length > 1 ? (
+            sortedData
+              .filter(filterByTypeOfCar) // Додаємо фільтрацію за типом автомобіля
+              .map((car) => (    /*  convertedPrices.map((car) => ( */
+                <div className="card--list--car" key={car.id}>
                   <img
                     className="car-image"
                     src={car.image}
                     alt="car"
+                    onClick={() => handleImageClick(car.image)}
                   />
-                  <div className="car-btn">
-                    <h3 className="car-name">{car.breand}</h3>
-                    <button className="btn-used">Used</button>
-                  </div>
-                  <div className="price-car">
-                    <p1 className="price-dollar">{`${car.price} $`} <span style={{ marginLeft: '15px', fontWeight: '400', fontSize: '10px' }}></span></p1>   {/*{`${car.convertedPrice} ₴`} */}
-                  </div>
-                  <div className="line--two"></div>
-                  <div className="four--change" style={{ display: 'flex', flexWrap: 'wrap' }}>
-                    <div style={{ flex: "45%", marginBottom: "6px" }}>
-                      <label className="form-control--four icon-car">
-                        <SpeedIcon />
-                        {car.distance}
-                      </label>
+                  <Link style={{ textDecoration: 'none' }} to={`/about/${car.id}`}>
+                    <div className="car-btn">
+                      <h3 className="car-name">{car.breand}</h3>
+                      <button className="btn-used">Used</button>
                     </div>
-                    <div style={{ flex: "45%", marginBottom: "6px" }}>
-                      <label className="form-control--four icon-car">
-                        <PlaceIcon />
-                        {car.sity}
-                      </label>
+                    <div className="price-car">
+                      <p1 className="price-dollar">{`${car.price} $`} <span style={{ marginLeft: '15px', fontWeight: '400', fontSize: '10px' }}></span></p1>   {/*{`${car.convertedPrice} ₴`} */}
                     </div>
-                    <div className="icon-car" style={{ flex: "45%" }}>
-                      <label className="form-control--four icon-car">
-                        <LocalGasStationIcon />
-                        {car.fuel}
-                      </label>
+                    <div className="line--two"></div>
+                    <div className="four--change" style={{ display: 'flex', flexWrap: 'wrap' }}>
+                      <div style={{ flex: "45%", marginBottom: "6px" }}>
+                        <label className="form-control--four icon-car">
+                          <SpeedIcon />
+                          {car.distance}
+                        </label>
+                      </div>
+                      <div style={{ flex: "45%", marginBottom: "6px" }}>
+                        <label className="form-control--four icon-car">
+                          <PlaceIcon />
+                          {car.sity}
+                        </label>
+                      </div>
+                      <div className="icon-car" style={{ flex: "45%" }}>
+                        <label className="form-control--four icon-car">
+                          <LocalGasStationIcon />
+                          {car.fuel}
+                        </label>
+                      </div>
+                      <div style={{ flex: "45%" }}>
+                        <label className="form-control--four icon-car">
+                          <HandymanIcon />
+                          {car.driveUnit}
+                        </label>
+                      </div>
                     </div>
-                    <div style={{ flex: "45%" }}>
-                      <label className="form-control--four icon-car">
-                        <HandymanIcon />
-                        {car.driveUnit}
-                      </label>
+                  </Link>
+                </div>
+              ))
+          )
+            : (sortedData.length == 1) ?
+              sortedData
+                .filter(filterByTypeOfCar) // Додаємо фільтрацію за типом автомобіля
+                .map((car) => (    /*  convertedPrices.map((car) => ( */
+                    <div className="card--list--car" style={{ marginLeft: "48px",marginRight: "49px", display: "flex", height: "234px"}} key={car.id}>
+                      <img
+                        className="car-image"
+                        src={car.image}
+                        alt="car"
+                        onClick={() => handleImageClick(car.image)}
+                      />
+                      <Link style={{ textDecoration: 'none' }} to={`/about/${car.id}`}>
+                        <div className="car-btn">
+                          <h3 className="car-name">{car.breand}</h3>
+                          <button className="btn-used">Used</button>
+                        </div>
+                        <div className="price-car">
+                          <p1 className="price-dollar">{`${car.price} $`} <span style={{ marginLeft: '15px', fontWeight: '400', fontSize: '10px' }}></span></p1>   {/*{`${car.convertedPrice} ₴`} */}
+                        </div>
+                        <div className="line--two"></div>
+                        <div className="four--change" style={{ display: 'flex', flexWrap: 'wrap', marginTop: '35px' }}>
+                          <div style={{ flex: "45%", marginBottom: "6px" }}>
+                            <label className="form-control--four icon-car">
+                              <SpeedIcon />
+                              {car.distance}
+                            </label>
+                          </div>
+                          <div style={{ flex: "45%", marginBottom: "6px" }}>
+                            <label className="form-control--four icon-car">
+                              <PlaceIcon />
+                              {car.sity}
+                            </label>
+                          </div>
+                          <div className="icon-car" style={{ flex: "45%" }}>
+                            <label className="form-control--four icon-car">
+                              <LocalGasStationIcon />
+                              {car.fuel}
+                            </label>
+                          </div>
+                          <div style={{ flex: "45%" }}>
+                            <label className="form-control--four icon-car">
+                              <HandymanIcon />
+                              {car.driveUnit}
+                            </label>
+                          </div>
+                        </div>
+                      </Link>
                     </div>
-                  </div>
-                </Link>
-              </div>
-            ))
-          ) : (
-            <div style={{ width: "823px", fontSize: '24px', textAlign: 'center', marginTop: '20px', }}>Немає автомобілів</div>
-          )}
+                ))
+              : (
+                <div style={{ width: "823px", fontSize: '24px', textAlign: 'center', marginTop: '20px', }}>Немає автомобілів</div>
+              )}
         </div>
       </div>
+      <Dialog open={imageModalOpen} onClose={handleImageModalClose}>
+        <DialogContent>
+          <img src={selectedImage} alt="large-car-image" style={{ width: '100%' }} />
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
