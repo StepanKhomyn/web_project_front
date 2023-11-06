@@ -8,28 +8,9 @@ import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FilterAltOffIcon from '@mui/icons-material/FilterAltOff';
 
 const apiKey = '81106b36bdb74941883a5389d7b0af62';
-/*
- async function getExchangeRate() {
-   try {
-     const response = await fetch(`https://open.er-api.com/v6/latest/USD?apikey=${apiKey}`);
-     const data = await response.json();
-     return data.rates.UAH;
-   } catch (error) {
-     console.error('Помилка при отриманні курсу обміну:', error);
-     return null;
-   }
- }
+
  
- async function convertDollarsToUAH(dollars) {
-   const exchangeRate = await getExchangeRate();
-   if (exchangeRate !== null) {
-     const uah = dollars * exchangeRate;
-     return uah.toFixed(0); // Округлюємо до двох знаків після коми
-   } else {
-     return null;
-   }
- }
-*/
+
 const carData = [
   {
     id: 1,
@@ -231,8 +212,74 @@ const CarsList = () => {
   const [engineFrom, setEngineFrom] = useState(localStorage.getItem('engineFrom') || 0.5);
   const [engineTo, setEngineTo] = useState(localStorage.getItem('engineTo') || '');
   const [color, setColor] = useState(localStorage.getItem('color') || '');
+ 
+/*
+  
+  async function getExchangeUAH() {
+    try {
+      const response = await fetch(`https://open.er-api.com/v6/latest/USD?apikey=${apiKey}`);
+      const data = await response.json();
+      return data.rates.UAH;
+    } catch (error) {
+      console.error('Помилка при отриманні курсу обміну:', error);
+      return null;
+    }
+  }
 
-  /*  let filteredData = .filter(i => i.type === "Audi")*/
+  async function convertDollarsToUAH(dollars) {
+    const exchangeRate = await getExchangeUAH();
+    if (exchangeRate !== null) {
+      const uah = dollars * exchangeRate;
+      return uah.toFixed(0); // Округлюємо до двох знаків після коми
+    } else {
+      return null;
+    }
+  }
+
+  async function getExchangeEUR() {
+    try {
+      const response = await fetch(`https://open.er-api.com/v6/latest/USD?apikey=${apiKey}`);
+      const data = await response.json();
+      return data.rates.EUR;
+    } catch (error) {
+      console.error('Помилка при отриманні курсу обміну:', error);
+      return null;
+    }
+  }
+
+  async function convertDollarsToEUR(dollars) {
+    const exchangeRate = await getExchangeEUR();
+    if (exchangeRate !== null) {
+      const uah = dollars * exchangeRate;
+      return uah.toFixed(0); // Округлюємо до двох знаків після коми
+    } else {
+      return null;
+    }
+  }
+
+  async function getExchangePLN() {
+    try {
+      const response = await fetch(`https://open.er-api.com/v6/latest/USD?apikey=${apiKey}`);
+      const data = await response.json();
+      return data.rates.PLN;
+    } catch (error) {
+      console.error('Помилка при отриманні курсу обміну:', error);
+      return null;
+    }
+  }
+  
+  async function convertDollarsToPLN(dollars) {
+    const exchangeRate = await getExchangePLN();
+    if (exchangeRate !== null) {
+      const uah = dollars * exchangeRate;
+      return uah.toFixed(0); // Округлюємо до двох знаків після коми
+    } else {
+      return null;
+    }
+  }
+
+
+*/
 
   useEffect(() => {
     window.localStorage.setItem('exchange', exchange);
@@ -347,8 +394,8 @@ const CarsList = () => {
       <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <div style={{ display: "flex" }}>
         <Menu />
-        <List engineFrom={engineFrom} engineTo={engineTo} sortingOption={sortingOption} sortedData={sortedData} setSortingOption={setSortingOption} onMenuOpen={onMenuOpen} selectedTypes={selectedTypes} priceFrom={priceFrom} priceTo={priceTo} yearFrom={yearFrom} yearTo={yearTo} mileage={mileage} />   {/*convertDollarsToUAH={convertDollarsToUAH}*/}
-        <Filter setColor={setColor} colorType={color} engineTo={engineTo} setEngineTo={setEngineTo} setEngineFrom={setEngineFrom} engineFrom={engineFrom} mileage={mileage} modelsType={modelsType} selectedTypess={selectedTypes} driveUnitType={driveUnit} fuelType={fuel} stateType={state} regionType={region} brandType={brandType} vehicleType={vehicleType} yearTo={yearTo} yearFrom={yearFrom} priceTo={priceTo} mileage={mileage} priceFrom={priceFrom} setMileage={setMileage} setDriveUnit={setDriveUnit} setFuel={setFuel} setState={setState} setRegion={setRegion} setVehicleType={setVehicleType} setBrandType={setBrandType} setModelsType={setModelsType} setExchange={setExchange} setSelectedTypes={setSelectedTypes} setPriceFrom={setPriceFrom} setPriceTo={setPriceTo} setYearFrom={setYearFrom} setYearTo={setYearTo} dataFromChild={menuOpen} exchange={exchange} />
+        <List engineFrom={engineFrom} engineTo={engineTo} sortingOption={sortingOption} sortedData={sortedData} setSortingOption={setSortingOption} onMenuOpen={onMenuOpen} selectedTypes={selectedTypes} priceFrom={priceFrom} priceTo={priceTo} yearFrom={yearFrom} yearTo={yearTo} mileage={mileage} />   {/*convertDollarsToUAH={convertDollarsToUAH} convertDollarsToEUR={convertDollarsToEUR} convertDollarsToPLN={convertDollarsToPLN}*/}
+        <Filter setColor={setColor} colorType={color} engineTo={engineTo} setEngineTo={setEngineTo} setEngineFrom={setEngineFrom} engineFrom={engineFrom} mileage={mileage} modelsType={modelsType} selectedTypess={selectedTypes} driveUnitType={driveUnit} fuelType={fuel} stateType={state} regionType={region} brandType={brandType} vehicleType={vehicleType} yearTo={yearTo} yearFrom={yearFrom} priceTo={priceTo} priceFrom={priceFrom} setMileage={setMileage} setDriveUnit={setDriveUnit} setFuel={setFuel} setState={setState} setRegion={setRegion} setVehicleType={setVehicleType} setBrandType={setBrandType} setModelsType={setModelsType} setExchange={setExchange} setSelectedTypes={setSelectedTypes} setPriceFrom={setPriceFrom} setPriceTo={setPriceTo} setYearFrom={setYearFrom} setYearTo={setYearTo} dataFromChild={menuOpen} exchange={exchange} />
       </div>
     </div>
   );

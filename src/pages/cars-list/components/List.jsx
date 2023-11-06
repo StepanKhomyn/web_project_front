@@ -10,42 +10,77 @@ import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FilterAltOffIcon from '@mui/icons-material/FilterAltOff';
 import "../CarsList.css"
 import { useEffect } from 'react';
-import { Dialog, DialogContent, DialogTitle } from '@mui/material';
+import { Dialog, DialogContent } from '@mui/material';
 
 
 
 
-const List = ({ engineTo, engineFrom, sortingOption, sortedData, setSortingOption, onMenuOpen, selectedTypes, priceFrom, priceTo, yearFrom, yearTo, mileage }) => {   /*convertDollarsToUAH */
+const List = ({ engineTo, engineFrom, sortingOption, sortedData, setSortingOption, onMenuOpen, selectedTypes, priceFrom, priceTo, yearFrom, yearTo, mileage,  }) => {   /*convertDollarsToUAH, convertDollarsToEUR, convertDollarsToPLN */
+
+/*
+const [convertedPrices, setConvertedPrices] = useState([]);
+
+const [selectedCurrency, setSelectedCurrency] = useState('grn');
 
 
-  /*
-  const [convertedPrices, setConvertedPrices] = useState([]);
+const handleCurrencyChange = (e) => {
+  const currency = e.target.value;
+  window.localStorage.setItem('currency', currency);
+  setSelectedCurrency(currency);
+};
+
+useEffect(() => {
+  // Функція для конвертації цін
+  const convertPrices = async () => {
+    const prices = await Promise.all(
+      sortedData.map(async (car) => {
+        let convertedPrice;
+
+        switch (selectedCurrency) {
+          case 'usa':
+            convertedPrice = `${car.price} $`;
+            break;
+          case 'grn':
+            convertedPrice = `${await convertDollarsToUAH(car.price)} ₴`;
+            break;
+          case 'eur':
+            convertedPrice = `${await convertDollarsToEUR(car.price)} €`; 
+            break;
+            case 'pln':
+              convertedPrice = `${await convertDollarsToPLN(car.price)} zł`;
+              break;
+          default:
+            convertedPrice = `${ car.price} $`;
+        }
+
+        return {
+          ...car,
+          convertedPrice,
+        };
+      })
+    );
+
+    setConvertedPrices(prices);
+  };
+
+  // Викликаємо функцію конвертації при завантаженні сторінки або зміні валюти
+  convertPrices();
+}, [selectedCurrency, sortedData, convertDollarsToUAH, convertDollarsToEUR, convertDollarsToPLN]);
   
-    useEffect(() => {
-      const fetchConvertedPrices = async () => {
-        const prices = await Promise.all(
-          sortedData.map(async (car) => {
-            const convertedPrice = await convertDollarsToUAH(car.price);
-            return {
-              ...car,
-              convertedPrice,
-            };
-          })
-        );
-        setConvertedPrices(prices);
-      };
-  
-      fetchConvertedPrices();
-    }, [sortedData]);
-  */
+*/
 
-  const localStorageBooll = localStorage.getItem('menuOpenIcon') === "false" ? false : true
-
-  const [menuOpen, setMenuOpen] = useState(localStorageBooll);
+  const localStorageMenu = localStorage.getItem('menuOpenIcon') === "false" ? false : true
+  const localStorageLine = localStorage.getItem('line') === "false" ? false : true
+ 
+  const [menuOpen, setMenuOpen] = useState(localStorageMenu);
+  const [line, setLine] = useState(localStorageLine)
+  const [selectedCurrency, setSelectedCurrency] = useState(localStorage.getItem('selectedCurrency') || 'usa');
 
   useEffect(() => {
     window.localStorage.setItem('menuOpenIcon', menuOpen);
-  }, [menuOpen]);
+    window.localStorage.setItem('line', line);
+    window.localStorage.setItem('selectedCurrency', selectedCurrency);
+  }, [menuOpen, line, selectedCurrency]);
 
 
 
@@ -90,6 +125,19 @@ const List = ({ engineTo, engineFrom, sortingOption, sortedData, setSortingOptio
             <select
               className="sort--select"
               style={{ marginRight: '26px', marginLeft: '14px' }}
+              /*onChange={handleCurrencyChange}*/
+              value={selectedCurrency}
+              onChange={(e) => setSelectedCurrency(e.target.value)}  /*це видалити коли курс вмикати*/ 
+             
+            >
+              <option value="usa">USA</option>
+              <option value="grn">UAH</option>
+              <option value="eur">EUR</option>
+              <option value="pln">PLN</option>
+            </select>
+            <select
+              className="sort--select"
+              style={{ marginRight: '26px', marginLeft: '14px' }}
               onChange={(e) => setSortingOption(e.target.value)}
               value={sortingOption}
             >
@@ -97,67 +145,68 @@ const List = ({ engineTo, engineFrom, sortingOption, sortedData, setSortingOptio
               <option value="option2">sort by name</option>
               <option value="option3">sort by price</option>
             </select>
-            <MenuIcon style={{ marginRight: '8' }} />
-            <AppsIcon />
+            <MenuIcon onClick={e => setLine(false)} style={{ marginRight: '8' }} />
+            <AppsIcon onClick={e => setLine(true)} />
             {menuOpen ? <FilterAltOffIcon className="close--icon" onClick={handleCloseIconClick} /> : < FilterAltIcon className="close--icon" onClick={handleCloseIconClick} />}
           </div>
         </div>
-        <div className="card--list--cars">
-          {sortedData.length > 1 ? (
-            sortedData
-              .filter(filterByTypeOfCar) // Додаємо фільтрацію за типом автомобіля
-              .map((car) => (    /*  convertedPrices.map((car) => ( */
-                <div className="card--list--car" key={car.id}>
-                  <img
-                    className="car-image"
-                    src={car.image}
-                    alt="car"
-                    onClick={() => handleImageClick(car.image)}
-                  />
-                  <Link style={{ textDecoration: 'none' }} to={`/about/${car.id}`}>
-                    <div className="car-btn">
-                      <h3 className="car-name">{car.breand}</h3>
-                      <button className="btn-used">Used</button>
-                    </div>
-                    <div className="price-car">
-                      <p1 className="price-dollar">{`${car.price} $`} <span style={{ marginLeft: '15px', fontWeight: '400', fontSize: '10px' }}></span></p1>   {/*{`${car.convertedPrice} ₴`} */}
-                    </div>
-                    <div className="line--two"></div>
-                    <div className="four--change" style={{ display: 'flex', flexWrap: 'wrap' }}>
-                      <div style={{ flex: "45%", marginBottom: "6px" }}>
-                        <label className="form-control--four icon-car">
-                          <SpeedIcon />
-                          {car.distance}
-                        </label>
+        <div style={{ justifyContent: "center" }} className="card--list--cars">
+          {line ? (
+            sortedData.length > 1 ? (
+              sortedData   /*convertedPrices */
+                .filter(filterByTypeOfCar) 
+                .map((car) => (   
+                  <div className="card--list--car" key={car.id}>
+                    <img
+                      className="car-image"
+                      src={car.image}
+                      alt="car"
+                      onClick={() => handleImageClick(car.image)}
+                    />
+                    <Link style={{ textDecoration: 'none' }} to={`/about/${car.id}`}>
+                      <div className="car-btn">
+                        <h3 className="car-name">{car.breand}</h3>
+                        <button className="btn-used">Used</button>
                       </div>
-                      <div style={{ flex: "45%", marginBottom: "6px" }}>
-                        <label className="form-control--four icon-car">
-                          <PlaceIcon />
-                          {car.sity}
-                        </label>
+                      <div className="price-car">
+                        <p1 className="price-dollar">{`${car.price} $`} </p1>   {/*{`${car.convertedPrice} ₴`} */}
                       </div>
-                      <div className="icon-car" style={{ flex: "45%" }}>
-                        <label className="form-control--four icon-car">
-                          <LocalGasStationIcon />
-                          {car.fuel}
-                        </label>
+                      <div className="line--two"></div>
+                      <div className="four--change" style={{ display: 'flex', flexWrap: 'wrap' }}>
+                        <div style={{ flex: "45%", marginBottom: "6px" }}>
+                          <label className="form-control--four icon-car">
+                            <SpeedIcon />
+                            {car.distance}
+                          </label>
+                        </div>
+                        <div style={{ flex: "45%", marginBottom: "6px" }}>
+                          <label className="form-control--four icon-car">
+                            <PlaceIcon />
+                            {car.sity}
+                          </label>
+                        </div>
+                        <div className="icon-car" style={{ flex: "45%" }}>
+                          <label className="form-control--four icon-car">
+                            <LocalGasStationIcon />
+                            {car.fuel}
+                          </label>
+                        </div>
+                        <div style={{ flex: "45%" }}>
+                          <label className="form-control--four icon-car">
+                            <HandymanIcon />
+                            {car.driveUnit}
+                          </label>
+                        </div>
                       </div>
-                      <div style={{ flex: "45%" }}>
-                        <label className="form-control--four icon-car">
-                          <HandymanIcon />
-                          {car.driveUnit}
-                        </label>
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              ))
-          )
-            : (sortedData.length == 1) ?
-              sortedData
-                .filter(filterByTypeOfCar) // Додаємо фільтрацію за типом автомобіля
-                .map((car) => (    /*  convertedPrices.map((car) => ( */
-                    <div className="card--list--car" style={{ marginLeft: "48px",marginRight: "49px", display: "flex", height: "234px"}} key={car.id}>
+                    </Link>
+                  </div>
+                ))
+            )
+              : (sortedData.length == 1) ?
+                sortedData   /*convertedPrices */
+                  .filter(filterByTypeOfCar) // Додаємо фільтрацію за типом автомобіля
+                  .map((car) => (    
+                    <div className="card--list--car" style={{ marginLeft: "48px", marginRight: "49px", display: "flex", height: "234px" }} key={car.id}>
                       <img
                         className="car-image"
                         src={car.image}
@@ -170,7 +219,7 @@ const List = ({ engineTo, engineFrom, sortingOption, sortedData, setSortingOptio
                           <button className="btn-used">Used</button>
                         </div>
                         <div className="price-car">
-                          <p1 className="price-dollar">{`${car.price} $`} <span style={{ marginLeft: '15px', fontWeight: '400', fontSize: '10px' }}></span></p1>   {/*{`${car.convertedPrice} ₴`} */}
+                          <p1 className="price-dollar">{`${car.price} $`} </p1>   {/*{`${car.convertedPrice} ₴`} */}
                         </div>
                         <div className="line--two"></div>
                         <div className="four--change" style={{ display: 'flex', flexWrap: 'wrap', marginTop: '35px' }}>
@@ -201,10 +250,60 @@ const List = ({ engineTo, engineFrom, sortingOption, sortedData, setSortingOptio
                         </div>
                       </Link>
                     </div>
-                ))
-              : (
-                <div style={{ width: "823px", fontSize: '24px', textAlign: 'center', marginTop: '20px', }}>Немає автомобілів</div>
-              )}
+                  ))
+                : (
+                  <div style={{ width: "823px", fontSize: '24px', textAlign: 'center', marginTop: '20px', }}>Немає автомобілів</div>
+                )
+          ) : (
+            sortedData    /*convertedPrices */
+              .filter(filterByTypeOfCar) // Додаємо фільтрацію за типом автомобіля
+              .map((car) => (    
+                <div className="card--list--car" style={{ marginLeft: "48px", marginRight: "49px", display: "flex", height: "234px" }} key={car.id}>
+                  <img
+                    className="car-image"
+                    src={car.image}
+                    alt="car"
+                    onClick={() => handleImageClick(car.image)}
+                  />
+                  <Link style={{ textDecoration: 'none' }} to={`/about/${car.id}`}>
+                    <div className="car-btn">
+                      <h3 className="car-name">{car.breand}</h3>
+                      <button className="btn-used">Used</button>
+                    </div>
+                    <div className="price-car">
+                      <p1 className="price-dollar">{`${car.price} $`} </p1>   {/*{`${car.convertedPrice} ₴`} */}
+                    </div>
+                    <div className="line--two"></div>
+                    <div className="four--change" style={{ display: 'flex', flexWrap: 'wrap', marginTop: '35px' }}>
+                      <div style={{ flex: "45%", marginBottom: "6px" }}>
+                        <label className="form-control--four icon-car">
+                          <SpeedIcon />
+                          {car.distance}
+                        </label>
+                      </div>
+                      <div style={{ flex: "45%", marginBottom: "6px" }}>
+                        <label className="form-control--four icon-car">
+                          <PlaceIcon />
+                          {car.sity}
+                        </label>
+                      </div>
+                      <div className="icon-car" style={{ flex: "45%" }}>
+                        <label className="form-control--four icon-car">
+                          <LocalGasStationIcon />
+                          {car.fuel}
+                        </label>
+                      </div>
+                      <div style={{ flex: "45%" }}>
+                        <label className="form-control--four icon-car">
+                          <HandymanIcon />
+                          {car.driveUnit}
+                        </label>
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+              ))
+          )}
         </div>
       </div>
       <Dialog open={imageModalOpen} onClose={handleImageModalClose}>
