@@ -6,6 +6,7 @@ import Filter from "./components/Filter";
 import List from "./components/List";
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FilterAltOffIcon from '@mui/icons-material/FilterAltOff';
+import { useDispatch, useSelector } from "react-redux";
 
 const apiKey = '81106b36bdb74941883a5389d7b0af62';
 
@@ -190,28 +191,14 @@ const carData = [
 
 
 const CarsList = () => {
+
+  const { searchTerm, mileage, priceFrom, priceTo, yearFrom, yearTo, vehicleType, brandType, modelsType, stateType, regionType, fuelType, colorType, driveUnit, engineFrom, engineTo, sortingOption, exchange} = useSelector((state) => state.FilterReducer);
+
+
+
   const storedSelectedTypes = localStorage.getItem('selectedTypes');
   const initialSelectedTypes = storedSelectedTypes ? JSON.parse(storedSelectedTypes) : [];
-  const localStorageBool = localStorage.getItem('exchange') === "true" ? true : false
-  const [searchTerm, setSearchTerm] = useState(localStorage.getItem('searchTerm') || '');
-  const [sortingOption, setSortingOption] = useState(localStorage.getItem('sortingOption') || '');
-  const [vehicleType, setVehicleType] = useState(localStorage.getItem('vehicleType') || '');
-  const [brandType, setBrandType] = useState(localStorage.getItem('brandType') || '');
-  const [modelsType, setModelsType] = useState(localStorage.getItem('modelsType') || '');
-  const [exchange, setExchange] = useState(localStorageBool);
   const [selectedTypes, setSelectedTypes] = useState(initialSelectedTypes);
-  const [priceFrom, setPriceFrom] = useState(localStorage.getItem('priceFrom') || 0);
-  const [priceTo, setPriceTo] = useState(localStorage.getItem('priceTo') || '');
-  const [yearFrom, setYearFrom] = useState(localStorage.getItem('yearFrom') || 1900);
-  const [yearTo, setYearTo] = useState(localStorage.getItem('yearTo') || '');
-  const [region, setRegion] = useState(localStorage.getItem('region') || '');
-  const [state, setState] = useState(localStorage.getItem('state') || '');
-  const [fuel, setFuel] = useState(localStorage.getItem('fuel') || '');
-  const [driveUnit, setDriveUnit] = useState(localStorage.getItem('driveUnit') || '');
-  const [mileage, setMileage] = useState(localStorage.getItem('mileage') || '');
-  const [engineFrom, setEngineFrom] = useState(localStorage.getItem('engineFrom') || 0.5);
-  const [engineTo, setEngineTo] = useState(localStorage.getItem('engineTo') || '');
-  const [color, setColor] = useState(localStorage.getItem('color') || '');
  
 /*
   
@@ -277,8 +264,6 @@ const CarsList = () => {
       return null;
     }
   }
-
-
 */
 
   useEffect(() => {
@@ -289,19 +274,20 @@ const CarsList = () => {
     window.localStorage.setItem('yearTo', yearTo);
     window.localStorage.setItem('vehicleType', vehicleType);
     window.localStorage.setItem('brandType', brandType);
-    window.localStorage.setItem('region', region);
-    window.localStorage.setItem('state', state);
-    window.localStorage.setItem('fuel', fuel);
+    window.localStorage.setItem('region', regionType);
+    window.localStorage.setItem('state', stateType);
+    window.localStorage.setItem('fuel', fuelType);
     window.localStorage.setItem('driveUnit', driveUnit);
     window.localStorage.setItem('selectedTypes', JSON.stringify(selectedTypes));
     window.localStorage.setItem('sortingOption', sortingOption);
-    window.localStorage.setItem('searchTerm', searchTerm);
     window.localStorage.setItem('modelsType', modelsType);
     window.localStorage.setItem('mileage', mileage);
     window.localStorage.setItem('engineFrom', engineFrom);
     window.localStorage.setItem('engineTo', engineTo);
-    window.localStorage.setItem('color', color);
-  }, [exchange, priceFrom, priceTo, yearFrom, yearTo, vehicleType, brandType, region, state, fuel, driveUnit, selectedTypes, sortingOption, searchTerm, modelsType, mileage, engineFrom, engineTo, color]);
+    window.localStorage.setItem('color', colorType);
+    window.localStorage.setItem('searchTerm', searchTerm);
+  }, [searchTerm, exchange, priceFrom, priceTo, yearFrom, yearTo, vehicleType, brandType, regionType, stateType, fuelType, driveUnit, selectedTypes, sortingOption, modelsType, mileage, engineFrom, engineTo, colorType]);
+
 
   const filteredData = carData.filter((car) =>
     car.breand.toLowerCase().includes(searchTerm.toLowerCase()) &&
@@ -330,21 +316,21 @@ const CarsList = () => {
       );
     }
 
-    if (region && region !== 'option1') {
+    if (regionType && regionType !== 'option1') {
       sortedArray = sortedArray.filter(car =>
-        car.region.toLowerCase().includes(region.toLowerCase())
+        car.region.toLowerCase().includes(regionType.toLowerCase())
       );
     }
 
-    if (state && state !== 'option1') {
+    if (stateType && stateType !== 'option1') {
       sortedArray = sortedArray.filter(car =>
-        car.state.toLowerCase().includes(state.toLowerCase())
+        car.state.toLowerCase().includes(stateType.toLowerCase())
       );
     }
 
-    if (fuel && fuel !== 'option1') {
+    if (fuelType && fuelType !== 'option1') {
       sortedArray = sortedArray.filter(car =>
-        car.fuel.toLowerCase().includes(fuel.toLowerCase())
+        car.fuel.toLowerCase().includes(fuelType.toLowerCase())
       );
     }
 
@@ -366,9 +352,9 @@ const CarsList = () => {
       );
     }
 
-    if (color && color !== 'option1') {
+    if (colorType && colorType !== 'option1') {
       sortedArray = sortedArray.filter(car =>
-        car.color.toLowerCase().includes(color.toLowerCase())
+        car.color.toLowerCase().includes(colorType.toLowerCase())
       );
     }
     return sortedArray;
@@ -391,11 +377,11 @@ const CarsList = () => {
 
   return (
     <div className="carsList--page">
-      <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      <Header />
       <div style={{ display: "flex" }}>
         <Menu />
-        <List engineFrom={engineFrom} engineTo={engineTo} sortingOption={sortingOption} sortedData={sortedData} setSortingOption={setSortingOption} onMenuOpen={onMenuOpen} selectedTypes={selectedTypes} priceFrom={priceFrom} priceTo={priceTo} yearFrom={yearFrom} yearTo={yearTo} mileage={mileage} />   {/*convertDollarsToUAH={convertDollarsToUAH} convertDollarsToEUR={convertDollarsToEUR} convertDollarsToPLN={convertDollarsToPLN}*/}
-        <Filter setColor={setColor} colorType={color} engineTo={engineTo} setEngineTo={setEngineTo} setEngineFrom={setEngineFrom} engineFrom={engineFrom} mileage={mileage} modelsType={modelsType} selectedTypess={selectedTypes} driveUnitType={driveUnit} fuelType={fuel} stateType={state} regionType={region} brandType={brandType} vehicleType={vehicleType} yearTo={yearTo} yearFrom={yearFrom} priceTo={priceTo} priceFrom={priceFrom} setMileage={setMileage} setDriveUnit={setDriveUnit} setFuel={setFuel} setState={setState} setRegion={setRegion} setVehicleType={setVehicleType} setBrandType={setBrandType} setModelsType={setModelsType} setExchange={setExchange} setSelectedTypes={setSelectedTypes} setPriceFrom={setPriceFrom} setPriceTo={setPriceTo} setYearFrom={setYearFrom} setYearTo={setYearTo} dataFromChild={menuOpen} exchange={exchange} />
+        <List sortedData={sortedData} onMenuOpen={onMenuOpen} selectedTypes={selectedTypes} />   {/*convertDollarsToUAH={convertDollarsToUAH} convertDollarsToEUR={convertDollarsToEUR} convertDollarsToPLN={convertDollarsToPLN}*/}
+        <Filter  selectedTypes={selectedTypes} setSelectedTypes={setSelectedTypes} dataFromChild={menuOpen} />
       </div>
     </div>
   );

@@ -11,11 +11,16 @@ import FilterAltOffIcon from '@mui/icons-material/FilterAltOff';
 import "../CarsList.css"
 import { useEffect } from 'react';
 import { Dialog, DialogContent } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateSortingOption } from '../../../store/reducers/FilterSlice';
 
 
 
 
-const List = ({ engineTo, engineFrom, sortingOption, sortedData, setSortingOption, onMenuOpen, selectedTypes, priceFrom, priceTo, yearFrom, yearTo, mileage,  }) => {   /*convertDollarsToUAH, convertDollarsToEUR, convertDollarsToPLN */
+const List = ({sortedData, onMenuOpen, selectedTypes }) => {   /*convertDollarsToUAH, convertDollarsToEUR, convertDollarsToPLN */
+
+const { mileage, priceFrom, priceTo, yearFrom, yearTo, engineFrom, engineTo, sortingOption } = useSelector((state) => state.FilterReducer);
+const dispatch = useDispatch();
 
 /*
 const [convertedPrices, setConvertedPrices] = useState([]);
@@ -138,7 +143,7 @@ useEffect(() => {
             <select
               className="sort--select"
               style={{ marginRight: '26px', marginLeft: '14px' }}
-              onChange={(e) => setSortingOption(e.target.value)}
+              onChange={(e) => dispatch(updateSortingOption(e.target.value))}
               value={sortingOption}
             >
               <option value="option1">sort by</option>
@@ -154,7 +159,7 @@ useEffect(() => {
           {line ? (
             sortedData.length > 1 ? (
               sortedData   /*convertedPrices */
-                .filter(filterByTypeOfCar) 
+                .filter(filterByTypeOfCar)  //походу не потрібно 
                 .map((car) => (   
                   <div className="card--list--car" key={car.id}>
                     <img

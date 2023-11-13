@@ -3,6 +3,8 @@ import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FilterAltOffIcon from '@mui/icons-material/FilterAltOff';
 import "../CarsList.css"
 import { useState } from 'react';
+import { updateBrandType, updateColor, updateDriveUnit, updateEngineFrom, updateEngineTo, updateExchange, updateFuel, updateMileage, updateModelsType, updatePriceFrom, updatePriceTo, updateRegion, updateState, updateVehicleType, updateYearFrom, updateYearTo } from '../../../store/reducers/FilterSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const region = [
@@ -68,7 +70,7 @@ const fuel = [
   { fuel: "Natural Gas" },
 ]
 
-const driveUnit = [
+const driveUnitType = [
   { driveUnit: "Manual" },
   { driveUnit: "Automatic" },
   { driveUnit: "AMT" },
@@ -177,9 +179,15 @@ const color = [
 ];
 
 
-const Filter = ({setColor, colorType, setEngineFrom, engineFrom, setEngineTo, engineTo, setMileage, modelsType, selectedTypess, driveUnitType, fuelType, stateType, regionType, brandType, vehicleType, yearTo, yearFrom, mileage, priceTo, priceFrom, exchange, setDriveUnit, setFuel, setState, setRegion, setVehicleType, setBrandType, setModelsType, setExchange, setSelectedTypes, setPriceFrom, setPriceTo, setYearFrom, setYearTo, dataFromChild }) => {
+const Filter = ({selectedTypes, setSelectedTypes, dataFromChild}) => {
+  
+  const { mileage, priceFrom, priceTo, yearFrom, yearTo, vehicleType, brandType,  modelsType, regionType, stateType, fuelType, colorType, driveUnit, engineTo, engineFrom, exchange } = useSelector((state) => state.FilterReducer);
+  const dispatch = useDispatch()
 
-  const [selectedTypes, setSelectedTypesLocal] = useState(selectedTypess);
+
+
+
+  const [selectedTypesChoice, setSelectedTypesLocal] = useState(selectedTypes);
   const localStorageBool = localStorage.getItem('showAllTypess') === "true" ? true : false
   const [showAllTypes, setShowAllTypes] = useState(localStorageBool);
 
@@ -191,18 +199,18 @@ const Filter = ({setColor, colorType, setEngineFrom, engineFrom, setEngineTo, en
 
   const handleBrandTypeChange = (brand) => {
     // Оновлюємо вибрану марку
-    setBrandType(brand);
+    dispatch(updateBrandType(brand));
 
     // Якщо обрано "All brand", оновлюємо і вибрану модель на "All model"
     if (brand === "option1") {
-      setModelsType("option1");
+      dispatch(updateModelsType("option1"));
     }
   }
 
   const displayedTypes = showAllTypes ? typeOfCar : typeOfCar.slice(0, 4);
 
   const handleTypeOfCarChange = (typeCar) => {
-    const updatedSelectedTypes = [...selectedTypes];
+    const updatedSelectedTypes = [...selectedTypesChoice];
     const index = updatedSelectedTypes.indexOf(typeCar);
 
     if (index !== -1) {
@@ -239,14 +247,14 @@ const Filter = ({setColor, colorType, setEngineFrom, engineFrom, setEngineTo, en
         </div>
         <div className="exchange--menu">
           <label class="form-control">
-            <input className="checkbox-exchange" type="checkbox" name="checkbox" onChange={(e) => setExchange(e.target.checked)} checked={exchange} />
+            <input className="checkbox-exchange" type="checkbox" name="checkbox" onChange={(e) => dispatch(updateExchange(e.target.checked))} checked={exchange} />
             Exchange
           </label>
         </div>
         <div className="line--one"></div>
         <div className="filter--select-all">
           <h5 className="filter--select--text" style={{ margin: "18px 0px 8px 0px" }}>Type of vehicle</h5>
-          <select className="filter--select" onChange={(e) => setVehicleType(e.target.value)} value={vehicleType} >
+          <select className="filter--select" onChange={(e) => dispatch(updateVehicleType(e.target.value))} value={vehicleType} >
             <option value="option1">All types</option>
             <option value="Passenger">Passenger</option>
             <option value="Bus">Bus</option>
@@ -265,7 +273,7 @@ const Filter = ({setColor, colorType, setEngineFrom, engineFrom, setEngineTo, en
         </div>
         <div className="filter--select-all">
           <h5 className="filter--select--text" style={{ margin: "18px 0px 8px 0px" }}>Car model</h5>
-          <select className="filter--select" onChange={(e) => setModelsType(e.target.value)} value={modelsType}>
+          <select className="filter--select" onChange={(e) => dispatch(updateModelsType(e.target.value))} value={modelsType}>
             <option value="option1">All model</option>
             {models.map((modelName, index) => (
               <option key={index} value={modelName}>{modelName}</option>
@@ -284,7 +292,7 @@ const Filter = ({setColor, colorType, setEngineFrom, engineFrom, setEngineTo, en
                   type="checkbox"
                   name="checkbox"
                   onChange={() => handleTypeOfCarChange(typer.typeCar)}
-                  checked={selectedTypes.includes(typer.typeCar)}
+                  checked={selectedTypesChoice.includes(typer.typeCar)}
                 />
                 {typer.typeCar}
               </label>
@@ -298,28 +306,28 @@ const Filter = ({setColor, colorType, setEngineFrom, engineFrom, setEngineTo, en
         <div className="price-filter">
           <div>
             <h5 className="price--from--text">Price from</h5>
-            <input placeholder="Price from" className="price--from--input" onChange={(e) => setPriceFrom(e.target.value)} value={priceFrom} />
+            <input placeholder="Price from" className="price--from--input" onChange={(e) => dispatch(updatePriceFrom(e.target.value))} value={priceFrom} />
           </div>
           <div >
             <h5 className="price--from--text">Price to</h5>
-            <input placeholder="Price to" className="price--from--input" onChange={(e) => setPriceTo(e.target.value)} value={priceTo} />
+            <input placeholder="Price to" className="price--from--input" onChange={(e) => dispatch(updatePriceTo(e.target.value))} value={priceTo} />
           </div>
         </div>
         <div className="line--one"></div>
         <div className="price-filter">
           <div>
             <h5 className="price--from--text">Year from</h5>
-            <input placeholder="Year from" className="price--from--input" onChange={(e) => setYearFrom(e.target.value)} value={yearFrom} />
+            <input placeholder="Year from" className="price--from--input" onChange={(e) => dispatch(updateYearFrom(e.target.value))} value={yearFrom} />
           </div>
           <div >
             <h5 className="price--from--text">Year to</h5>
-            <input placeholder="Year to" className="price--from--input" onChange={(e) => setYearTo(e.target.value)} value={yearTo} />
+            <input placeholder="Year to" className="price--from--input" onChange={(e) => dispatch(updateYearTo(e.target.value))} value={yearTo} />
           </div>
         </div>
         <div className="line--one"></div>
         <div className="filter--select-all">
           <h5 className="filter--select--text" style={{ margin: "18px 0px 8px 0px" }}>Region</h5>
-          <select className="filter--select" onChange={(e) => setRegion(e.target.value)} value={regionType}>
+          <select className="filter--select" onChange={(e) => dispatch(updateRegion(e.target.value))} value={regionType}>
             <option value="option1">All region</option>
             {region.map(region => {
               return <option value={region.region}>{region.region}</option>
@@ -328,7 +336,7 @@ const Filter = ({setColor, colorType, setEngineFrom, engineFrom, setEngineTo, en
         </div>
         <div className="filter--select-all">
           <h5 className="filter--select--text" style={{ margin: "18px 0px 8px 0px" }}>State</h5>
-          <select className="filter--select" onChange={(e) => setState(e.target.value)} value={stateType}>
+          <select className="filter--select" onChange={(e) => dispatch(updateState(e.target.value))} value={stateType}>
             <option value="option1">All state</option>
             {state.map(state => {
               return <option value={state.state}>{state.state}</option>
@@ -340,16 +348,16 @@ const Filter = ({setColor, colorType, setEngineFrom, engineFrom, setEngineTo, en
         <div className="additional--filter-two">
           <div className="">
             <h5 className="filter--select--text" style={{ margin: "18px 0px 8px 0px" }}>Engine from</h5>
-            <input placeholder="Engine from" className="price--from--input" onChange={(e) => setEngineFrom(e.target.value)} value={engineFrom} />
+            <input placeholder="Engine from" className="price--from--input" onChange={(e) => dispatch(updateEngineFrom(e.target.value))}  value={engineFrom} />
           </div>
           <div className="">
             <h5 className="filter--select--text" style={{ margin: "18px 0px 8px 0px" }}>Engine  to</h5>
-            <input placeholder="Engine to" className="price--from--input" onChange={(e) => setEngineTo(e.target.value)} value={engineTo} />
+            <input placeholder="Engine to" className="price--from--input" onChange={(e) => dispatch(updateEngineTo(e.target.value))}  value={engineTo} />
           </div>
         </div>
         <div className="filter--select-all">
           <h5 className="filter--select--text" style={{ margin: "18px 0px 8px 0px" }}>Fuel</h5>
-          <select className="filter--select" onChange={(e) => setFuel(e.target.value)} value={fuelType}>
+          <select className="filter--select" onChange={(e) => dispatch(updateFuel(e.target.value))} value={fuelType}>
             <option value="option1">-</option>
             {fuel.map(fuel => {
               return <option value={fuel.fuel}>{fuel.fuel}</option>
@@ -358,7 +366,7 @@ const Filter = ({setColor, colorType, setEngineFrom, engineFrom, setEngineTo, en
         </div>
         <div className="filter--select-all">
           <h5 className="filter--select--text" style={{ margin: "18px 0px 8px 0px" }}>Color</h5>
-          <select className="filter--select" onChange={(e) => setColor(e.target.value)} value={colorType}>
+          <select className="filter--select" onChange={(e) => dispatch(updateColor(e.target.value))} value={colorType}>
             <option value="option1">-</option>
             {color.map(color => {
               return <option value={color.color}>{color.color}</option>
@@ -367,16 +375,16 @@ const Filter = ({setColor, colorType, setEngineFrom, engineFrom, setEngineTo, en
         </div>
         <div className="filter--select-all">
           <h5 className="filter--select--text" style={{ margin: "18px 0px 8px 0px" }}>Drive unit</h5>
-          <select className="filter--select" onChange={(e) => setDriveUnit(e.target.value)} value={driveUnitType}>
+          <select className="filter--select" onChange={(e) => dispatch(updateDriveUnit(e.target.value))} value={driveUnit}>
             <option value="option1">-</option>
-            {driveUnit.map(driveUnit => {
-              return <option value={driveUnit.driveUnit}>{driveUnit.driveUnit}</option>
+            {driveUnitType.map(driveUnitType => {
+              return <option value={driveUnitType.driveUnit}>{driveUnitType.driveUnit}</option>
             })}
           </select>
         </div>
         <div className="filter--select-all" style={{ marginBottom: "40px" }} >
           <h5 className="filter--select--text" style={{ margin: "18px 0px 8px 0px" }}>Mileage</h5>
-          <input placeholder="Mileage" className="price--from--input" style={{width: '82%'}} onChange={(e) => setMileage(e.target.value)} value={mileage} />
+          <input placeholder="Mileage" className="price--from--input" style={{width: '82%'}} onChange={(e) => dispatch(updateMileage(e.target.value))} value={mileage} />
         </div>
       </div>
     </>

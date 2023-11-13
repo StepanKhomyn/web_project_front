@@ -5,15 +5,20 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import MessageIcon from '@mui/icons-material/Message';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import "./cars-list/CarsList.css"
+import { useDispatch, useSelector } from 'react-redux';
+import { updateSearchTerm } from '../store/reducers/FilterSlice';
 
-const Header = ({searchTerm, setSearchTerm }) => {
+const Header = () => {
+  
+  const { searchTerm } = useSelector((state) => state.FilterReducer);
+  const dispatch = useDispatch()
 
   return (
     <div className="navbar">
         <input
           placeholder="Search"
           className="search-input"
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e) => dispatch(updateSearchTerm(e.target.value))}
           value={searchTerm}
         />
       {/*<div className="sell-container">

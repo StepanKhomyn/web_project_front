@@ -402,11 +402,15 @@
   display: flex;
   flex-wrap: wrap;
   /* width: 850px; */
-  height: 930px;
+  max-height: 1350px;
+  overflow-y: scroll;
   padding-top: 30px;
   padding-right: 25px;
 }
 
+.card--list--cars::-webkit-scrollbar {
+  width: 0.01em; /* ширина скролбара */
+}
 
 
 .card--list--car {
