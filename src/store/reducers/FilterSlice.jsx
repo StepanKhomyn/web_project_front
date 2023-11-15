@@ -18,7 +18,9 @@ const initialState = {
     engineFrom: localStorage.getItem('engineFrom') || 0.5,
     engineTo: localStorage.getItem('engineTo') || '',
     sortingOption: localStorage.getItem('sortingOption') || '',
-    exchange: localStorage.getItem('exchange') === "true" ? true : false
+    exchange: localStorage.getItem('exchange') === "true" ? true : false,
+    isAuth: false
+
   };
   
   export const FilterSlice = createSlice({
@@ -79,10 +81,12 @@ const initialState = {
       updateExchange: (state, action) => {
         state.exchange = action.payload;
       },
-      
+      updateIsAuth: (state, action) => {
+        state.isAuth = action.payload;
+      }
     },
   });
   
-  export const { updateSearchTerm, updateMileage, updatePriceFrom, updatePriceTo, updateYearFrom, updateYearTo, updateVehicleType, updateBrandType, updateModelsType, updateRegion, updateState, updateFuel, updateColor, updateDriveUnit, updateEngineFrom, updateEngineTo, updateSortingOption, updateExchange} = FilterSlice.actions;
+  export const { updateSearchTerm, updateMileage, updatePriceFrom, updatePriceTo, updateYearFrom, updateYearTo, updateVehicleType, updateBrandType, updateModelsType, updateRegion, updateState, updateFuel, updateColor, updateDriveUnit, updateEngineFrom, updateEngineTo, updateSortingOption, updateExchange, updateIsAuth} = FilterSlice.actions;
   
   export default FilterSlice.reducer;

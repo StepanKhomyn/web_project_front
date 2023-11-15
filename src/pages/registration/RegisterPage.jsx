@@ -12,6 +12,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { updateIsAuth } from '../../store/reducers/FilterSlice';
 
 
 const defaultTheme = createTheme();
@@ -25,6 +27,8 @@ const RegisterPage = () => {
     const [passwordDirty, setPasswordDirty] = useState(false)
     const [formValid, setFormValid] = useState(false)
 
+    const dispatch = useDispatch()
+
     useEffect(() => {
         if (emailDirty || passwordDirty) {
             setFormValid(false)
@@ -35,13 +39,13 @@ const RegisterPage = () => {
 
     const emailHandler = (e) => {
         setEmail(e.target.value)
-        const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        /*const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
         
         if (!re.test(String(email).toLowerCase())) {
             setEmailDirty(true)
         } else {
             setEmailDirty(false)
-        }
+        }*/
     }
 
     const passwordHandler = (e) => {
@@ -55,20 +59,38 @@ const RegisterPage = () => {
 
   
 
-
-
     const push = useNavigate();
 
-    const handleLogin = () => {
 
-        push('/');
-    }
-
-
-
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        handleLogin();
+    
+        const userData = {
+            username: email,
+            password: password,
+        };
+    
+        try {
+            const response = await fetch('http://localhost:5000/auth/registration', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(userData),
+            });
+    
+            if (response.ok) {
+                const result = await response.json();
+                localStorage.setItem('token', result.token);
+                dispatch(updateIsAuth(true))
+                push('/');
+            } else {
+                console.error('Ошибка регистрации:', response.status);
+                alert('Помилка реєстрації. Перевірте введені дані.');
+            }
+        } catch (error) {
+            console.error('Помилка при відправленні запиту:', error);
+        }
     };
 
 

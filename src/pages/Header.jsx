@@ -1,17 +1,50 @@
-import { AppBar, Avatar, IconButton } from '@mui/material'
+import { AppBar, Avatar, IconButton, Menu, MenuItem } from '@mui/material'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import MessageIcon from '@mui/icons-material/Message';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import "./cars-list/CarsList.css"
 import { useDispatch, useSelector } from 'react-redux';
-import { updateSearchTerm } from '../store/reducers/FilterSlice';
+import { updateIsAuth, updateSearchTerm } from '../store/reducers/FilterSlice';
+import { AccountCircle, AccountCircleOutlined } from '@mui/icons-material';
 
 const Header = () => {
   
   const { searchTerm } = useSelector((state) => state.FilterReducer);
   const dispatch = useDispatch()
+  const navigate = useNavigate();
+
+
+  const [auth, setAuth] = React.useState(true);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleChange = (event) => {
+    setAuth(event.target.checked);
+  };
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    // Додайте код для виходу, наприклад, вивільнення токену або скидання інших даних авторизації
+    // Приклад:
+    // localStorage.removeItem('token');
+    // або використовуйте функції для очищення стану аутентифікації в Redux
+    // dispatch(logoutAction());
+    
+    // Після виходу перенаправте користувача на сторінку входу або іншу відповідну сторінку
+    dispatch(updateIsAuth(false))
+    navigate('/login');
+    
+    // Закрийте меню
+    handleClose();
+  };
 
   return (
     <div className="navbar">
@@ -44,9 +77,38 @@ const Header = () => {
             </IconButton>
           </Link>
         </div>
-        <IconButton sx={{ p: 0 }}>
-          <Avatar alt="" />
-        </IconButton>
+        {auth && (
+            <div>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <AccountCircle style={{width: "40px", height: "40px", borderRadius: "50%", color: "grey"}} />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleLogout}>Вихід</MenuItem>
+              </Menu>
+            </div>
+        )}
       </div>
     </div>
   )
