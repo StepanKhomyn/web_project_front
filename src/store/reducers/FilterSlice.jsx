@@ -19,7 +19,7 @@ const initialState = {
     engineTo: localStorage.getItem('engineTo') || '',
     sortingOption: localStorage.getItem('sortingOption') || '',
     exchange: localStorage.getItem('exchange') === "true" ? true : false,
-    isAuth: false
+    isAuth: true
 
   };
   
