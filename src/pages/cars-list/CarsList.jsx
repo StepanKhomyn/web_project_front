@@ -4,15 +4,13 @@ import Header from "../Header";
 import Menu from "./components/Menu";
 import Filter from "./components/Filter";
 import List from "./components/List";
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import FilterAltOffIcon from '@mui/icons-material/FilterAltOff';
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 const apiKey = '81106b36bdb74941883a5389d7b0af62';
 
- 
 
-const carData = [
+/*const carData = [
   {
     id: 1,
     type: "Passenger",
@@ -182,7 +180,7 @@ const carData = [
     color: "Black",
   },
 
-];
+];*/
 
 
 
@@ -192,9 +190,14 @@ const carData = [
 
 const CarsList = () => {
 
-  const { searchTerm, mileage, priceFrom, priceTo, yearFrom, yearTo, vehicleType, brandType, modelsType, stateType, regionType, fuelType, colorType, driveUnit, engineFrom, engineTo, sortingOption, exchange} = useSelector((state) => state.FilterReducer);
+  const {isAuth, searchTerm, mileage, priceFrom, priceTo, yearFrom, yearTo, vehicleType, brandType, modelsType, stateType, regionType, fuelType, colorType, driveUnit, engineFrom, engineTo, sortingOption, exchange} = useSelector((state) => state.FilterReducer);
 
-
+  const [carData, setTodos] = useState([])
+    useEffect(() => {
+        axios.get('http://localhost:5000/get')
+            .then(result => setTodos(result.data))
+            .catch(err => console.log(err))
+    }, [])
 
   const storedSelectedTypes = localStorage.getItem('selectedTypes');
   const initialSelectedTypes = storedSelectedTypes ? JSON.parse(storedSelectedTypes) : [];
@@ -286,7 +289,8 @@ const CarsList = () => {
     window.localStorage.setItem('engineTo', engineTo);
     window.localStorage.setItem('color', colorType);
     window.localStorage.setItem('searchTerm', searchTerm);
-  }, [searchTerm, exchange, priceFrom, priceTo, yearFrom, yearTo, vehicleType, brandType, regionType, stateType, fuelType, driveUnit, selectedTypes, sortingOption, modelsType, mileage, engineFrom, engineTo, colorType]);
+    window.localStorage.setItem('isAuth', isAuth);
+  }, [searchTerm, exchange, priceFrom, priceTo, isAuth, yearFrom, yearTo, vehicleType, brandType, regionType, stateType, fuelType, driveUnit, selectedTypes, sortingOption, modelsType, mileage, engineFrom, engineTo, colorType]);
 
 
   const filteredData = carData.filter((car) =>

@@ -14,8 +14,9 @@ import { useSelector } from 'react-redux';
 
 
 function App() {
-    const {isAuth} = useSelector((state) => state.FilterReducer); 
+    const { isAuth } = useSelector((state) => state.FilterReducer);
 
+    
 
 
     return (

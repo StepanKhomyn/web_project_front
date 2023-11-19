@@ -161,14 +161,14 @@ useEffect(() => {
               sortedData   /*convertedPrices */
                 .filter(filterByTypeOfCar)  //походу не потрібно 
                 .map((car) => (   
-                  <div className="card--list--car" key={car.id}>
+                  <div className="card--list--car" key={car._id}>
                     <img
                       className="car-image"
                       src={car.image}
                       alt="car"
                       onClick={() => handleImageClick(car.image)}
                     />
-                    <Link style={{ textDecoration: 'none' }} to={`/about/${car.id}`}>
+                    <Link style={{ textDecoration: 'none' }} to={`/about/${car._id}`}>
                       <div className="car-btn">
                         <h3 className="car-name">{car.breand}</h3>
                         <button className="btn-used">Used</button>
@@ -181,7 +181,7 @@ useEffect(() => {
                         <div style={{ flex: "45%", marginBottom: "6px" }}>
                           <label className="form-control--four icon-car">
                             <SpeedIcon />
-                            {car.distance}
+                            {car.mileage}
                           </label>
                         </div>
                         <div style={{ flex: "45%", marginBottom: "6px" }}>
@@ -218,7 +218,7 @@ useEffect(() => {
                         alt="car"
                         onClick={() => handleImageClick(car.image)}
                       />
-                      <Link style={{ textDecoration: 'none' }} to={`/about/${car.id}`}>
+                      <Link style={{ textDecoration: 'none' }} to={`/about/${car._id}`}>
                         <div className="car-btn">
                           <h3 className="car-name">{car.breand}</h3>
                           <button className="btn-used">Used</button>
@@ -231,7 +231,7 @@ useEffect(() => {
                           <div style={{ flex: "45%", marginBottom: "6px" }}>
                             <label className="form-control--four icon-car">
                               <SpeedIcon />
-                              {car.distance}
+                              {car.mileage}
                             </label>
                           </div>
                           <div style={{ flex: "45%", marginBottom: "6px" }}>
@@ -270,7 +270,7 @@ useEffect(() => {
                     alt="car"
                     onClick={() => handleImageClick(car.image)}
                   />
-                  <Link style={{ textDecoration: 'none' }} to={`/about/${car.id}`}>
+                  <Link style={{ textDecoration: 'none' }} to={`/about/${car._id}`}>
                     <div className="car-btn">
                       <h3 className="car-name">{car.breand}</h3>
                       <button className="btn-used">Used</button>
@@ -283,7 +283,7 @@ useEffect(() => {
                       <div style={{ flex: "45%", marginBottom: "6px" }}>
                         <label className="form-control--four icon-car">
                           <SpeedIcon />
-                          {car.distance}
+                          {car.mileage}
                         </label>
                       </div>
                       <div style={{ flex: "45%", marginBottom: "6px" }}>

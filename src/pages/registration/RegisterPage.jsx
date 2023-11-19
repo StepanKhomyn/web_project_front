@@ -12,8 +12,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { updateIsAuth } from '../../store/reducers/FilterSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateEmail, updateIsAuth } from '../../store/reducers/FilterSlice';
 
 
 const defaultTheme = createTheme();
@@ -21,7 +21,8 @@ const defaultTheme = createTheme();
 
 const RegisterPage = () => {
 
-    const [email, setEmail] = useState('')
+    const {email} = useSelector((state) => state.FilterReducer);
+
     const [password, setPassword] = useState('')
     const [emailDirty, setEmailDirty] = useState(false)
     const [passwordDirty, setPasswordDirty] = useState(false)
@@ -38,14 +39,14 @@ const RegisterPage = () => {
     },[emailDirty, passwordDirty])
 
     const emailHandler = (e) => {
-        setEmail(e.target.value)
-        /*const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        dispatch(updateEmail(e.target.value));
+        const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
         
         if (!re.test(String(email).toLowerCase())) {
             setEmailDirty(true)
         } else {
             setEmailDirty(false)
-        }*/
+        }
     }
 
     const passwordHandler = (e) => {
@@ -85,7 +86,7 @@ const RegisterPage = () => {
                 dispatch(updateIsAuth(true))
                 push('/');
             } else {
-                console.error('Ошибка регистрации:', response.status);
+                console.error('Помилка реєстрації:', response.status);
                 alert('Помилка реєстрації. Перевірте введені дані.');
             }
         } catch (error) {

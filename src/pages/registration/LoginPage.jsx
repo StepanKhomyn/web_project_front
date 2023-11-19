@@ -12,16 +12,17 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { updateIsAuth } from '../../store/reducers/FilterSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateEmail, updateIsAuth } from '../../store/reducers/FilterSlice';
 
 const defaultTheme = createTheme();
 
 const LoginPage = () => {
 
+    const {email} = useSelector((state) => state.FilterReducer);
     const dispatch = useDispatch()
 
-    const [email, setEmail] = useState('')
+    //const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [emailDirty, setEmailDirty] = useState(false)
     const [passwordDirty, setPasswordDirty] = useState(false)
@@ -36,14 +37,14 @@ const LoginPage = () => {
     }, [emailDirty, passwordDirty])
 
     const emailHandler = (e) => {
-        setEmail(e.target.value)
-        /*const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        dispatch(updateEmail(e.target.value));
+        const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
         if (!re.test(String(email).toLowerCase())) {
             setEmailDirty(true)
         } else {
             setEmailDirty(false)
-        }*/
+        }
     }
 
     const passwordHandler = (e) => {

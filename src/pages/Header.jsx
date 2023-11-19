@@ -11,7 +11,7 @@ import { AccountCircle, AccountCircleOutlined } from '@mui/icons-material';
 
 const Header = () => {
   
-  const { searchTerm } = useSelector((state) => state.FilterReducer);
+  const { searchTerm, email } = useSelector((state) => state.FilterReducer);
   const dispatch = useDispatch()
   const navigate = useNavigate();
 
@@ -34,10 +34,10 @@ const Header = () => {
   const handleLogout = () => {
     // Додайте код для виходу, наприклад, вивільнення токену або скидання інших даних авторизації
     // Приклад:
-    // localStorage.removeItem('token');
+     localStorage.removeItem('token');
     // або використовуйте функції для очищення стану аутентифікації в Redux
     // dispatch(logoutAction());
-    
+    window.localStorage.removeItem('isAuth');
     // Після виходу перенаправте користувача на сторінку входу або іншу відповідну сторінку
     dispatch(updateIsAuth(false))
     navigate('/login');
@@ -104,7 +104,7 @@ const Header = () => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleClose}>Profile {email}</MenuItem>
                 <MenuItem onClick={handleLogout}>Вихід</MenuItem>
               </Menu>
             </div>

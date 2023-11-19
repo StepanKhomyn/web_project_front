@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
+    email: localStorage.getItem("email") || "",
     searchTerm: localStorage.getItem("searchTerm") || "",
     mileage: localStorage.getItem('mileage') || '',
     priceFrom: localStorage.getItem('priceFrom') || '',
@@ -19,8 +20,7 @@ const initialState = {
     engineTo: localStorage.getItem('engineTo') || '',
     sortingOption: localStorage.getItem('sortingOption') || '',
     exchange: localStorage.getItem('exchange') === "true" ? true : false,
-    isAuth: false
-
+    isAuth: localStorage.getItem('isAuth') || false,
   };
   
   export const FilterSlice = createSlice({
@@ -83,10 +83,13 @@ const initialState = {
       },
       updateIsAuth: (state, action) => {
         state.isAuth = action.payload;
+      },
+      updateEmail: (state, action) => {
+        state.email = action.payload;
       }
     },
   });
   
-  export const { updateSearchTerm, updateMileage, updatePriceFrom, updatePriceTo, updateYearFrom, updateYearTo, updateVehicleType, updateBrandType, updateModelsType, updateRegion, updateState, updateFuel, updateColor, updateDriveUnit, updateEngineFrom, updateEngineTo, updateSortingOption, updateExchange, updateIsAuth} = FilterSlice.actions;
+  export const { updateSearchTerm, updateMileage, updatePriceFrom, updatePriceTo, updateYearFrom, updateYearTo, updateVehicleType, updateBrandType, updateModelsType, updateRegion, updateState, updateFuel, updateColor, updateDriveUnit, updateEngineFrom, updateEngineTo, updateSortingOption, updateExchange, updateIsAuth, updateEmail} = FilterSlice.actions;
   
   export default FilterSlice.reducer;
