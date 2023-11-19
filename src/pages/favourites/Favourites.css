@@ -153,8 +153,14 @@
 }
 
 @media (max-width: 840px) {
+    .favourite {
+        display: flex;
+        width: 100%;
+        align-items: center;
+    }
     .container {
         width: 100%;
+        margin-right: 0px;
     }
 
     .container-header {
@@ -178,3 +184,18 @@
     }
 }
 
+@media (max-width: 530px) {
+    .container-main-item img {
+        width: 100%;
+    }
+    .container-main-item-info{
+        width: 100%;
+        margin-right: 0px;
+    }
+    .container-main-item-info-short {
+        width: 100%;
+    }
+    .container-main-item-action{
+        width: 100%;
+    }
+    }

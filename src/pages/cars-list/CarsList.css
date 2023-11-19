@@ -499,3 +499,10 @@
 .white {
   background-color: #fff;
 }
+
+
+@media screen and (max-width: 768px) {
+  .carsList--page{
+    margin-left: 0px;
+  }
+  }

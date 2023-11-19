@@ -3,7 +3,7 @@ import "../AboutCar.css"
 const RightMenu = ({ carData }) => {
   return (
     <div className="right-menu" style={{ position: "sticky", top: "0px" }}>
-      <div className="fiteres--menu">
+      <div className="about-car-menu">
         <div>
           <h2 className='title'>About Car</h2>
         </div>
