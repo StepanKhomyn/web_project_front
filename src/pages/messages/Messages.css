@@ -1,5 +1,20 @@
 
 
+/* @media screen and (max-width: 768px) {
+  .chats {
+    display: none !important; 
+  }
+
+  body{
+    background-color: blue;
+  }
+
+  .back-btn{
+    display: block !important;
+  }
+
+} */
+
 #main {
   display: flex;
   flex-direction: column;
@@ -13,6 +28,7 @@
   gap: 10px;
   flex: 1; 
   height: 650px;
+  width: 100%;
 }
 
 .chats {
@@ -20,16 +36,29 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  overflow-y: scroll;
+  overflow-y: auto;
   /* height: 600px; */
   height: 790px;
 }
 
-.chat-img {
+.chat-img-container{
   height: 64px;
   width: 64px;
-  border-radius: 64px;
+  overflow: hidden;
+  min-width: 64px;
 }
+
+.chat-img {
+  /* height: 64px;
+  width: 64px;
+  /* object-fit: cover; */
+ 
+  border-radius: 64px; 
+
+  width: 100%; /* Make the image take the full width of the container */
+  height: 100%; /* Make the image take the full height of the container */
+  /* object-fit: cover; */
+} 
 
 .chat-card {
   display: flex;
@@ -79,15 +108,12 @@
 }
 
 .messages {
-  /* margin: 5px; */
   padding: 5px;
-  /* height: 515px; */
   height: 700px;
 
   display: flex;
   flex-direction: column;
-  /* justify-content: end; */
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .message {
@@ -95,10 +121,6 @@
   background-color: #f0f0f0;
   border-radius: 3px;
   margin: 5px 0px;
-  /* display: flex; */
-  /* flex-wrap: wrap; */
-  /* width: 30ch; */
-  /* display: inline-block; */
   overflow-wrap: break-word;
 }
 
@@ -106,19 +128,13 @@
   margin-left: auto;
   margin-right: 10px;
   display: inline-block;
-
-  /* white-space: nowrap; */
-  /* overflow: hidden; */
   text-overflow: ellipsis;
-  /* text-align: end; */
-  /* width: 100%; */
 }
 
 .message-l {
     margin-right:auto;
     margin-left: 10px;
     background-color: #d3d3d3;
-    /* text-align: start; */
 }
 
 .message-text {
@@ -133,6 +149,8 @@
 .message-input {
   flex: 1;
   border: 0;
+  border-radius: inherit;
+  height: 2rem;
   /* height:50px */
 }
 
@@ -142,3 +160,8 @@
   justify-content: center;
   align-items: center;
 }
+
+
+/* .back-btn{
+  display: none;
+} */
