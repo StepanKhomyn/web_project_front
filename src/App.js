@@ -11,6 +11,7 @@ import Favourites from './pages/favourites/Favourites';
 import Messages from './pages/messages/Messages';
 import Profile from './pages/profile/Profile';
 import { useSelector } from 'react-redux';
+import Reviews from './pages/reviews/Reviews';
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
                         <Route path="/favourites" element={<Favourites />} />
                         <Route path="/messages" element={<Messages />} />
                         <Route path="/profile" element={<Profile />} />
+                        <Route path="/reviews" element={<Reviews />} />
                     </>
                 ) : (
                     <Route path="*" element={<LoginPage />} />

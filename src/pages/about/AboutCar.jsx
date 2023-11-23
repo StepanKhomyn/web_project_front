@@ -28,9 +28,9 @@ const AboutCar = () => {
 
   return (
     <div className="carsList--page">
-      <Header  />
+      <Header />
       <div style={{ display: "flex" }}>
-        <Menu/>
+        <Menu />
         <div className='central-div'>
           <div><h2>Tesla Model X 2022</h2></div>
           <div className='image-seller'>
@@ -98,12 +98,14 @@ const AboutCar = () => {
                 <h2>0985375484</h2>
               </div>
               <div>
+                <Link to={'/Messages'}>
                   <button className='btn-chat' style={{ width: '100%', display: 'flex', height: '40px' }}>
                     <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="MessageIcon">
                       <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"></path>
                     </svg>
                     <span>Написати в чат</span>
                   </button>
+                </Link>
               </div>
             </div>
           </div>
