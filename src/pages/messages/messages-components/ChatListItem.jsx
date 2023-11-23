@@ -5,7 +5,7 @@ function ChatListItem(props) {
   return (
     <>
       <a href="#" className={`chat-card ${props.isLastClicked ? 'last-clicked' : ''}`} onClick={props.onClick}>
-        <div>
+        <div className='chat-img-container'>
           <img className="chat-img" src={props.carImg} alt={props.carName} />
         </div>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
