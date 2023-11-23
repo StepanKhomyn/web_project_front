@@ -21,6 +21,34 @@
     justify-content: center;
 }
 
+.add-img{
+    color: #256799;
+    cursor: pointer;
+    border-radius: 20px;
+    margin: 10px;
+    padding: 8px 20px
+}
+.uploaded-block{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+.uploaded-block img{
+    max-height: 300px;
+    max-width: 500px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+.uploaded-block-item{
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 15px;
+    margin-bottom: 1rem;
+}
 /* SellCar.css */
 
 
@@ -42,3 +70,12 @@
   .MuiFormHelperText-root {
     color: red;
   }
+  .sell-container{
+      width: 100%;
+      margin: 0 70px;
+  }
+@media (max-width: 840px) {
+    .sell-container{
+        margin: 0px;
+    }
+}

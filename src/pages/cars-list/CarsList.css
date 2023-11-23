@@ -402,11 +402,15 @@
   display: flex;
   flex-wrap: wrap;
   /* width: 850px; */
-  height: 930px;
+  max-height: 1350px;
+  overflow-y: scroll;
   padding-top: 30px;
   padding-right: 25px;
 }
 
+.card--list--cars::-webkit-scrollbar {
+  width: 0.01em; /* ширина скролбара */
+}
 
 
 .card--list--car {
@@ -495,3 +499,10 @@
 .white {
   background-color: #fff;
 }
+
+
+@media screen and (max-width: 768px) {
+  .carsList--page{
+    margin-left: 0px;
+  }
+  }

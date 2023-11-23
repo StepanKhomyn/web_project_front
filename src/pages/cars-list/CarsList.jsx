@@ -1,58 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./CarsList.css"
 import Header from "../Header";
 import Menu from "./components/Menu";
 import Filter from "./components/Filter";
 import List from "./components/List";
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import FilterAltOffIcon from '@mui/icons-material/FilterAltOff';
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 const apiKey = '81106b36bdb74941883a5389d7b0af62';
 
-/* async function getExchangeRate() {
-   try {
-     const response = await fetch(`https://open.er-api.com/v6/latest/USD?apikey=${apiKey}`);
-     const data = await response.json();
-     return data.rates.UAH;
-   } catch (error) {
-     console.error('Помилка при отриманні курсу обміну:', error);
-     return null;
-   }
- }
- 
- async function convertDollarsToUAH(dollars) {
-   const exchangeRate = await getExchangeRate();
-   if (exchangeRate !== null) {
-     const uah = dollars * exchangeRate;
-     return uah.toFixed(0); // Округлюємо до двох знаків після коми
-   } else {
-     return null;
-   }
- }*/
 
-const carData = [
+/*const carData = [
   {
     id: 1,
-    name: "Tesla Model X 2022",
     type: "Passenger",
     price: 10000,
     sity: "Ternopil",
     driveUnit: "AMT",
     distance: "11 000",
-    breand: "Mersedes-Benz",
+    breand: "Mercedes-Benz",
     exchange: true,
     image:
       "https://cdn3.riastatic.com/photosnew/auto/photo/tesla_model-3__515756233f.webp",
-    model: "Q8",
+    model: "A-Class",
     typeOfCar: "Sedan",
     year: 2008,
     region: "Ternopil Oblast",
     state: "New (Factory)",
     fuel: "Diesel Fuel",
+    mileage: 50000,
+    engine: 2.2,
+    color: "Blue",
   },
   {
     id: 2,
-    name: "Volkswagen Passat 2020",
     type: "Passenger",
     price: 4000,
     sity: "Kyiv",
@@ -62,16 +43,18 @@ const carData = [
     exchange: true,
     image:
       "https://cdn.riastatic.com/photos/ria/news_text/16/1692/169281/169281.jpg",
-    model: "Q8",
+    model: "Rio",
     typeOfCar: "Minivan",
     year: 2023,
     region: "Kyiv Oblast",
     state: "Restored",
     fuel: "Gasoline",
+    mileage: 100000,
+    engine: 3.2,
+    color: "Red",
   },
   {
     id: 3,
-    name: "Volkswagen Tiguan 2022",
     type: "Passenger",
     price: 1000,
     sity: "Lviv",
@@ -81,16 +64,18 @@ const carData = [
     exchange: true,
     image:
       "https://cdn.riastatic.com/photosnewr/auto/new_auto_storage/volkswagen-id-4-crozz__2080542-620x465x72.webp",
-    model: "Q8",
+    model: "A3",
     typeOfCar: "Sedan",
     year: 1990,
     region: "Lviv Oblast",
     state: "Restored",
     fuel: "Diesel Fuel",
+    mileage: 700000,
+    engine: 4.2,
+    color: "Black",
   },
   {
     id: 4,
-    name: "Audi Q5",
     type: "Ship",
     price: 6700,
     sity: "Ternopil",
@@ -100,15 +85,18 @@ const carData = [
     exchange: false,
     image:
       "https://cdn.riastatic.com/photosnewr/auto/new_auto_storage/volkswagen-id-4-crozz__2080542-620x465x72.webp",
+    model: "Octavia",
     typeOfCar: "Crossover",
     year: 1998,
     region: "Ternopil Oblast",
     state: "New (Factory)",
     fuel: "Diesel Fuel",
+    mileage: 900000,
+    engine: 3.0,
+    color: "Metallic",
   },
   {
     id: 5,
-    name: "Skoda",
     type: "Plane",
     price: 7000,
     sity: "Lviv",
@@ -118,16 +106,18 @@ const carData = [
     exchange: true,
     image:
       "https://cdn.riastatic.com/photos/ria/news_text/16/1692/169281/169281.jpg",
-    model: "Q8",
+    model: "Model 3",
     typeOfCar: "Сoupe",
     year: 1998,
     region: "Lviv Oblast",
     state: "Restored",
     fuel: "Diesel Fuel",
+    mileage: 100000,
+    engine: 0.9,
+    color: "Metallic",
   },
   {
     id: 6,
-    name: "Kia",
     type: "Plane",
     price: 5000,
     sity: "Ternopil",
@@ -137,16 +127,18 @@ const carData = [
     exchange: false,
     image:
       "https://cdn.riastatic.com/photosnewr/auto/new_auto_storage/volkswagen-id-4-crozz__2080542-620x465x72.webp",
-    model: "Q8",
+    model: "Model 3",
     typeOfCar: "Convertible",
     year: 2000,
     region: "Ternopil Oblast",
     state: "Leased (Under Lease)",
     fuel: "Natural Gas",
+    mileage: 250000,
+    engine: 1.2,
+    color: "Yellow",
   },
   {
     id: 7,
-    name: "Kia",
     type: "Plane",
     price: 5000,
     sity: "Lviv",
@@ -156,16 +148,18 @@ const carData = [
     exchange: false,
     image:
       "https://cdn.riastatic.com/photosnewr/auto/new_auto_storage/volkswagen-id-4-crozz__2080542-620x465x72.webp",
-    model: "Q8",
+    model: "Model 3",
     typeOfCar: "Sports car",
     year: 2005,
     region: "Lviv Oblast",
     state: "New (Factory)",
     fuel: "Natural Gas",
+    mileage: 150000,
+    engine: 1.2,
+    color: "Black",
   },
   {
     id: 8,
-    name: "Kia",
     type: "Plane",
     price: 5000,
     sity: "Ternopil",
@@ -175,15 +169,18 @@ const carData = [
     exchange: false,
     image:
       "https://cdn.riastatic.com/photosnewr/auto/new_auto_storage/volkswagen-id-4-crozz__2080542-620x465x72.webp",
-    model: "Q8",
+    model: "Model S",
     typeOfCar: "Microvan",
     year: 2020,
     region: "Ternopil Oblast",
     state: "Leased (Under Lease)",
     fuel: "Gasoline",
+    mileage: 100000,
+    engine: 1.8,
+    color: "Black",
   },
 
-];
+];*/
 
 
 
@@ -193,26 +190,108 @@ const carData = [
 
 const CarsList = () => {
 
+  const {isAuth, searchTerm, mileage, priceFrom, priceTo, yearFrom, yearTo, vehicleType, brandType, modelsType, stateType, regionType, fuelType, colorType, driveUnit, engineFrom, engineTo, sortingOption, exchange} = useSelector((state) => state.FilterReducer);
 
+  const [carData, setTodos] = useState([])
+    useEffect(() => {
+        axios.get('http://localhost:5000/get')
+            .then(result => setTodos(result.data))
+            .catch(err => console.log(err))
+    }, [])
 
+  const storedSelectedTypes = localStorage.getItem('selectedTypes');
+  const initialSelectedTypes = storedSelectedTypes ? JSON.parse(storedSelectedTypes) : [];
+  const [selectedTypes, setSelectedTypes] = useState(initialSelectedTypes);
+ 
+/*
+  
+  async function getExchangeUAH() {
+    try {
+      const response = await fetch(`https://open.er-api.com/v6/latest/USD?apikey=${apiKey}`);
+      const data = await response.json();
+      return data.rates.UAH;
+    } catch (error) {
+      console.error('Помилка при отриманні курсу обміну:', error);
+      return null;
+    }
+  }
 
+  async function convertDollarsToUAH(dollars) {
+    const exchangeRate = await getExchangeUAH();
+    if (exchangeRate !== null) {
+      const uah = dollars * exchangeRate;
+      return uah.toFixed(0); // Округлюємо до двох знаків після коми
+    } else {
+      return null;
+    }
+  }
 
-  const [searchTerm, setSearchTerm] = useState('');
-  const [sortingOption, setSortingOption] = useState('');
-  const [vehicleType, setVehicleType] = useState('');
-  const [brandType, setBrandType] = useState('');
-  const [exchange, setExchange] = useState(false);
-  const [selectedTypes, setSelectedTypes] = useState([]);
-  const [priceFrom, setPriceFrom] = useState('');
-  const [priceTo, setPriceTo] = useState('');
-  const [yearFrom, setYearFrom] = useState('');
-  const [yearTo, setYearTo] = useState('');
-  const [region, setRegion] = useState('');
-  const [state, setState] = useState('');
-  const [fuel, setFuel] = useState('');
-  const [driveUnit, setDriveUnit] = useState('');
+  async function getExchangeEUR() {
+    try {
+      const response = await fetch(`https://open.er-api.com/v6/latest/USD?apikey=${apiKey}`);
+      const data = await response.json();
+      return data.rates.EUR;
+    } catch (error) {
+      console.error('Помилка при отриманні курсу обміну:', error);
+      return null;
+    }
+  }
 
-  /*  let filteredData = .filter(i => i.type === "Audi")*/
+  async function convertDollarsToEUR(dollars) {
+    const exchangeRate = await getExchangeEUR();
+    if (exchangeRate !== null) {
+      const uah = dollars * exchangeRate;
+      return uah.toFixed(0); // Округлюємо до двох знаків після коми
+    } else {
+      return null;
+    }
+  }
+
+  async function getExchangePLN() {
+    try {
+      const response = await fetch(`https://open.er-api.com/v6/latest/USD?apikey=${apiKey}`);
+      const data = await response.json();
+      return data.rates.PLN;
+    } catch (error) {
+      console.error('Помилка при отриманні курсу обміну:', error);
+      return null;
+    }
+  }
+  
+  async function convertDollarsToPLN(dollars) {
+    const exchangeRate = await getExchangePLN();
+    if (exchangeRate !== null) {
+      const uah = dollars * exchangeRate;
+      return uah.toFixed(0); // Округлюємо до двох знаків після коми
+    } else {
+      return null;
+    }
+  }
+*/
+
+  useEffect(() => {
+    window.localStorage.setItem('exchange', exchange);
+    window.localStorage.setItem('priceFrom', priceFrom);
+    window.localStorage.setItem('priceTo', priceTo);
+    window.localStorage.setItem('yearFrom', yearFrom);
+    window.localStorage.setItem('yearTo', yearTo);
+    window.localStorage.setItem('vehicleType', vehicleType);
+    window.localStorage.setItem('brandType', brandType);
+    window.localStorage.setItem('region', regionType);
+    window.localStorage.setItem('state', stateType);
+    window.localStorage.setItem('fuel', fuelType);
+    window.localStorage.setItem('driveUnit', driveUnit);
+    window.localStorage.setItem('selectedTypes', JSON.stringify(selectedTypes));
+    window.localStorage.setItem('sortingOption', sortingOption);
+    window.localStorage.setItem('modelsType', modelsType);
+    window.localStorage.setItem('mileage', mileage);
+    window.localStorage.setItem('engineFrom', engineFrom);
+    window.localStorage.setItem('engineTo', engineTo);
+    window.localStorage.setItem('color', colorType);
+    window.localStorage.setItem('searchTerm', searchTerm);
+    window.localStorage.setItem('isAuth', isAuth);
+  }, [searchTerm, exchange, priceFrom, priceTo, isAuth, yearFrom, yearTo, vehicleType, brandType, regionType, stateType, fuelType, driveUnit, selectedTypes, sortingOption, modelsType, mileage, engineFrom, engineTo, colorType]);
+
 
   const filteredData = carData.filter((car) =>
     car.breand.toLowerCase().includes(searchTerm.toLowerCase()) &&
@@ -220,7 +299,10 @@ const CarsList = () => {
     (priceFrom === '' || car.price >= parseFloat(priceFrom)) &&
     (priceTo === '' || car.price <= parseFloat(priceTo)) &&
     (yearFrom === '' || car.year >= parseInt(yearFrom)) &&
-    (yearTo === '' || car.year <= parseInt(yearTo))
+    (yearTo === '' || car.year <= parseInt(yearTo)) &&
+    (mileage === '' || car.mileage <= parseInt(mileage)) &&
+    (engineFrom === '' || car.engine >= parseFloat(engineFrom)) &&
+    (engineTo === '' || car.engine <= parseFloat(engineTo))
   );
 
   const sortData = () => {
@@ -238,24 +320,24 @@ const CarsList = () => {
       );
     }
 
-    if (region && region !== 'option1') {
+    if (regionType && regionType !== 'option1') {
       sortedArray = sortedArray.filter(car =>
-        car.region.toLowerCase().includes(region.toLowerCase())
+        car.region.toLowerCase().includes(regionType.toLowerCase())
       );
     }
 
-    if (state && state !== 'option1') {
+    if (stateType && stateType !== 'option1') {
       sortedArray = sortedArray.filter(car =>
-        car.state.toLowerCase().includes(state.toLowerCase())
+        car.state.toLowerCase().includes(stateType.toLowerCase())
       );
     }
 
-    if (fuel && fuel !== 'option1') {
+    if (fuelType && fuelType !== 'option1') {
       sortedArray = sortedArray.filter(car =>
-        car.fuel.toLowerCase().includes(fuel.toLowerCase())
+        car.fuel.toLowerCase().includes(fuelType.toLowerCase())
       );
     }
-    
+
     if (driveUnit && driveUnit !== 'option1') {
       sortedArray = sortedArray.filter(car =>
         car.driveUnit.toLowerCase().includes(driveUnit.toLowerCase())
@@ -268,17 +350,29 @@ const CarsList = () => {
       );
     }
 
-    
+    if (modelsType && modelsType !== 'option1') {
+      sortedArray = sortedArray.filter(car =>
+        car.model.toLowerCase().includes(modelsType.toLowerCase())
+      );
+    }
 
-    
-
+    if (colorType && colorType !== 'option1') {
+      sortedArray = sortedArray.filter(car =>
+        car.color.toLowerCase().includes(colorType.toLowerCase())
+      );
+    }
     return sortedArray;
   };
 
   const sortedData = sortData();
+  const localStorageBooll = localStorage.getItem('menuOpen') === "false" ? false : true
 
+  const [menuOpen, setMenuOpen] = useState(localStorageBooll);
 
-  const [menuOpen, setMenuOpen] = useState(null);
+  useEffect(() => {
+    window.localStorage.setItem('menuOpen', menuOpen);
+  }, [menuOpen]);
+
 
   const onMenuOpen = (data) => {
     setMenuOpen(data);
@@ -287,11 +381,11 @@ const CarsList = () => {
 
   return (
     <div className="carsList--page">
-      <Header setSearchTerm={setSearchTerm} />
+      <Header />
       <div style={{ display: "flex" }}>
         <Menu />
-        <List sortedData={sortedData} setSortingOption={setSortingOption} onMenuOpen={onMenuOpen} selectedTypes={selectedTypes}  priceFrom={priceFrom} priceTo={priceTo} yearFrom={yearFrom} yearTo={yearTo} />   {/*convertDollarsToUAH={convertDollarsToUAH} */}
-        <Filter setDriveUnit={setDriveUnit} setFuel={setFuel} setState={setState} setRegion={setRegion} setVehicleType={setVehicleType} setBrandType={setBrandType} setExchange={setExchange} setSelectedTypes={setSelectedTypes} setPriceFrom={setPriceFrom} setPriceTo={setPriceTo} setYearFrom={setYearFrom} setYearTo={setYearTo} dataFromChild={menuOpen} />
+        <List sortedData={sortedData} onMenuOpen={onMenuOpen} selectedTypes={selectedTypes} />   {/*convertDollarsToUAH={convertDollarsToUAH} convertDollarsToEUR={convertDollarsToEUR} convertDollarsToPLN={convertDollarsToPLN}*/}
+        <Filter  selectedTypes={selectedTypes} setSelectedTypes={setSelectedTypes} dataFromChild={menuOpen} />
       </div>
     </div>
   );

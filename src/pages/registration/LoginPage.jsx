@@ -12,13 +12,17 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateEmail, updateIsAuth } from '../../store/reducers/FilterSlice';
 
 const defaultTheme = createTheme();
 
 const LoginPage = () => {
 
+    const {email} = useSelector((state) => state.FilterReducer);
+    const dispatch = useDispatch()
 
-    const [email, setEmail] = useState('')
+    //const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [emailDirty, setEmailDirty] = useState(false)
     const [passwordDirty, setPasswordDirty] = useState(false)
@@ -33,7 +37,7 @@ const LoginPage = () => {
     }, [emailDirty, passwordDirty])
 
     const emailHandler = (e) => {
-        setEmail(e.target.value)
+        dispatch(updateEmail(e.target.value));
         const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
         if (!re.test(String(email).toLowerCase())) {
@@ -45,7 +49,7 @@ const LoginPage = () => {
 
     const passwordHandler = (e) => {
         setPassword(e.target.value)
-        if (e.target.value.length < 6 || e.target.value.length > 24) {
+        if (e.target.value.length < 3 || e.target.value.length > 24) {
             setPasswordDirty(true)
         } else {
             setPasswordDirty(false)
@@ -54,19 +58,37 @@ const LoginPage = () => {
 
     const push = useNavigate();
 
-    const handleLogin = () => {
 
-        push('/');
-    }
-
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
-        handleLogin();
+
+        const userData = {
+            username: email,
+            password: password,
+        };
+
+        try {
+            const response = await fetch('http://localhost:5000/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(userData),
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                localStorage.setItem('token', result.token);
+                dispatch(updateIsAuth(true))
+                push('/');
+            } else {
+                if (response.status === 400) {
+                    alert('Неправильний пароль');
+                }
+            }
+        } catch (error) {
+            console.error('Помилка при відправленні запиту:', error);
+        }
     };
 
     return (

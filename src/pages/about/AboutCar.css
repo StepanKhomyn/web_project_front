@@ -126,3 +126,86 @@
     color: #444444;
     margin: 6px 0px 6px 0px;
 }
+
+.image-seller{
+    display: flex;
+}
+
+.central-div{
+    margin: 0px 30px;
+    width: 100%
+}
+
+.image-div{
+    height: 100%;
+}
+
+.about-seller{
+    margin-left: 16px;
+    width: 36%;
+    height: 100%;
+}
+
+.car-abilities{
+    display: flex;
+    margin-top: 12px;
+}
+
+.car-abilities-span{
+    font-size: 20px;
+}
+
+.about-car-menu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 1024px) {
+    .image-seller{
+        display: block;
+    }
+
+    .about-seller{
+        width: 74%;
+    }
+
+    .car-abilities{
+        display: block;
+        
+    }
+
+    .car-abilities-span{
+        font-size: 20px;
+        margin-top: 12px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .central-div{
+        margin: 0px 4px;
+    }
+
+    .about-car-menu{
+        display: block;
+        margin-left: 16px;
+    }
+
+    .margin-for-span-right-menu{
+        margin-left: 12px;
+    }
+
+    .right-menu{
+        width: 100%;
+    }
+    .central-div{
+        width: 48%;
+    }
+  }
+
+  @media screen and (max-width: 376px) {
+    .central-div{
+        width: 100%;
+        margin-left: 20px;
+    }
+  }
