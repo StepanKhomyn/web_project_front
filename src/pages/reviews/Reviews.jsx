@@ -71,7 +71,7 @@ const Reviews = () => {
         };
 
         // Додаємо новий відгук до стану response
-        setResponse((prevResponse) => [...prevResponse, newFeedback]);
+        setResponse((prevResponse) => [newFeedback, ...prevResponse]);
 
         // Створюємо об'єкт для відгуку, який відправляється на сервер
         const userData = {
@@ -90,12 +90,22 @@ const Reviews = () => {
         })
     };
 
-    const sorting = (value) => {
-        if (value) {
-            response.sort(item => item.rating)
-        }
-        console.log(response)
-    }
+    const sortResponseUp = (columnName) => {
+        const sortedResponse = [...response].sort((a, b) => {
+            return b[columnName] - a[columnName];
+        });
+
+        setResponse(sortedResponse);
+    };
+
+    const sortResponseDown = (columnName) => {
+        const sortedResponse = [...response].sort((a, b) => {
+            return a[columnName] - b[columnName];
+        });
+
+        setResponse(sortedResponse);
+    };
+
 
     return (
         <div className="carsList--page">
@@ -108,9 +118,9 @@ const Reviews = () => {
                     </div>
                     <div className='reviews'>
                         <div className='response'>
-                            <p style={{}} onClick={sorting(true)}>POSITIVE {response.filter(item => item.rating > 2.5).length}</p>
+                            <p style={{}} onClick={() => sortResponseUp('rating')}>POSITIVE {response.filter(item => item.rating > 2.5).length}</p>
                             <p style={{}}>ALL {response.length}</p>
-                            <p style={{}}>NEGATIVE {response.filter(item => item.rating <= 2.5).length}</p>
+                            <p style={{}} onClick={() => sortResponseDown('rating')}>NEGATIVE {response.filter(item => item.rating <= 2.5).length}</p>
                         </div>
                     </div>
                     <button className='responseButton' onClick={handleModalOpen}>Give feedback</button>

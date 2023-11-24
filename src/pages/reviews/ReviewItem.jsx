@@ -26,7 +26,7 @@ const ReviewItem = (props) => {
                     <p style={{ marginBottom: "20px" }} > {description}</p>
                     <span style={{}} >{date}</span>
                 </div>
-                <div className='rating'><Rating name="half-rating" defaultValue={rating} precision={0.5} /></div>
+                <div className='rating'><Rating name="half-rating" value={rating} precision={0.5} /></div>
 
             </div>
         </div>
