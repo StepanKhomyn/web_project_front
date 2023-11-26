@@ -8,6 +8,7 @@ import HandymanIcon from '@mui/icons-material/Handyman';
 import { Link } from "react-router-dom";
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FilterAltOffIcon from '@mui/icons-material/FilterAltOff';
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder"
 import "../CarsList.css"
 import { useEffect } from 'react';
 import { Dialog, DialogContent } from '@mui/material';
@@ -118,6 +119,28 @@ useEffect(() => {
     setImageModalOpen(false);
   };
 
+  const [favouriteList, setFavouriteList] = useState([]);
+  useEffect(() => {
+    const storedFavourites = localStorage.getItem('favourites');
+    if (storedFavourites) {
+      setFavouriteList(JSON.parse(storedFavourites));
+    }
+  }, []);
+  useEffect(() => {
+    localStorage.setItem('favourites', JSON.stringify(favouriteList));
+  }, [favouriteList]);
+
+  const addItemToLockStore = (car) => {
+    const isCarInFavourites = favouriteList.some((favCar) => favCar.id === car.id);
+
+    if (isCarInFavourites) {
+      const updatedList = favouriteList.filter((favCar) => favCar.id !== car.id);
+      setFavouriteList(updatedList);
+    } else {
+      const updatedList = [...favouriteList, car];
+      setFavouriteList(updatedList);
+    }
+  };
 
 
   return (
@@ -132,8 +155,8 @@ useEffect(() => {
               style={{ marginRight: '26px', marginLeft: '14px' }}
               /*onChange={handleCurrencyChange}*/
               value={selectedCurrency}
-              onChange={(e) => setSelectedCurrency(e.target.value)}  /*це видалити коли курс вмикати*/ 
-             
+              onChange={(e) => setSelectedCurrency(e.target.value)}  /*це видалити коли курс вмикати*/
+
             >
               <option value="usa">USA</option>
               <option value="grn">UAH</option>
@@ -159,8 +182,8 @@ useEffect(() => {
           {line ? (
             sortedData.length > 1 ? (
               sortedData   /*convertedPrices */
-                .filter(filterByTypeOfCar)  //походу не потрібно 
-                .map((car) => (   
+                .filter(filterByTypeOfCar)  //походу не потрібно
+                .map((car) => (
                   <div className="card--list--car" key={car._id}>
                     <img
                       className="car-image"
@@ -173,8 +196,11 @@ useEffect(() => {
                         <h3 className="car-name">{car.breand}</h3>
                         <button className="btn-used">Used</button>
                       </div>
-                      <div className="price-car">
+                      <div className="price-car" style={{alignItems: "center", justifyContent: "space-between"}}>
                         <p1 className="price-dollar">{`${car.price} $`} </p1>   {/*{`${car.convertedPrice} ₴`} */}
+                        <div onClick={() => addItemToLockStore(car)}>
+                          <FavoriteBorderIcon  />
+                        </div>
                       </div>
                       <div className="line--two"></div>
                       <div className="four--change" style={{ display: 'flex', flexWrap: 'wrap' }}>
@@ -223,8 +249,11 @@ useEffect(() => {
                           <h3 className="car-name">{car.breand}</h3>
                           <button className="btn-used">Used</button>
                         </div>
-                        <div className="price-car">
+                        <div className="price-car" style={{alignItems: "center", justifyContent: "space-between", marginRight: "20px"}}>
                           <p1 className="price-dollar">{`${car.price} $`} </p1>   {/*{`${car.convertedPrice} ₴`} */}
+                          <div onClick={() => addItemToLockStore(car)}>
+                            <FavoriteBorderIcon  />
+                          </div>
                         </div>
                         <div className="line--two"></div>
                         <div className="four--change" style={{ display: 'flex', flexWrap: 'wrap', marginTop: '35px' }}>
@@ -275,8 +304,11 @@ useEffect(() => {
                       <h3 className="car-name">{car.breand}</h3>
                       <button className="btn-used">Used</button>
                     </div>
-                    <div className="price-car">
+                    <div className="price-car" style={{alignItems: "center", justifyContent: "space-between"}}>
                       <p1 className="price-dollar">{`${car.price} $`} </p1>   {/*{`${car.convertedPrice} ₴`} */}
+                      <div onClick={() => addItemToLockStore(car)}>
+                        <FavoriteBorderIcon  />
+                      </div>
                     </div>
                     <div className="line--two"></div>
                     <div className="four--change" style={{ display: 'flex', flexWrap: 'wrap', marginTop: '35px' }}>

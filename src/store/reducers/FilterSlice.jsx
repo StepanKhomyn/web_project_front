@@ -20,7 +20,7 @@ const initialState = {
     engineTo: localStorage.getItem('engineTo') || '',
     sortingOption: localStorage.getItem('sortingOption') || '',
     exchange: localStorage.getItem('exchange') === "true" ? true : false,
-    isAuth: localStorage.getItem('isAuth') || false,
+    isAuth: localStorage.getItem('isAuth') || true,
   };
   
   export const FilterSlice = createSlice({

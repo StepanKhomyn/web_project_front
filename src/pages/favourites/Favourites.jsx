@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import "./Favourites.css"
 import { Breadcrumbs, Button, Link, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -15,32 +15,14 @@ import Menu from '../cars-list/components/Menu';
 
 const Favourites = () => {
   const navigate = useNavigate();
-  const [savedCars, setSavedCars] = useState([
-    {
-      id: 1,
-      name: 'Tesla Model 3 2018',
-      price: '20 999 $',
-      km: '97 тис. км',
-      location: 'Пустомити',
-      fuelType: 'Електро',
-      transmission: 'Автомат',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit...',
-      date: '09.10.2023',
-      seller: 'Андрій'
-    },
-    {
-      id: 2,
-      name: 'BMW i3 2019',
-      price: '22 500 $',
-      km: '85 тис. км',
-      location: 'Київ',
-      fuelType: 'Електро',
-      transmission: 'Автомат',
-      description: 'Another description here...',
-      date: '11.11.2023',
-      seller: 'Іван'
-    },
-  ]);
+  const [savedCars, setSavedCars] = useState([]);
+
+  useEffect(() => {
+    const storedCars = localStorage.getItem('favourites');
+    if (storedCars) {
+      setSavedCars(JSON.parse(storedCars));
+    }
+  }, []);
   const handleSingleDeletion = (carId) => {
     const updatedCars = savedCars.filter((car) => car.id !== carId);
     setSavedCars(updatedCars);
@@ -75,31 +57,31 @@ const Favourites = () => {
                   <div key={car.id} className="container-main-item">
                 <img src={'https://cdn3.riastatic.com/photosnew/auto/photo/tesla_model-3__515756233f.webp'} />
                 <div className="container-main-item-info">
-                  <h3>{car.name}</h3>
+                  <h3>{car.breand} {car.model}</h3>
                   <div className="container-main-item-info-price">
-                    {car.price}
+                    {car.price}$
                   </div>
                   <div className="container-main-item-info-short">
                     <div>
-                      <SpeedIcon className="container-main-item-info-short-icon" /> {car.km}
+                      <SpeedIcon className="container-main-item-info-short-icon" /> {car.distance}
                     </div>
                     <div>
-                      <PlaceIcon className="container-main-item-info-short-icon" /> {car.location}
+                      <PlaceIcon className="container-main-item-info-short-icon" /> {car.region}
                     </div>
                   </div>
                   <div className="container-main-item-info-short">
                     <div>
-                      <LocalGasStationIcon className="container-main-item-info-short-icon" /> {car.fuelType}
+                      <LocalGasStationIcon className="container-main-item-info-short-icon" /> {car.fuel}
                     </div>
                     <div>
-                      <HandymanIcon className="container-main-item-info-short-icon" /> {car.transmission}
+                      <HandymanIcon className="container-main-item-info-short-icon" /> {car.driveUnit}
                     </div>
                   </div>
                   <div className="container-main-item-info-description">
                     {car.description}
                   </div>
                   <div className="container-main-item-info-time">
-                    <AccessTimeIcon className="container-main-item-info-time-icon" /> {car.date}
+                    <AccessTimeIcon className="container-main-item-info-time-icon" /> {car.year}
                   </div>
                 </div>
                 <div className="container-main-item-action">
