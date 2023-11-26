@@ -314,7 +314,7 @@ const SellCar = () => {
               <Grid container spacing={2}>
                 <Grid item xs={6}>
                   <FormControl fullWidth error={!!validationErrors.transportType}>
-                    <InputLabel htmlFor="transport-type">Тип транспорту</InputLabel>
+                    <InputLabel htmlFor="transport-type" >Тип транспорту</InputLabel>
                     <Select
                         labelId="transport-type"
                         id="transport-type"
@@ -322,6 +322,7 @@ const SellCar = () => {
                         value={formData.transportType}
                         onChange={handleInputChange}
                         required
+                        className={validationErrors.transportType ? "error-text" : ""}
                     >
                       {typeOfCar.map((typeCar) => (
                           <MenuItem key={typeCar.typeCar} value={typeCar.typeCar}>
@@ -330,7 +331,6 @@ const SellCar = () => {
                       ))}
                     </Select>
                     <FormHelperText>{validationErrors.transportType}</FormHelperText>
-
                   </FormControl>
                 </Grid>
                 <Grid item xs={6}>
