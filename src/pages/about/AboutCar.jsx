@@ -66,7 +66,7 @@ const AboutCar = () => {
                     <path d="M8 5.67663e-08L10.4242 4.88095L16 5.71429L12 9.52381L12.9697 15L8 12.5L3.0303 15L4 9.52381L-2.88992e-08 5.71429L5.57576 4.88095L8 5.67663e-08Z"></path>
                   </svg>
                 </div>
-                <div className='left-marg'>4.5 оцінка продавця від 16 покупців</div>
+                <div className='left-marg'>4.5 <Link to="/reviews"> оцінка продавця </Link> від 16 покупців</div>
               </div>
               <div className='seller'>
                 <div>
