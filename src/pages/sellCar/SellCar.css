@@ -71,7 +71,6 @@
     color: red;
   }
   .sell-container{
-      width: 100%;
       margin: 0 70px;
   }
 @media (max-width: 840px) {
