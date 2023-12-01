@@ -119,13 +119,8 @@ useEffect(() => {
     setImageModalOpen(false);
   };
 
-  const [favouriteList, setFavouriteList] = useState([]);
-  useEffect(() => {
-    const storedFavourites = localStorage.getItem('favourites');
-    if (storedFavourites) {
-      setFavouriteList(JSON.parse(storedFavourites));
-    }
-  }, []);
+  const [favouriteList, setFavouriteList] = useState(JSON.parse(localStorage.getItem('favourites')) || []);
+
   useEffect(() => {
     localStorage.setItem('favourites', JSON.stringify(favouriteList));
   }, [favouriteList]);

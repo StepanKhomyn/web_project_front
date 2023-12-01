@@ -23,14 +23,22 @@ const Favourites = () => {
       setSavedCars(JSON.parse(storedCars));
     }
   }, []);
+
+  const updateLocalStorage = (cars) => {
+    localStorage.setItem('favourites', JSON.stringify(cars));
+  };
+
   const handleSingleDeletion = (carId) => {
     const updatedCars = savedCars.filter((car) => car.id !== carId);
     setSavedCars(updatedCars);
+    updateLocalStorage(updatedCars); // Оновлюємо localStorage після видалення
   };
 
   const handleClearAll = () => {
     setSavedCars([]);
+    localStorage.removeItem('favourites'); // Видаляємо дані з localStorage при очищенні улюблених авто
   };
+
 
   return (
     <div style={{ marginLeft: "70px", marginRight: "70px" }}>
