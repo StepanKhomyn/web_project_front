@@ -10,13 +10,13 @@ const RightMenu = ({ carData }) => {
       </div>
       <div className="exchange--menu">
         <label class="exchange">
-          <input className="checkbox-exchange" type="checkbox" name="checkbox" disabled />
+          <input className="checkbox-exchange" type="checkbox" name="checkbox" disabled checked={carData.exchange}/>
           <span className='margin-for-svg'>Exchange</span>
         </label>
       </div>
       <div className="exchange--menu">
         <label class="exchange">
-          <input className="checkbox-exchange" type="checkbox" name="checkbox" disabled checked />
+          <input className="checkbox-exchange" type="checkbox" name="checkbox" disabled/>
           <span className='margin-for-svg'>Used</span>
         </label>
       </div>
@@ -31,37 +31,37 @@ const RightMenu = ({ carData }) => {
         <h3 className="right-menu-font">
         <span class="point" className='span-point price-ua'>•</span>
           Type of vehicle</h3>
-        <span className='margin-for-span-right-menu'>Passenger</span>
+        <span className='margin-for-span-right-menu'>{carData.type}</span>
       </div>
       <div className="left-marg">
         <h3 className="right-menu-font">
         <span class="point" className='span-point price-ua'>•</span>
           Car brand</h3>
-        <span className='margin-for-span-right-menu'>{carData.name}</span>
+        <span className='margin-for-span-right-menu'>{carData.breand}</span>
       </div>
       <div className="left-marg">
         <h5 className="right-menu-font">
         <span class="point" className='span-point price-ua'>•</span>
           Car model</h5>
-        <span className='margin-for-span-right-menu'>Camry</span>
+        <span className='margin-for-span-right-menu'>{carData.model}</span>
       </div>
       <div className="left-marg">
         <h5 className="right-menu-font">
         <span class="point" className='span-point price-ua'>•</span>
           Year</h5>
-        <span className='margin-for-span-right-menu'>2023</span>
+        <span className='margin-for-span-right-menu'>{carData.year}</span>
       </div>
       <div className="left-marg">
         <h5 className="right-menu-font">
         <span class="point" className='span-point price-ua'>•</span>
           Color</h5>
-        <span className='margin-for-span-right-menu'>Black</span>
+        <span className='margin-for-span-right-menu'>{carData.color}</span>
       </div>
       <div className="left-marg">
         <h5 className="right-menu-font">
         <span class="point" className='span-point price-ua'>•</span>
           Type of car</h5>
-        <span className='margin-for-span-right-menu'>Minivan</span>
+        <span className='margin-for-span-right-menu'>{carData.typeOfCar}</span>
       </div>
       {/* <h3 className="type--of--car">Type of car</h3>
       <div className="four--change" style={{ display: "flex", flexWrap: "wrap" }}>
@@ -97,14 +97,14 @@ const RightMenu = ({ carData }) => {
           <span class="point" className='span-point price-ua'>•</span>
           Region
         </h5>
-        <span className='margin-for-span-right-menu'>Lviv</span>
+        <span className='margin-for-span-right-menu'>{carData.region}</span>
       </div>
       <div className="left-marg">
         <h5 className="right-menu-font">
           <span class="point" className='span-point price-ua'>•</span>
           State
         </h5>
-        <span className='margin-for-span-right-menu'>Sokilnyky</span>
+        <span className='margin-for-span-right-menu'>{carData.state}</span>
       </div>
     </div>
   )

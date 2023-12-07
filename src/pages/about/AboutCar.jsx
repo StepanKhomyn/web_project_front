@@ -8,23 +8,48 @@ import Header from '../Header';
 import Menu from '../cars-list/components/Menu';
 import RightMenu from './components/RightMenu';
 import { Link } from 'react-router-dom';
-
-
-
-const carData =
-{
-  id: 1,
-  name: "Tesla Model X 2022",
-  price: "10 000 $",
-  location: "Lviv",
-  transmission: "mechanical",
-  fuelType: "Gas 1.6",
-  distance: "11 000",
-  image:
-    "https://cdn3.riastatic.com/photosnew/auto/photo/tesla_model-3__515756233f.webp",
-}
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const AboutCar = () => {
+
+  const { id } = useParams();
+  const [car, setCar] = useState({});
+  console.log(id)
+
+  useEffect(() => {
+    // Функція для отримання даних автомобіля за id
+    const fetchCarData = async () => {
+      try {
+        const response = await axios.get(`api/cars/${id}`, { baseURL: 'http://localhost:5000/' });
+        setCar(response.data);
+      } catch (error) {
+        console.error('Помилка отримання даних автомобіля', error);
+      }
+    };
+
+    // Виклик функції отримання даних
+    fetchCarData();
+  }, [id]);
+
+  const [exchangeRate, setExchangeRate] = useState(null);
+
+  useEffect(() => {
+    const fetchExchangeRate = async () => {
+      try {
+        // Ваш ключ API
+        const apiKey = 'a29f960547f0dd13e76a0a05';
+
+        const response = await axios.get(`https://open.er-api.com/v6/latest/USD?apikey=${apiKey}`);
+        setExchangeRate(response.data.rates.UAH);
+      } catch (error) {
+        console.error('Помилка отримання курсу обміну', error);
+      }
+    };
+
+    fetchExchangeRate();
+  }, []);
 
   return (
     <div className="carsList--page">
@@ -32,10 +57,10 @@ const AboutCar = () => {
       <div style={{ display: "flex" }}>
         <Menu />
         <div className='central-div'>
-          <div><h2>Tesla Model X 2022</h2></div>
+          <div><h2>{car.breand}</h2></div>
           <div className='image-seller'>
             <div className='image-div'>
-              <img src={carData.image} alt={carData.name} style={{ width: '100%', height: '100%', objectFit: "cover" }} />
+              <img src={car.image} alt={car.name} style={{ width: '100%', height: '100%', objectFit: "cover" }} />
             </div>
             {/* <div>
               <dl style={{ display: "flex", flexWrap: "wrap", marginLeft: "16px" }}>
@@ -111,10 +136,10 @@ const AboutCar = () => {
           </div>
           <div style={{ display: 'block' }}>
             <div className='test'>
-              <span className='price'>{carData.price}</span>
+              <span className='price'>{car.price} $</span>
               <span class="point" className='span-point price-ua'>•</span>
               <span className='price-ua' >
-                400000 ₴
+                {car.price * exchangeRate} ₴
               </span>
               <span class="point" className='span-point price-ua'>•</span>
               <span className='price-ua' >
@@ -166,19 +191,17 @@ const AboutCar = () => {
                     </svg>
                     <span className='margin-for-svg'>Пробіг</span>
                   </label>
-                  11 000 тис. км
+                  {car.mileage} км
                 </div>
                 <div className='car-abilities-span' style={{ display: 'flex' }}>
                   <label class="form-control--four" style={{ width: '200px' }}>
                     <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="PlaceIcon">
                       <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"></path>
                     </svg>
-                    <span className='margin-for-svg'>Локація</span>
+                    <span className='margin-for-svg'>Місто</span>
                   </label>
                   <div>
-                    Lviv
-                    <span class="point" className='span-point'>•</span>
-                    Sokilnyky
+                    {car.sity}
                   </div>
                 </div>
               </div>
@@ -191,9 +214,9 @@ const AboutCar = () => {
                     <span className='margin-for-svg'>Двигун</span>
                   </label>
                   <div>
-                    Gas
+                    {car.fuel}
                     <span class="point" className='span-point'>•</span>
-                    1.6
+                    {car.engine}
                   </div>
                 </div>
                 <div className='car-abilities-span' style={{ display: 'flex' }}>
@@ -203,7 +226,7 @@ const AboutCar = () => {
                     </svg>
                     <span className='margin-for-svg'>Коробка передач</span>
                   </label>
-                  mechanical
+                  {car.driveUnit}
                 </div>
               </div>
             </div>
@@ -216,7 +239,7 @@ const AboutCar = () => {
           </div>
         </div>
         <div>
-          <RightMenu carData={carData} />
+          <RightMenu carData={car} />
         </div>
       </div>
     </div >

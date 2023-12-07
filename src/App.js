@@ -34,7 +34,7 @@ function App() {
                 {isAuth ? (
                     <>
                         <Route path="/" element={<CarsList />} />
-                        <Route path="/about" element={<AboutCar />} />
+                        <Route path="/about/:id" element={<AboutCar/>} />
                         <Route path="/sell" element={<SellCar />} />
                         <Route path="/mycar" element={<MyCar />} />
                         <Route path="/favourites" element={<Favourites />} />
